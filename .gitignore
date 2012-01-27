@@ -4,3 +4,4 @@ bin/
 logs/
 .settings/
 .project
+target/
