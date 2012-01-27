@@ -10,13 +10,13 @@ import org.randi2.installer.controller.configuration.MailConfiguration;
 import org.randi2.installer.model.Administrator;
 import org.randi2.installer.model.Center;
 import org.randi2.installer.model.ContactPerson;
+import org.randi2.installer.model.enumerations.Language;
 import org.randi2.installer.model.io.ContextService;
 import org.randi2.installer.model.io.IO_properties;
 import org.randi2.installer.model.services.AdministratorService;
 import org.randi2.installer.model.services.CenterService;
 import org.randi2.installer.model.services.DBService;
 import org.randi2.installer.model.services.FileService;
-import org.randi2.installer.view.LanguagePanel;
 import org.randi2.installer.view.MainFrame;
 import org.randi2.installer.view.Statusbar;
 import org.randi2.installer.view.steps.WizardStep1;
@@ -47,7 +47,6 @@ public class Main {
 
 	private MainFrame mainFrame;
 	private Statusbar statusbar;
-	private LanguagePanel lPanel;
 	private WizardStep1 ws1;
 	private WizardStep2 ws2;
 	private WizardStep3 ws3;
@@ -103,8 +102,16 @@ public class Main {
 		center.setContactPerson(contactPerson);
 		urlService = new URLService(this);
 		mainFrame = new MainFrame(this);
-		lPanel = new LanguagePanel(this);
-		mainFrame.add(lPanel);
+
+		if(System.getProperty("user.language").equals("de"))
+		{
+			conf.loadProperties(Language.GER, statusService);
+		}
+		else
+		{
+			conf.loadProperties(Language.US, statusService);
+		}
+		start();
 		mainFrame.repaint();
 	}
 
@@ -284,7 +291,6 @@ public class Main {
 	}
 
 	public void start() {
-		mainFrame.remove(lPanel);
 		mainFrame.initGUI();
 
 		ws1 = new WizardStep1(this);
