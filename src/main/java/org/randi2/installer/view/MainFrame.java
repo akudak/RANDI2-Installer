@@ -32,6 +32,7 @@ public class MainFrame extends JFrame {
 		this.setBackground(Color.WHITE);
 		this.setSize(800, 600);
 		this.setVisible(true);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	public void initGUI() {
