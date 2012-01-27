@@ -111,7 +111,7 @@ public class Main {
 			conf.loadProperties(Language.US, statusService);
 		}
 		start();
-		System.out.println("Git");
+		System.out.println("Git2");
 		mainFrame.repaint();
 	}
 
