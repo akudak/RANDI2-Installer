@@ -17,6 +17,11 @@ public class Administrator extends Person {
 	/** The Constant MIN_USERNAME_LENGTH. */
 	public final static int MIN_USERNAME_LENGTH = 5;
 
+	
+	public Administrator()
+	{
+		
+	}
 	/**
 	 * @return the username
 	 */
