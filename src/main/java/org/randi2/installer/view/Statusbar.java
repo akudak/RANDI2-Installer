@@ -30,7 +30,7 @@ public class Statusbar extends JPanel {
 	 * Laed die Bilder
 	 */
 	public void init() {
-		this.setSize(800, 100);
+		this.setSize(800, 80);
 		this.setLocation(0, 120);
 		this.setBackground(Color.WHITE);
 		iconGreen = new ImageIcon(

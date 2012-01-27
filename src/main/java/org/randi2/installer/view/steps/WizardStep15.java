@@ -25,39 +25,44 @@ public class WizardStep15 extends MainPanel {
 	}
 
 	public void initGUI() {
-		JLabel contactPersonL = new JLabel(main.getConf().getlProp()
-				.getProperty("label.contactPersonInfo2"));
-		contactPersonL.setLocation(10, 20);
-		contactPersonL.setSize(600, 20);
-
-		this.add(contactPersonL);
-
+	
 		JLabel titleL = new JLabel(main.getConf().getlProp()
 				.getProperty("label.phone"));
-		titleL.setLocation(10, 80);
+		titleL.setLocation(10, 20);
 		titleL.setSize(200, 20);
 
 		this.add(titleL);
 
 		JLabel firstnameL = new JLabel(main.getConf().getlProp()
 				.getProperty("label.mobile"));
-		firstnameL.setLocation(10, 120);
+		firstnameL.setLocation(10, 80);
 		firstnameL.setSize(200, 20);
 
 		this.add(firstnameL);
 
 		JLabel surnameL = new JLabel(main.getConf().getlProp()
 				.getProperty("label.fax"));
-		surnameL.setLocation(10, 160);
+		surnameL.setLocation(10, 120);
 		surnameL.setSize(200, 20);
 
 		this.add(surnameL);
 
+		
+
+		JLabel contactPersonL = new JLabel(main.getConf().getlProp()
+				.getProperty("label.contactPersonInfo2"));
+		contactPersonL.setLocation(10, 20);
+		contactPersonL.setSize(600, 160);
+
+		this.add(contactPersonL);
+
+		
 		JLabel passwordL1 = new JLabel(main.getConf().getlProp()
 				.getProperty("label.password"));
 		passwordL1.setLocation(10, 200);
 		passwordL1.setSize(200, 20);
-
+		
+	
 		this.add(passwordL1);
 
 		JLabel passwordL2 = new JLabel(main.getConf().getlProp()

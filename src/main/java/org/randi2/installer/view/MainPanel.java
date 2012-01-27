@@ -25,8 +25,8 @@ public class MainPanel extends JPanel {
 	}
 
 	public void init() {
-		this.setSize(800, 300);
-		this.setLocation(100, 220);
+		this.setSize(800, 320);
+		this.setLocation(100, 200);
 		this.setBackground(Color.WHITE);
 		status = new Status(main);
 		status.setStatus(OPEN);
