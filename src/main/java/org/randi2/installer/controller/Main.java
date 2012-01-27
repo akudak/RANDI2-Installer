@@ -102,7 +102,6 @@ public class Main {
 		center.setContactPerson(contactPerson);
 		urlService = new URLService(this);
 		mainFrame = new MainFrame(this);
-
 		if(System.getProperty("user.language").equals("de"))
 		{
 			conf.loadProperties(Language.GER, statusService);
