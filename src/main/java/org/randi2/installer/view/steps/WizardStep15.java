@@ -51,7 +51,7 @@ public class WizardStep15 extends MainPanel {
 
 		JLabel contactPersonL = new JLabel(main.getConf().getlProp()
 				.getProperty("label.contactPersonInfo2"));
-		contactPersonL.setLocation(10, 20);
+		contactPersonL.setLocation(10, 160);
 		contactPersonL.setSize(600, 160);
 
 		this.add(contactPersonL);
