@@ -29,8 +29,10 @@ public class DBServiceTest {
 		DBCONF = new DBConfiguration();
 		DBCONF.setServer("127.0.0.1");
 		DBCONF.setMySQL(true);
-		DBCONF.setUsername("admin");
-		DBCONF.setPassword("www", "www");
+		DBCONF.setUsernameCon("root");
+		DBCONF.setPasswordCon("", "");
+		MAIN = new Main();
+		MAIN.setDbconf(DBCONF);
 		DBSERVICE = new DBService(MAIN);
 	}
 
@@ -41,7 +43,7 @@ public class DBServiceTest {
 	 */
 
 	@Before
-	public void SetUPBefore() throws SQLException {
+	public void SetUpBefore() throws SQLException {
 
 		String user = "user";
 		do {

@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.Properties;
 import org.randi2.installer.model.io.IO_properties;
 import org.randi2.installer.controller.Main;
+import org.randi2.installer.controller.StatusService;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.randi2.installer.controller.configuration.Configuration;
@@ -25,9 +26,11 @@ public class IO_propertiesTest {
 	private static final String PAGES_ABOUTPOPUP_HOSTINGINST = "HostingInst";
 	private static final String WEBSITE = "mykudak.com";
 	private static Main MAIN;
+	private static StatusService STATUSSERVICE;
 
 	@BeforeClass
 	public static void setUpBeforeClass() {
+		STATUSSERVICE = new StatusService();
 		CONF = new Configuration();
 		CONF.setMail_from(MAIL_FROM);
 		CONF.setInfo_server(INFO_SERVER);
@@ -39,6 +42,8 @@ public class IO_propertiesTest {
 		CONF.setServerPath(ClassLoader.getSystemResource("")
 				.getFile());
 		CONF.setWebsite(WEBSITE);
+		MAIN.setConf(CONF);
+		MAIN.setStatusService(STATUSSERVICE);
 		IO_PROP = new IO_properties(MAIN);
 	}
 

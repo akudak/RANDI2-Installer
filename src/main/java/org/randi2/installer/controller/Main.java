@@ -83,7 +83,10 @@ public class Main {
 	private FileService fileService;
 	private Iterator<Status> iterator;
 
-	
+	public Main()
+	{
+		
+	}
 	/**
 	 * Erstelle Objekte
 	 */
@@ -627,6 +630,13 @@ mainFrame.getStatusText().setText("Aktueller Status: OK");
 	public DBConfiguration getDbconf() {
 		return dbconf;
 	}
+	
+	/**
+	 * @return DBConfiguration
+	 */
+	public void setDbconf(DBConfiguration dbconf) {
+		this.dbconf=dbconf;
+	}
 
 	/**
 	 * @return Statusbar
@@ -682,6 +692,14 @@ mainFrame.getStatusText().setText("Aktueller Status: OK");
 	 */
 	public int getactStatus() {
 		return actStatus;
+	}
+
+	public void setConf(Configuration conf) {
+		this.conf = conf;
+	}
+
+	public void setStatusService(StatusService statusService) {
+		this.statusService = statusService;
 	}
 
 	/**

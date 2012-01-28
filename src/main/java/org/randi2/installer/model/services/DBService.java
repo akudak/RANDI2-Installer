@@ -166,9 +166,6 @@ public class DBService {
 			else
 				url = "jdbc:postgresql://" + main.getDbconf().getServer() + "/";
 		
-if(main.getDbconf().getPasswordCon()==null)
-con = DriverManager.getConnection(url, main.getDbconf().getUsernameCon(),"");
-else
 	con = DriverManager.getConnection(url, main.getDbconf().getUsernameCon(),main.getDbconf().getPasswordCon());
 		} catch (SQLException e) {
 			main.getMainFrame()

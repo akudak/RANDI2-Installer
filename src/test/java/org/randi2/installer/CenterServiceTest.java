@@ -45,8 +45,9 @@ public class CenterServiceTest {
 		DBCONF = new DBConfiguration();
 		DBCONF.setServer("127.0.0.1");
 		DBCONF.setMySQL(true);
-		DBCONF.setUsername("admin");
-		DBCONF.setPassword("www", "www");
+		DBCONF.setUsernameCon("root");
+		DBCONF.setPasswordCon("", "");
+		MAIN.setDbconf(DBCONF);
 		DBSERVICE = new DBService(MAIN);
 		CENTER = new Center();
 		CENTERSERVICE = new CenterService(MAIN);
