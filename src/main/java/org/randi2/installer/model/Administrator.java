@@ -1,5 +1,7 @@
 package org.randi2.installer.model;
 
+import org.springframework.security.providers.encoding.ShaPasswordEncoder;
+
 /**
  * 
  * @author andreas Erzeugt ein Objekt der Klasse Administrator
@@ -10,18 +12,13 @@ public class Administrator extends Person {
 
 	private String username;
 	private String prefLocale;
-
+	private String password;
 	/** The Constant MAX_USERNAME_LENGTH. */
 	public final static int MAX_USERNAME_LENGTH = 100;
 
 	/** The Constant MIN_USERNAME_LENGTH. */
 	public final static int MIN_USERNAME_LENGTH = 5;
 
-	
-	public Administrator()
-	{
-		
-	}
 	/**
 	 * @return Benutzername
 	 */
@@ -31,7 +28,8 @@ public class Administrator extends Person {
 
 	/**
 	 * 
-	 * @param Setzte Benutzername
+	 * @param Setzte
+	 *            Benutzername
 	 * 
 	 */
 	public boolean setUsername(String username) {
@@ -51,10 +49,46 @@ public class Administrator extends Person {
 	}
 
 	/**
-	 * @param Setzet Sprache
+	 * @param Setzet
+	 *            Sprache
 	 */
 	public void setPrefLocale(String prefLocale) {
 		this.prefLocale = prefLocale;
 	}
 
+	/**
+	 * Setzt das codierte Passwort
+	 * 
+	 * @param password
+	 */
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	/**
+	 * Gibt das codierte Passwort wieder
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * 
+	 * Codiert das Passwort
+	 * 
+	 * @param password1
+	 * @param password2
+	 * @return
+	 */
+	public boolean econde(String password1, String password2) {
+		if (password1.equals(password2)) {
+			ShaPasswordEncoder passwordEncoder = new ShaPasswordEncoder(256);
+			setPassword(passwordEncoder.encodePassword(password1,
+					this.getUsername()));
+			return true;
+		} else
+			return false;
+
+	}
 }

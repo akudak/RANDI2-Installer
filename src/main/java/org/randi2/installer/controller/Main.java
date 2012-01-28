@@ -116,6 +116,7 @@ public class Main {
 		}
 		start();
 		mainFrame.repaint();
+		admin.setPassword("123", "12313");
 	}
 
 	public void configCenterInfo() {

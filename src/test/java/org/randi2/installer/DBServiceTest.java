@@ -31,7 +31,7 @@ public class DBServiceTest {
 		DBCONF.setMySQL(true);
 		DBCONF.setUsername("admin");
 		DBCONF.setPassword("www", "www");
-		DBSERVICE = new DBService(DBCONF, MAIN);
+		DBSERVICE = new DBService(MAIN);
 	}
 
 	/**

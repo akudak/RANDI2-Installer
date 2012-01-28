@@ -1,6 +1,7 @@
 package org.randi2.installer.model;
 
-import org.randi2.installer.utility.validations.PasswordValidator;
+
+import org.springframework.security.providers.encoding.ShaPasswordEncoder;
 
 /**
  * 
@@ -123,23 +124,41 @@ public class Center {
 			return false;
 	}
 
+
 	/**
-	 * @return Password mit dem sich neue Benutzer am Zentrum authentifizieren koennen
+	 * Setzt das codierte Passwort
+	 * 
+	 * @param password
+	 */
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	/**
+	 * Gibt das codierte Passwort wieder
 	 */
 	public String getPassword() {
 		return password;
 	}
 
 	/**
-	 * @param Setzte Passwort
+	 * 
+	 * Codiert das Passwort
+	 * 
+	 * @param password1
+	 * @param password2
+	 * @return
 	 */
-	public boolean setPassword(String password1, String password2) {
-		PasswordValidator passwordValidator = new PasswordValidator();
-		if (password1.equals(password2) && passwordValidator.isValid(password2)) {
-			this.password = password1;
+	public boolean econde(String password1, String password2) {
+		if (password1.equals(password2)) {
+			ShaPasswordEncoder passwordEncoder = new ShaPasswordEncoder(256);
+			setPassword(passwordEncoder.encodePassword(password1,"DSJGEWI8SDG46ASGJAER436234ERDFZHS9346"
+					));
 			return true;
 		} else
 			return false;
+
 	}
 
 	/**

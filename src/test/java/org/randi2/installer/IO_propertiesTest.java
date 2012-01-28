@@ -9,15 +9,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
 import org.randi2.installer.model.io.IO_properties;
+import org.randi2.installer.controller.Main;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.randi2.installer.controller.StatusService;
 import org.randi2.installer.controller.configuration.Configuration;
 
 public class IO_propertiesTest {
 
 	private static IO_properties IO_PROP;
-	private static StatusService STATUSSERVICE;
 	private static Configuration CONF;
 	private static final String MAIL_FROM = "andreas";
 	private static final String INFO_SERVER = "Randi2.de";
@@ -25,10 +24,10 @@ public class IO_propertiesTest {
 	private static final String PAGES_REGISTRTION_TERMS = "Disclaimer";
 	private static final String PAGES_ABOUTPOPUP_HOSTINGINST = "HostingInst";
 	private static final String WEBSITE = "mykudak.com";
+	private static Main MAIN;
 
 	@BeforeClass
 	public static void setUpBeforeClass() {
-		STATUSSERVICE = new StatusService();
 		CONF = new Configuration();
 		CONF.setMail_from(MAIL_FROM);
 		CONF.setInfo_server(INFO_SERVER);
@@ -40,13 +39,13 @@ public class IO_propertiesTest {
 		CONF.setServerPath(ClassLoader.getSystemResource("")
 				.getFile());
 		CONF.setWebsite(WEBSITE);
-		IO_PROP = new IO_properties(STATUSSERVICE);
+		IO_PROP = new IO_properties(MAIN);
 	}
 
 	@Test
 	public void infoData() throws FileNotFoundException, IOException {
 		// Schreibe Datei
-		IO_PROP.infoData(CONF);
+		IO_PROP.infoData();
 
 		// Lese Datei
 		Properties prop = new Properties();
@@ -67,7 +66,7 @@ public class IO_propertiesTest {
 
 	@Test
 	public void labesGER() throws FileNotFoundException, IOException {
-		IO_PROP.labelsGER(CONF);
+		IO_PROP.labelsGER();
 		Properties prop = new Properties();
 		prop.load(new FileInputStream(
 				CONF.getServerPath()
@@ -88,7 +87,7 @@ public class IO_propertiesTest {
 
 	@Test
 	public void labesUS() throws FileNotFoundException, IOException {
-		IO_PROP.labelsUS(CONF);
+		IO_PROP.labelsUS();
 		Properties prop = new Properties();
 		prop.load(new FileInputStream(
 				CONF.getServerPath()
@@ -109,7 +108,7 @@ public class IO_propertiesTest {
 
 	@Test
 	public void editWebsite() throws FileNotFoundException, IOException {
-		IO_PROP.editWebsite(CONF);
+		IO_PROP.editWebsite();
 		Properties prop = new Properties();
 		prop.load(new FileInputStream(CONF.getServerPath()
 				+ "/webapps/RANDI2/RANDI2.properties"));
@@ -123,7 +122,7 @@ public class IO_propertiesTest {
 
 	@Test
 	public void loadProperties() throws MalformedURLException {
-		IO_PROP.editWebsite(CONF);
+		IO_PROP.editWebsite();
 		URL url = new URL("file:" + CONF.getServerPath()
 				+ "webapps/RANDI2/RANDI2.properties");
 		Properties prop = new Properties();

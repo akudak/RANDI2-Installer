@@ -145,12 +145,12 @@ public class DBService {
 	 */
 	public Connection getFirstConnection() {
 		String url;
-		// Erste Verbindung aufbauen
-		/*try {
+		//Erste Verbindung aufbauen
+		try {
 			if (main.getDbconf().isMySQL())
 				Class.forName("com.mysql.jdbc.Driver");
 			else
-				Class.forName("org.postgresql.Driver")
+				Class.forName("org.postgresql.Driver");
 		} catch (ClassNotFoundException e) {
 			System.out.println("Fehler");
 			main.getStatusService().getAkt().setStatus(-1);
@@ -159,7 +159,7 @@ public class DBService {
 					.setText(
 							(main.getConf().getlProp()
 									.getProperty("error.DBConnection")));
-		};*/
+		};
 		try {
 			if (main.getDbconf().isMySQL())
 				url = "jdbc:mysql://" + main.getDbconf().getServer() + "/";
@@ -179,7 +179,6 @@ else
 			main.getStatusService().getAkt().setStatus(-1);
 
 		}
-		System.out.println(con);
 		return con;
 		
 	}

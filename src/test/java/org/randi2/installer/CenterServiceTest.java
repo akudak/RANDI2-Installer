@@ -13,9 +13,7 @@ import org.randi2.installer.model.services.CenterService;
 import org.randi2.installer.model.services.DBService;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import org.randi2.installer.controller.Main;
-import org.randi2.installer.controller.StatusService;
 import org.randi2.installer.controller.configuration.DBConfiguration;
 
 public class CenterServiceTest {
@@ -26,10 +24,9 @@ public class CenterServiceTest {
 	private static Main MAIN;
 	private static DBService DBSERVICE;
 	private static DBConfiguration DBCONF;
-	private static StatusService STATUSSERVICE;
 	private static final String TITLE = "Dr,";
 	private static final long ID1 = 1;
-	private static final String PASSWORD = "1$password";
+// 	private static final String PASSWORD = "1$password";
 	private static final String EMAIL = "mail@test.de";
 	private static final String FAX = "012334243";
 	private static final String FIRSTNAME = "Hans";
@@ -40,20 +37,19 @@ public class CenterServiceTest {
 	private static final String CITY = "Padeborn";
 	private static final String COUNTRY = "Germany";
 	private static final String NAME = "Zentrum";
-	private static final String PLZ = "33100";
+	private static final String POSTCODE = "33100";
 	private static final String STREET = "Mittelberg";
 
 	@BeforeClass
-	public static void setUpBeforeClass() {
-		STATUSSERVICE = new StatusService();
+	public static void setUpBeforeClass() {  
 		DBCONF = new DBConfiguration();
 		DBCONF.setServer("127.0.0.1");
 		DBCONF.setMySQL(true);
 		DBCONF.setUsername("admin");
 		DBCONF.setPassword("www", "www");
-		DBSERVICE = new DBService(DBCONF, MAIN);
+		DBSERVICE = new DBService(MAIN);
 		CENTER = new Center();
-		CENTERSERVICE = new CenterService(DBSERVICE, STATUSSERVICE);
+		CENTERSERVICE = new CenterService(MAIN);
 		CONTACTPERSON = new ContactPerson();
 		CONTACTPERSON.setAcademicTitle(TITLE);
 		CONTACTPERSON.setMail(EMAIL);
@@ -63,11 +59,11 @@ public class CenterServiceTest {
 		CONTACTPERSON.setSurname(SURNAME);
 		CONTACTPERSON.setMobile(MOBILE);
 		CONTACTPERSON.setPhone(PHONE);
-		CENTER.setPassword(PASSWORD, PASSWORD);
+		//CENTER.setPassword(PASSWORD, PASSWORD);
 		CENTER.setCity(CITY);
 		CENTER.setCountry(COUNTRY);
 		CENTER.setName(NAME);
-		CENTER.setPlz(PLZ);
+		CENTER.setPostcode(POSTCODE);
 		CENTER.setStreet(STREET);
 		CENTER.setId(ID1);
 		CENTER.setContactPerson(CONTACTPERSON);
@@ -95,7 +91,7 @@ public class CenterServiceTest {
 			assertEquals(rs.getString(1), CITY);
 			assertEquals(rs.getString(2), COUNTRY);
 			assertEquals(rs.getString(3), NAME);
-			assertEquals(rs.getString(4), PLZ);
+			assertEquals(rs.getString(4), POSTCODE);
 			assertEquals(rs.getString(5), STREET);
 			CONTACTPERSON.setId(rs.getLong(6));
 		}

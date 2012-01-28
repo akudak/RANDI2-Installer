@@ -132,7 +132,7 @@ public class WizardStep12 extends MainPanel {
 				for (int k = 0; k < adminPasswordT2.getPassword().length; k++)
 					p2 = p2 + adminPasswordT2.getPassword()[k];
 
-				if (!main.getAdmin().setPassword(p1, p2))
+				if (!main.getAdmin().econde(p1, p2))
 					main.getStatusService().getAkt().setStatus(-1);
 
 				if (!main.getAdmin().setMail(adminEMailT.getText()))

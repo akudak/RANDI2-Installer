@@ -12,9 +12,7 @@ import org.randi2.installer.model.services.AdministratorService;
 import org.randi2.installer.model.services.DBService;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import org.randi2.installer.controller.Main;
-import org.randi2.installer.controller.StatusService;
 import org.randi2.installer.controller.configuration.DBConfiguration;
 
 public class AdministratorServiceTest {
@@ -23,7 +21,6 @@ public class AdministratorServiceTest {
 	private static AdministratorService ADMINSERVICE;
 	private static DBService DBSERVICE;
 	private static DBConfiguration DBCONF;
-	private static StatusService STATUSSERVICE;
 	private static Main MAIN;
 	private static final String TITLE = "Dr,";
 	private static final String PRELOCALE = "de";
@@ -40,15 +37,14 @@ public class AdministratorServiceTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() {
-		STATUSSERVICE = new StatusService();
 		DBCONF = new DBConfiguration();
 		DBCONF.setServer("127.0.0.1");
 		DBCONF.setMySQL(true);
 		DBCONF.setUsername("admin");
 		DBCONF.setPassword("www", "www");
-		DBSERVICE = new DBService(DBCONF, MAIN);
+		DBSERVICE = new DBService(MAIN);
 		ADMIN = new Administrator();
-		ADMINSERVICE = new AdministratorService(DBSERVICE, STATUSSERVICE);
+		ADMINSERVICE = new AdministratorService(MAIN);
 		ADMIN.setAcademicTitle(TITLE);
 		ADMIN.setPrefLocale(PRELOCALE);
 		ADMIN.setUsername(USERNAME);

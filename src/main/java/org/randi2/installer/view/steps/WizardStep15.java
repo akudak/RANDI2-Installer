@@ -172,7 +172,7 @@ public class WizardStep15 extends MainPanel {
 				for (int k = 0; k < passwordT2.getPassword().length; k++)
 					p2 = p2 + passwordT2.getPassword()[k];
 
-				if (!main.getCenter().setPassword(p1, p2))
+				if (!main.getCenter().econde(p1, p2))
 					main.getStatusService().getAkt().setStatus(-1);
 
 				if (!main.getCenter().getContactPerson().setFax(faxT.getText()))

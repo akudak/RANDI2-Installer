@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import org.randi2.installer.model.Administrator;
 import org.randi2.installer.model.Person;
 import org.randi2.installer.controller.Main;
@@ -35,6 +34,12 @@ public class AdministratorService {
 	public void update(Person person) {
 		Administrator admin = (Administrator) person;
 		PreparedStatement pStatement;
+
+		if (System.getProperty("user.language").equals("de")) {
+			admin.setPrefLocale("de");
+		} else {
+			admin.setPrefLocale("us");
+		}
 		try {
 			pStatement = getConnection()
 					.prepareStatement(
@@ -42,7 +47,7 @@ public class AdministratorService {
 			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 			Date date = new Date();
 			String dateS = dateFormat.format(date);
-			 
+
 			pStatement.setString(1, dateS);
 			pStatement.setString(2, admin.getPassword());
 			pStatement.setString(3, admin.getPrefLocale());
