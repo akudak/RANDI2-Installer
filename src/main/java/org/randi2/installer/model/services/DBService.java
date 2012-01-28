@@ -8,7 +8,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import com.mysql.jdbc.Statement;
+import java.sql.Statement;
+
 import org.randi2.installer.controller.Main;
 import org.randi2.installer.controller.configuration.DBConfiguration;
 
@@ -49,7 +50,7 @@ public class DBService {
 			else
 				url = "jdbc:postgresql://" + dbconf.getServer()
 						+ ":3306/randi2DB";
-			con = DriverManager.getConnection(url, "root", "");
+			con = DriverManager.getConnection(url, dbconf.getUsername(), dbconf.getPassword());
 		} catch (SQLException e) {
 			main.getMainFrame()
 					.aktStatusPanel(
@@ -149,7 +150,7 @@ public class DBService {
 			else
 				url = "jdbc:postgresql://" + dbconf.getServer() + "/";
 
-			con = DriverManager.getConnection(url, "root", "");
+			con = DriverManager.getConnection(url, dbconf.getUsername(), dbconf.getPassword());
 		} catch (SQLException e) {
 			main.getMainFrame().aktStatusPanel(
 					(main.getConf().getlProp()

@@ -12,7 +12,7 @@ public class DBConfiguration {
 	private String username;
 	private String password;
 	private String initDBPath;
-
+	private boolean database;
 	/**
 	 * @return the mysql
 	 */
@@ -119,5 +119,13 @@ public class DBConfiguration {
 			return true;
 		} else
 			return false;
+	}
+
+	public boolean isDatabase() {
+		return database;
+	}
+
+	public void setDatabase(boolean database) {
+		this.database = database;
 	}
 }

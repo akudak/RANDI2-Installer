@@ -71,11 +71,11 @@ public class WizardStep15 extends MainPanel {
 	
 
 		aButton.setLocation(100, 160);
-		bButton.setLocation(160, 160);
+		bButton.setLocation(210, 160);
 	
 
-		aButton.setSize(50, 20);
-		bButton.setSize(50, 20);
+		aButton.setSize(100, 20);
+		bButton.setSize(100, 20);
 	
 
 		aButton.setVisible(true);

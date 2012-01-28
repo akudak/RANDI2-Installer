@@ -111,7 +111,6 @@ public class Main {
 			conf.loadProperties(Language.US, statusService);
 		}
 		start();
-		System.out.println("Gitala");
 		mainFrame.repaint();
 	}
 
