@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Properties;
 
 /**
  * 
@@ -13,15 +14,9 @@ import java.net.URL;
  */
 public class URLService {
 
-	private final static String TOMCAT = "http://tomcat.apache.org/";
-	private final static String XAMPP = "http://www.apachefriends.org/de/xampp.html";
-	private final static String JDBC_MYSQL = "http://www.mysql.com/products/connector/";
-	private final static String JDBC_POSTGRE = "http://jdbc.postgresql.org/download.html";
-	private final static String JAVA_MAIL = "http://www.oracle.com/technetwork/java/javaee/index-138643.html";
-	private final static String RANDI2 = "http://www.randi2.org";
-	private final static String JAF = "http://www.oracle.com/technetwork/java/javase/downloads/index-135046.html";
-	private Main main;
 
+	private Main main;
+	private Properties link;
 	public URLService(Main main) {
 		this.main = main;
 	}
@@ -30,19 +25,19 @@ public class URLService {
 		URL url = null;
 		try {
 			if (urlText.equalsIgnoreCase("Tomcat"))
-				url = new URL(TOMCAT);
+			 url=new URL(link.getProperty("url.tomcat"));
 			else if (urlText.equalsIgnoreCase("Xampp"))
-				url = new URL(XAMPP);
+				url=new URL(link.getProperty("url.xampp"));
 			else if (urlText.equalsIgnoreCase("jdbc_mysql"))
-				url = new URL(JDBC_MYSQL);
+				url=new URL(link.getProperty("url.jdbcMySQL"));
 			else if (urlText.equalsIgnoreCase("jdbc_postgre"))
-				url = new URL(JDBC_POSTGRE);
+				url=new URL(link.getProperty("url.jdbcPostgreSQL"));
 			else if (urlText.equalsIgnoreCase("java_mail"))
-				url = new URL(JAVA_MAIL);
+				url=new URL(link.getProperty("url.jma"));
 			else if (urlText.equalsIgnoreCase("randi2"))
-				url = new URL(RANDI2);
+				url=new URL(link.getProperty("url.randi2"));
 			else if (urlText.equalsIgnoreCase("jaf"))
-				url = new URL(JAF);
+				url=new URL(link.getProperty("url.jaf"));
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -57,5 +52,11 @@ public class URLService {
 				e.printStackTrace();
 			}
 		}
+		
+		
+	}
+	public void loadLink()
+	{
+	link = main.getProp().loadProperties(ClassLoader.getSystemResource("installer.properties"));
 	}
 }
