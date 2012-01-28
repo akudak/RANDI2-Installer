@@ -54,8 +54,8 @@ public class DBService {
 			else
 				url = "jdbc:postgresql://" + main.getDbconf().getServer()
 						+ ":3306/randi2DB";
-			con = DriverManager.getConnection(url, main.getDbconf().getUsername(),
-					main.getDbconf().getPassword());
+			con = DriverManager.getConnection(url, main.getDbconf().getUsernameCon(),
+					main.getDbconf().getPasswordCon());
 		} catch (SQLException e) {
 			main.getMainFrame()
 					.getStatusText()
@@ -152,6 +152,7 @@ public class DBService {
 			else
 				Class.forName("org.postgresql.Driver");
 		} catch (ClassNotFoundException e) {
+			System.out.println("Fehler");
 			main.getStatusService().getAkt().setStatus(-1);
 			main.getMainFrame()
 					.getStatusText()
@@ -164,9 +165,11 @@ public class DBService {
 				url = "jdbc:mysql://" + main.getDbconf().getServer() + "/";
 			else
 				url = "jdbc:postgresql://" + main.getDbconf().getServer() + "/";
-
-			con = DriverManager.getConnection(url, main.getDbconf().getUsername(),
-					main.getDbconf().getPassword());
+		
+if(main.getDbconf().getPasswordCon()==null)
+con = DriverManager.getConnection(url, main.getDbconf().getUsernameCon(),"");
+else
+	con = DriverManager.getConnection(url, main.getDbconf().getUsernameCon(),main.getDbconf().getPasswordCon());
 		} catch (SQLException e) {
 			main.getMainFrame()
 					.getStatusText()
@@ -176,7 +179,9 @@ public class DBService {
 			main.getStatusService().getAkt().setStatus(-1);
 
 		}
+		System.out.println(con);
 		return con;
+		
 	}
 
 	/**

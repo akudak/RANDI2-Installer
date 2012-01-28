@@ -19,6 +19,7 @@ public class WizardStep2 extends MainPanel {
 	private JTextField adminT;
 	private JPasswordField passwordT1;
 	private JPasswordField passwordT2;
+	private JButton insertB;
 	public WizardStep2(final Main main) {
 		super(main);
 		initGUI();
@@ -117,6 +118,7 @@ public class WizardStep2 extends MainPanel {
 				adminT.setEnabled(true);
 				passwordT1.setEnabled(true);
 				passwordT2.setEnabled(true);
+				insertB.setEnabled(true);
 			}
 		});
 
@@ -128,10 +130,19 @@ public class WizardStep2 extends MainPanel {
 				adminT.setEnabled(true);
 				passwordT1.setEnabled(true);
 				passwordT2.setEnabled(true);
+				insertB.setEnabled(true);
 
 			}
 		});
 
+		
+		 insertB = new JButton(main.getConf().getlProp()
+				.getProperty("button.save"));
+		insertB.setLocation(315, 250);
+		insertB.setSize(80, 20);
+
+		this.add(insertB);
+		
 		eButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				main.getDbconf().setMySQL(true);
@@ -140,15 +151,14 @@ public class WizardStep2 extends MainPanel {
 				passwordT1.setEnabled(false);
 				passwordT2.setEnabled(false);
 				main.getDbconf().setPostgre(false);
+				main.getDbconf().setUsernameCon("root");
+				main.getDbconf().setPasswordCon("", "");
+				insertB.setEnabled(false);
+				
 			}
 		});
 		
-		JButton insertB = new JButton(main.getConf().getlProp()
-				.getProperty("button.save"));
-		insertB.setLocation(315, 250);
-		insertB.setSize(80, 20);
-
-		this.add(insertB);
+	
 
 		insertB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -158,25 +168,25 @@ public class WizardStep2 extends MainPanel {
 
 				String p1 = "";
 				String p2 = "";
-				for (int i = 0; i < passwordT1.getPassword().length; i++)
+		
+					for (int i = 0; i < passwordT1.getPassword().length; i++)
 					p1 = p1 + passwordT1.getPassword()[i];
 
 				for (int k = 0; k < passwordT2.getPassword().length; k++)
 					p2 = p2 + passwordT2.getPassword()[k];
-
+		
+			
+				
 				if(main.getDbconf().isDatabase())
 				{
-				if (!main.getDbconf().setPassword(p1, p2))
+				if (!main.getDbconf().setPasswordCon(p1, p2))
 					main.getStatusService().getAkt().setStatus(-1);
 
-				if (!main.getDbconf().setUsername(adminT.getText()))
+				
+				if (!main.getDbconf().setUsernameCon(adminT.getText()))
 					main.getStatusService().getAkt().setStatus(-1);
 				}
-				else 
-				{
-					main.getDbconf().setUsername("root");
-					main.getDbconf().setPassword("", "");
-				}
+
 
 			}
 		});

@@ -11,6 +11,8 @@ public class DBConfiguration {
 	private String server;
 	private String username;
 	private String password;
+	private String usernameCon;
+	private String passwordCon;
 	private String initDBPath;
 	private boolean database;
 	
@@ -62,7 +64,7 @@ public class DBConfiguration {
 	}
 
 	/**
-	 * @return Datenbankbenutzer
+	 * @return Datenbankbenutzer fuer Datenbank randi2DB
 	 */
 	public String getUsername() {
 		return username;
@@ -80,7 +82,7 @@ public class DBConfiguration {
 	}
 
 	/**
-	 * @return DB Passwort
+	 * @return DB Passwort fuer randi2DB
 	 */
 	public String getPassword() {
 		return password;
@@ -90,14 +92,46 @@ public class DBConfiguration {
 	 * @param Setzte DB Passwort
 	 */
 	public boolean setPassword(String password1, String password2) {
-		if (password1 != null && password1.equals(password2)
-				&& !password1.isEmpty()) {
+		if (password1.equals(password2)) {
 			this.password = password1;
 			return true;
 		} else
 			return false;
 	}
 
+	/**
+	 * Passwort fuer die Datenbank Verbidnung
+	 * @return
+	 */
+	public String getPasswordCon() {
+		return passwordCon;
+	}
+
+	public boolean setPasswordCon(String passwordCon1, String passwordCon2) {
+		if (passwordCon1.equals(passwordCon2)) {
+			this.password = passwordCon1;
+			return true;
+		} else
+			return false;
+	}
+
+	/**
+	 * Benutzername fuer die Datenbank Verbidnung
+	 * @return
+	 */
+	public boolean setUsernameCon(String usernameCon) {
+		if (usernameCon != null && !usernameCon.isEmpty()) {
+			this.usernameCon = usernameCon;
+			return true;
+		} else
+			return false;
+	}
+	
+	public String getUsernameCon() {
+		return usernameCon;
+	}
+	
+	
 	/**
 	 * @return Pfad zur sql Datei
 	 */
