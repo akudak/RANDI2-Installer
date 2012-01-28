@@ -119,6 +119,7 @@ public class WizardStep2 extends MainPanel {
 				passwordT1.setEnabled(true);
 				passwordT2.setEnabled(true);
 				insertB.setEnabled(true);
+				main.getStatusService().getAkt().setStatus(0);
 			}
 		});
 
@@ -131,7 +132,7 @@ public class WizardStep2 extends MainPanel {
 				passwordT1.setEnabled(true);
 				passwordT2.setEnabled(true);
 				insertB.setEnabled(true);
-
+				main.getStatusService().getAkt().setStatus(0);
 			}
 		});
 
@@ -154,7 +155,7 @@ public class WizardStep2 extends MainPanel {
 				main.getDbconf().setUsernameCon("root");
 				main.getDbconf().setPasswordCon("", "");
 				insertB.setEnabled(false);
-				
+				main.getStatusService().getAkt().setStatus(1);
 			}
 		});
 		
