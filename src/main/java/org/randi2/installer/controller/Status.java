@@ -8,7 +8,7 @@ public class Status {
 	 */
 
 	private int status;
-	private boolean aktive;
+	private boolean active;
 	private boolean visible;
 	private Main main;
 
@@ -17,20 +17,24 @@ public class Status {
 	}
 
 	/**
-	 * @return the visible
+	 * @return Gibt an, ob ein Status in der Statusbar angezeigt wird
 	 */
 	public boolean isVisible() {
 		return visible;
 	}
 
 	/**
-	 * @param visible
-	 *            the visible to set
+	 * @param Setzt, ob ein Status in der Statusbar angezeigt wird
 	 */
 	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
 
+	/**
+	 * 
+	 * @param status
+	 *  Setzte den Status
+	 */
 	public void setStatus(int status) {
 		if (status != this.status) {
 			this.status = status;
@@ -44,18 +48,17 @@ public class Status {
 	}
 
 	/**
-	 * @return the aktive
+	 * @return Gibt an, ob ein Status zur Zeit bearbeitet wird
 	 */
-	public boolean isAktive() {
-		return aktive;
+	public boolean isActive() {
+		return active;
 	}
 
 	/**
-	 * @param aktive
-	 *            the aktive to set
+	 * @param Setzt, , ob ein Status zur Zeit bearbeitet wird
 	 */
-	public void setAktive(boolean aktive) {
-		this.aktive = aktive;
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 }

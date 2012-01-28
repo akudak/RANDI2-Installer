@@ -48,10 +48,13 @@ public class Statusbar extends JPanel {
 		initBar();
 	}
 
+	/**
+	 * Erstelle Objekte
+	 */
 	public void initBar() {
 		JLabel[] l = new JLabel[statusService.getStatusList().size()];
 		for (int i = 0; i < statusService.getStatusList().size() - 1; i++) {
-			if (statusService.getStatusList().get(i).isAktive()) {
+			if (statusService.getStatusList().get(i).isActive()) {
 				if (statusService.getStatusList().get(i).getStatus() == 1)
 					l[i] = new JLabel(iconGreenG);
 				if (statusService.getStatusList().get(i).getStatus() == -1)

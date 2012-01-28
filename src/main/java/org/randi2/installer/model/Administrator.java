@@ -23,12 +23,17 @@ public class Administrator extends Person {
 		
 	}
 	/**
-	 * @return the username
+	 * @return Benutzername
 	 */
 	public String getUsername() {
 		return username;
 	}
 
+	/**
+	 * 
+	 * @param Setzte Benutzername
+	 * 
+	 */
 	public boolean setUsername(String username) {
 		if (username.length() >= MIN_USERNAME_LENGTH
 				&& username.length() <= MAX_USERNAME_LENGTH) {
@@ -39,15 +44,14 @@ public class Administrator extends Person {
 	}
 
 	/**
-	 * @return the prefLocale
+	 * @return Sprache fuer die DB
 	 */
 	public String getPrefLocale() {
 		return prefLocale;
 	}
 
 	/**
-	 * @param prefLocale
-	 *            the prefLocale to set
+	 * @param Setzet Sprache
 	 */
 	public void setPrefLocale(String prefLocale) {
 		this.prefLocale = prefLocale;

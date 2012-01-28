@@ -59,7 +59,7 @@ public class WizardStep7 extends MainPanel {
 		downloadPfadB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				main.getStatusService().getAkt().setStatus(1);
-				Chooser fileOpen = new Chooser();
+				Chooser fileOpen = new Chooser(main);
 				if (!main.getConf().setJDBCPath(fileOpen.getFile("jar"))) {
 					main.getStatusService().getAkt().setStatus(-1);
 						main.getMainFrame().getStatusText().setText(

@@ -85,12 +85,12 @@ public class WizardStep6 extends MainPanel {
 		initDBPfadB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				main.getStatusService().getAkt().setStatus(1);
-				Chooser fileOpen = new Chooser();
+				Chooser fileOpen = new Chooser(main);
 				if (!main.getDbconf().setInitDBPath(fileOpen.getFile("sql"))) {
 					main.getStatusService().getAkt().setStatus(-1);
 					main.getMainFrame().getStatusText().setText(
 									(main.getConf().getlProp()
-											.getProperty("error.sql")));
+											.getProperty("error.loadSQL")));
 				}
 				downloadPathT.setText(main.getDbconf().getInitDBPath());
 				main.initDatabase();

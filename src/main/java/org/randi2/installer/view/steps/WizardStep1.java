@@ -20,6 +20,7 @@ public class WizardStep1 extends MainPanel {
 		initGUI();
 	}
 
+
 	public void initGUI() {
 		JLabel downloadTomcat = new JLabel(main.getConf().getlProp()
 				.getProperty("label.downloadTomcat"));
@@ -64,7 +65,7 @@ public class WizardStep1 extends MainPanel {
 		downloadPfadB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				main.getStatusService().getAkt().setStatus(1);
-				Chooser fileOpen = new Chooser();
+				Chooser fileOpen = new Chooser(main);
 
 				if (main.getConf().setServerPath(
 						fileOpen.getDirectorie(main.getConf(), "")))

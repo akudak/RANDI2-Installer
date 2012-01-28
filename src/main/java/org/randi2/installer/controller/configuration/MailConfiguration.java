@@ -12,15 +12,14 @@ public class MailConfiguration {
 	private String jarPath;
 
 	/**
-	 * @return the server
+	 * @return Server IP
 	 */
 	public String getServer() {
 		return server;
 	}
 
 	/**
-	 * @param server
-	 *            the server to set
+	 * @param Setzte Server IP
 	 */
 	public boolean setServer(String server) {
 		if (server != null && !server.isEmpty()) {
@@ -31,15 +30,14 @@ public class MailConfiguration {
 	}
 
 	/**
-	 * @return the username
+	 * @return Benutzername
 	 */
 	public String getUsername() {
 		return username;
 	}
 
 	/**
-	 * @param username
-	 *            the username to set
+	 * @param Setzte Benutzername
 	 */
 	public boolean setUsername(String username) {
 		if (username != null && !username.isEmpty()) {
@@ -50,15 +48,14 @@ public class MailConfiguration {
 	}
 
 	/**
-	 * @return the password
+	 * @return Password
 	 */
 	public String getPassword() {
 		return password;
 	}
 
 	/**
-	 * @param password
-	 *            the password to set
+	 * @param Setzte Password
 	 */
 	public boolean setPassword(String password1, String password2) {
 		if (password1 != null && !password1.isEmpty()
@@ -70,15 +67,14 @@ public class MailConfiguration {
 	}
 
 	/**
-	 * @return the jarPath
+	 * @return Pfad zur JMA Datei
 	 */
 	public String getJarPath() {
 		return jarPath;
 	}
 
 	/**
-	 * @param jarPath
-	 *            the jarPath to set
+	 * @param Pfad zur JMA Datei
 	 */
 	public boolean setJarPath(String jarPath) {
 		if (jarPath != null && !jarPath.equalsIgnoreCase("fail")

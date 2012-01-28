@@ -19,20 +19,18 @@ public class Person {
 	private String mobile;
 	private String fax;
 	private String password;
-	private Center center;
 	private Gender sex;
 	private long id;
 
 	/**
-	 * @return the firstname
+	 * @return Vorname
 	 */
 	public String getFirstname() {
 		return firstname;
 	}
 
 	/**
-	 * @param firstname
-	 *            the firstname to set
+	 * @param Setzte Vorname
 	 */
 	public boolean setFirstname(String firstname) {
 		if (firstname != null && !firstname.isEmpty()) {
@@ -43,15 +41,14 @@ public class Person {
 	}
 
 	/**
-	 * @return the surname
+	 * @return Nachname
 	 */
 	public String getSurname() {
 		return surname;
 	}
 
 	/**
-	 * @param surname
-	 *            the surname to set
+	 * @param Setzte Nachname
 	 */
 	public boolean setSurname(String surname) {
 		if (surname != null && !surname.isEmpty()) {
@@ -62,30 +59,28 @@ public class Person {
 	}
 
 	/**
-	 * @return the academicTitle
+	 * @return Setzte Title
 	 */
 	public String getAcademicTitle() {
 		return academicTitle;
 	}
 
 	/**
-	 * @param academicTitle
-	 *            the academicTitle to set
+	 * @param Setzte Title
 	 */
 	public void setAcademicTitle(String academicTitle) {
 		this.academicTitle = academicTitle;
 	}
 
 	/**
-	 * @return the mail
+	 * @return E-Mail Adresse
 	 */
 	public String getMail() {
 		return mail;
 	}
 
 	/**
-	 * @param mail
-	 *            the mail to set
+	 * @param Setzte E-Mail Adresse
 	 */
 	public boolean setMail(String mail) {
 		EMailRANDI2Validator emailRANDI2Validator = new EMailRANDI2Validator();
@@ -98,15 +93,14 @@ public class Person {
 	}
 
 	/**
-	 * @return the phone
+	 * @return Telefonnummer
 	 */
 	public String getPhone() {
 		return phone;
 	}
 
 	/**
-	 * @param phone
-	 *            the phone to set
+	 * @param Setzte Telefonnummer
 	 */
 	public boolean setPhone(String phone) {
 		{
@@ -120,15 +114,14 @@ public class Person {
 	}
 
 	/**
-	 * @return the mobil
+	 * @return Mobilfunknummer
 	 */
 	public String getMobile() {
 		return mobile;
 	}
 
 	/**
-	 * @param mobil
-	 *            the mobile to set
+	 * @param Setzte Mobilfunknummer
 	 */
 	public boolean setMobile(String mobile) {
 		{
@@ -143,15 +136,14 @@ public class Person {
 	}
 
 	/**
-	 * @return the fax
+	 * @return Faxnummer
 	 */
 	public String getFax() {
 		return fax;
 	}
 
 	/**
-	 * @param fax
-	 *            the fax to set
+	 * @param Setzte Faxnummer
 	 */
 	public boolean setFax(String fax) {
 		{
@@ -166,15 +158,14 @@ public class Person {
 	}
 
 	/**
-	 * @return the password
+	 * @return Passwort
 	 */
 	public String getPassword() {
 		return password;
 	}
 
 	/**
-	 * @param password
-	 *            the password to set
+	 * @param Setzte Passwort
 	 */
 
 	public boolean setPassword(String password1, String password2) {
@@ -185,41 +176,35 @@ public class Person {
 		} else
 			return false;
 	}
+	
 
 	/**
-	 * @return the center
-	 */
-	public Center getCenter() {
-		return center;
-	}
-
-	/**
-	 * @param center
-	 *            the center to set
-	 */
-	public void setCenter(Center center) {
-		this.center = center;
-	}
-
-	/**
-	 * @return the sex
+	 * @return Geschlecht
 	 */
 	public Gender getSex() {
 		return sex;
 	}
 
 	/**
-	 * @param male
-	 *            the sex to set
+	 * @param Setzte Geschlecht
 	 */
 	public void setSex(Gender sex) {
 		this.sex = sex;
 	}
 
+	/**
+	 * 
+	 * @return ID
+	 */
 	public long getId() {
 		return id;
 	}
 
+	/**
+	 * 
+	 * @param id
+	 * Setzte ID
+	 */
 	public void setId(long id) {
 		this.id = id;
 	}

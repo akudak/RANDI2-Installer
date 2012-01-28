@@ -21,18 +21,20 @@ import org.randi2.installer.controller.configuration.DBConfiguration;
 public class DBService {
 
 	private Connection con;
-	private DBConfiguration dbconf;
 	private String url;
 	private Main main;
 
-	public DBService(DBConfiguration dbconf, Main main) {
+	public DBService(Main main) {
 		this.main = main;
-		this.dbconf = dbconf;
 	}
 
+	/** 
+	 * Gibt eine Connection zur Datenbank randi2DB zurueck
+	 * @return
+	 */
 	public Connection getConnection() {
 		try {
-			if (dbconf.isMySQL())
+			if (main.getDbconf().isMySQL())
 				Class.forName("com.mysql.jdbc.Driver");
 			else
 				Class.forName("org.postgresql.Driver");
@@ -47,19 +49,19 @@ public class DBService {
 
 		}
 		try {
-			if (dbconf.isMySQL())
-				url = "jdbc:mysql://" + dbconf.getServer() + ":3306/randi2DB";
+			if (main.getDbconf().isMySQL())
+				url = "jdbc:mysql://" + main.getDbconf().getServer() + ":3306/randi2DB";
 			else
-				url = "jdbc:postgresql://" + dbconf.getServer()
+				url = "jdbc:postgresql://" + main.getDbconf().getServer()
 						+ ":3306/randi2DB";
-			con = DriverManager.getConnection(url, dbconf.getUsername(),
-					dbconf.getPassword());
+			con = DriverManager.getConnection(url, main.getDbconf().getUsername(),
+					main.getDbconf().getPassword());
 		} catch (SQLException e) {
 			main.getMainFrame()
 					.getStatusText()
 					.setText(
 							(main.getConf().getlProp()
-									.getProperty("error.driverLoad")));
+									.getProperty("error.DBConnection")));
 			main.getStatusService().getAkt().setStatus(-1);
 
 		}
@@ -85,11 +87,11 @@ public class DBService {
 	 * @throws IOException
 	 * @throws SQLException
 	 * 
-	 *             Fuerht das Init Skript für MySQL aus.
+	 *  Fuerht das Init Skript fuer MySQL aus.
 	 */
 	public boolean executeMySQLDBScript(String aSQLScriptFilePath)
 			throws IOException, SQLException {
-		if (dbconf.isMySQL()) {
+		if (main.getDbconf().isMySQL()) {
 			boolean isScriptExecuted = false;
 			Statement stmt = (Statement) getConnection().createStatement();
 			try {
@@ -118,18 +120,17 @@ public class DBService {
 								.getStatusText()
 								.setText(
 										(main.getConf().getlProp()
-												.getProperty("error.dbSkript")));
+												.getProperty("error.SQL")));
 					}
 				}
 				in.close();
 				isScriptExecuted = true;
 			} catch (Exception e) {
-				System.out.println(e);
 				main.getMainFrame()
 						.getStatusText()
 						.setText(
 								(main.getConf().getlProp()
-										.getProperty("error.dbSkript")));
+										.getProperty("error.SQL")));
 				main.getStatusService().getAkt().setStatus(-1);
 			}
 			return isScriptExecuted;
@@ -137,11 +138,16 @@ public class DBService {
 			return false;
 	}
 
+	
+	/**
+	 * Erstellt eine erste Connection ohne die DB randi2DB
+	 * @return
+	 */
 	public Connection getFirstConnection() {
 		String url;
 		// Erste Verbindung aufbauen
 		try {
-			if (dbconf.isMySQL())
+			if (main.getDbconf().isMySQL())
 				Class.forName("com.mysql.jdbc.Driver");
 			else
 				Class.forName("org.postgresql.Driver");
@@ -151,28 +157,32 @@ public class DBService {
 					.getStatusText()
 					.setText(
 							(main.getConf().getlProp()
-									.getProperty("error.driverLoad")));
+									.getProperty("error.DBConnection")));
 		}
 		try {
-			if (dbconf.isMySQL())
-				url = "jdbc:mysql://" + dbconf.getServer() + "/";
+			if (main.getDbconf().isMySQL())
+				url = "jdbc:mysql://" + main.getDbconf().getServer() + "/";
 			else
-				url = "jdbc:postgresql://" + dbconf.getServer() + "/";
+				url = "jdbc:postgresql://" + main.getDbconf().getServer() + "/";
 
-			con = DriverManager.getConnection(url, dbconf.getUsername(),
-					dbconf.getPassword());
+			con = DriverManager.getConnection(url, main.getDbconf().getUsername(),
+					main.getDbconf().getPassword());
 		} catch (SQLException e) {
 			main.getMainFrame()
 					.getStatusText()
 					.setText(
 							(main.getConf().getlProp()
-									.getProperty("error.dbConnection")));
+									.getProperty("error.DBConnection")));
 			main.getStatusService().getAkt().setStatus(-1);
 
 		}
 		return con;
 	}
 
+	/**
+	 * Erstellt die Datenbank randi2DB, wenn sie noch nicht vorhanden ist
+	 * @param dbconf
+	 */
 	public void createDatabase(DBConfiguration dbconf) {
 		// Datenbank randi2DB erstellen MySql
 		if (dbconf.isMySQL()) {
@@ -187,15 +197,16 @@ public class DBService {
 						.setText(
 								(main.getConf().getlProp()
 										.getProperty("error.createDB")));
-
 			}
-			// Testen, ob Datenbank bereits exisitiert, wenn nicht anlegen
-
+		
 		} else {
 			// fuer Postgre muss es noch programmiert werden
 		}
 	}
 
+	/**
+	 * Erstellt einen DB Benutzer mit dem von Anwender angegebenen Daten
+	 */
 	public void createUser(DBConfiguration dbconf) {
 		if (dbconf.isMySQL()) {
 			try {
@@ -239,7 +250,7 @@ public class DBService {
 						.getStatusText()
 						.setText(
 								(main.getConf().getlProp()
-										.getProperty("error.dbCreateUser")));
+										.getProperty("error.createDBUser")));
 			}
 		}
 	}

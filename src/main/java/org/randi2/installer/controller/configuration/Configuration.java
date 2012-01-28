@@ -2,6 +2,7 @@ package org.randi2.installer.controller.configuration;
 
 import java.util.Properties;
 
+import org.randi2.installer.controller.Main;
 import org.randi2.installer.controller.StatusService;
 
 import org.randi2.installer.model.enumerations.*;
@@ -24,25 +25,23 @@ public class Configuration {
 	private String disclaimerGER;
 	private String disclaimerUS;
 	private String logoPath;
-	private boolean selfRegistration;
 
 	/**
-	 * @return the info_server
+	 * @return Text zum Info Server
 	 */
 	public String getInfo_server() {
 		return info_server;
 	}
 
 	/**
-	 * @return the info_hoster
+	 * @return Text zum Info Hoster
 	 */
 	public String getInfo_hoster() {
 		return info_hoster;
 	}
 
 	/**
-	 * @param info_server
-	 *            the info_server to set
+	 * @param Setzt Text zum Info Server
 	 */
 	public boolean setInfo_server(String info_server) {
 		if (info_server != null && !info_server.isEmpty()) {
@@ -53,8 +52,7 @@ public class Configuration {
 	}
 
 	/**
-	 * @param info_hoster
-	 *            the info_hoster to set
+	 * @param Setzt Text zum Info Hoster
 	 */
 	public boolean setInfo_hoster(String info_hoster) {
 		if (info_hoster != null && !info_hoster.isEmpty()) {
@@ -65,15 +63,14 @@ public class Configuration {
 	}
 
 	/**
-	 * @return the website
+	 * @return Webseite des Unternehmens
 	 */
 	public String getWebsite() {
 		return website;
 	}
 
 	/**
-	 * @param webseite
-	 *            the website to set
+	 * @param Setzte Webseite
 	 */
 	public boolean setWebsite(String website) {
 		if (website != null && !website.isEmpty()) {
@@ -84,15 +81,14 @@ public class Configuration {
 	}
 
 	/**
-	 * @return the tomcatPath
+	 * @return Pfad zr Tomcat Installation
 	 */
 	public String getServerPath() {
 		return serverPath;
 	}
 
 	/**
-	 * @param tomcatPath
-	 *            the tomcatPath to set
+	 * @param  Setzte den Pfad zur Tomcat Installation
 	 */
 	public boolean setServerPath(String serverPath) {
 		if (serverPath != null && !serverPath.equalsIgnoreCase("fail")
@@ -103,57 +99,66 @@ public class Configuration {
 			return false;
 	}
 
+	/**
+	 * 
+	 * @return Sprach Properties-Datei
+	 */
 	public Properties getlProp() {
 		return this.lProp;
 	}
+	
+	/**
+	 * 
+	 * @param language
+	 * @param statusService
+	 * 
+	 * Lade Sprach Properties-Datei
+	 */
 
-	public void loadProperties(Language language, StatusService statusService) {
-		IO_properties io_prop = new IO_properties(statusService);
+	public void loadLanguageProperties(Language language, Main main) {
 		if (Language.GER.equals(language)) {
-			lProp = io_prop.loadProperties(ClassLoader
+			main.getProp().loadProperties(ClassLoader
 					.getSystemResource("labels_de_DE.properties"));
 			this.language = language;
 		} else {
-			lProp = io_prop.loadProperties(ClassLoader
+			main.getProp().loadProperties(ClassLoader
 					.getSystemResource("labels_us_US.properties"));
 			this.language = language;
 		}
 	}
 
 	/**
-	 * @return the language
+	 * @return Sprache
 	 */
 	public Language getLanguage() {
 		return language;
 	}
 
 	/**
-	 * @param language
-	 *            the language to set
+	 * @param Setzte Sprache
 	 */
 	public void setLanguage(Language language) {
 		this.language = language;
 	}
 
 	/**
-	 * @param lProp
-	 *            the lProp to set
+	 * @param Setze Properties der Sprachdatei
 	 */
 	public void setlProp(Properties lProp) {
 		this.lProp = lProp;
 	}
 
 	/**
-	 * @return the randi2Path
+	 * @return Pfad zur RANDI2.war Datei
 	 */
 	public String getRandi2Path() {
 		return randi2Path;
 	}
 
 	/**
-	 * @param randi2Path
-	 *            the randi2Path to set
+	 * @param Setzte Pafad zur RANDI2.war Datei
 	 */
+	
 	public boolean setRandi2Path(String randi2Path) {
 		if (randi2Path != null && !randi2Path.equalsIgnoreCase("fail")
 				&& !randi2Path.isEmpty() && randi2Path.endsWith("war")) {
@@ -164,15 +169,14 @@ public class Configuration {
 	}
 
 	/**
-	 * @return the jDBCPath
+	 * @return Pfad zur JDBC.jar Datei
 	 */
 	public String getJDBCPath() {
 		return jdbcPath;
 	}
 
 	/**
-	 * @param jDBCPath
-	 *            the jDBCPath to set
+	 * @param Setzte Pfad zur JDBC.jar Datei
 	 */
 	public boolean setJDBCPath(String jdbcPath) {
 		if (jdbcPath != null && !jdbcPath.equalsIgnoreCase("fail")
@@ -184,15 +188,14 @@ public class Configuration {
 	}
 
 	/**
-	 * @return the jafPath
+	 * @return Pfad zur JAF.jar Datei
 	 */
 	public String getJAFPath() {
 		return jafPath;
 	}
 
 	/**
-	 * @param jafPath
-	 *            the jafPath to set
+	 * @param Setez Pfad zur JAF.jar Datei
 	 */
 	public boolean setJAFPath(String jafPath) {
 		if (jafPath != null && !jafPath.equalsIgnoreCase("fail")
@@ -204,15 +207,14 @@ public class Configuration {
 	}
 
 	/**
-	 * @return the mail_from
+	 * @return Absender E-Mail Adresse
 	 */
 	public String getMail_from() {
 		return mail_from;
 	}
 
 	/**
-	 * @param mail_from
-	 *            the mail_from to set
+	 * @param Setzte Absender E-Mail Adresse
 	 */
 	public boolean setMail_from(String mail_from) {
 		if (mail_from != null && !mail_from.isEmpty()) {
@@ -223,15 +225,14 @@ public class Configuration {
 	}
 
 	/**
-	 * @return the hostingInstGER
+	 * @return deutschen Text zur Installation
 	 */
 	public String getHostingInstGER() {
 		return hostingInstGER;
 	}
 
 	/**
-	 * @param hostingInstGER
-	 *            the hostingInstGER to set
+	 * @param Setzte deutschen Text zur Installation
 	 */
 	public boolean setHostingInstGER(String hostingInstGER) {
 		if (hostingInstGER != null && !hostingInstGER.isEmpty()) {
@@ -242,15 +243,14 @@ public class Configuration {
 	}
 
 	/**
-	 * @return the hostingInstUS
+	 * @return englischen Text zur Installation
 	 */
 	public String getHostingInstUS() {
 		return hostingInstUS;
 	}
 
 	/**
-	 * @param hostingInstUS
-	 *            the hostingInstUS to set
+	 * @param Setzte englischen Text zur Installation
 	 */
 	public boolean setHostingInstUS(String hostingInstUS) {
 		if (hostingInstUS != null && !hostingInstUS.isEmpty()) {
@@ -261,15 +261,14 @@ public class Configuration {
 	}
 
 	/**
-	 * @return the disclaimerGER
+	 * @return Dislaimer deutsch
 	 */
 	public String getDisclaimerGER() {
 		return disclaimerGER;
 	}
 
 	/**
-	 * @param disclaimerGER
-	 *            the disclaimerGER to set
+	 * @param Setzte deutschen Disclaimer
 	 */
 	public boolean setDisclaimerGER(String disclaimerGER) {
 		if (disclaimerGER != null && !disclaimerGER.isEmpty()) {
@@ -280,15 +279,14 @@ public class Configuration {
 	}
 
 	/**
-	 * @return the disclaimerUS
+	 * @return Dislaimer englisch
 	 */
 	public String getDisclaimerUS() {
 		return disclaimerUS;
 	}
 
 	/**
-	 * @param disclaimerUS
-	 *            the disclaimerUS to set
+	 * @param Setzte englischen Disclaimer
 	 */
 	public boolean setDisclaimerUS(String disclaimerUS) {
 		if (disclaimerUS != null && !disclaimerUS.isEmpty()) {
@@ -299,15 +297,14 @@ public class Configuration {
 	}
 
 	/**
-	 * @return the logoPath
+	 * @return Pfad zum Logo
 	 */
 	public String getLogoPath() {
 		return logoPath;
 	}
 
 	/**
-	 * @param logoPath
-	 *            the logoPath to set
+	 * @param Setzte Logo Pfad
 	 */
 	public boolean setLogoPath(String logoPath) {
 		if (logoPath != null && !logoPath.equalsIgnoreCase("fail")
@@ -316,13 +313,5 @@ public class Configuration {
 			return true;
 		} else
 			return false;
-	}
-
-	public boolean isSelfRegistration() {
-		return selfRegistration;
-	}
-
-	public void setSelfRegistration(boolean selfRegistration) {
-		this.selfRegistration = selfRegistration;
 	}
 }

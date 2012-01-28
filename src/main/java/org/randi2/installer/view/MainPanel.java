@@ -24,6 +24,9 @@ public class MainPanel extends JPanel {
 		init();
 	}
 
+	/**
+	 * Erstelle Objekte
+	 */
 	public void init() {
 		this.setSize(800, 320);
 		this.setLocation(100, 200);
@@ -33,15 +36,14 @@ public class MainPanel extends JPanel {
 	}
 
 	/**
-	 * @return the status
+	 * @return Gibt den aktuellen Status zurueck
 	 */
 	public Status getStatus() {
 		return status;
 	}
 
 	/**
-	 * @param status
-	 *            the status to set
+	 * @param Setzt den aktuellen Status
 	 */
 	public void setStatus(Status status) {
 		this.status = status;

@@ -20,6 +20,9 @@ public class ContextService {
 		this.main = main;
 	}
 
+	/**
+	 * Bearbeitet die Datei Context.xml
+	 */
 	public void editContext() {
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(main
@@ -52,10 +55,12 @@ public class ContextService {
 			in.close();
 		} catch (FileNotFoundException e) {
 			main.getStatusService().getAkt().setStatus(-1);
-			e.printStackTrace();
+			main.getMainFrame().getStatusText().setText(main.getConf().getlProp()
+					.getProperty("error.context"));
 		} catch (IOException e) {
 			main.getStatusService().getAkt().setStatus(-1);
-			e.printStackTrace();
+			main.getMainFrame().getStatusText().setText(main.getConf().getlProp()
+					.getProperty("error.context"));
 		}
 	}
 }

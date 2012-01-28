@@ -79,22 +79,26 @@ public class Main {
 	private ContactPerson contactPerson;
 
 	private IO_properties prop;
-	private int aktStatus;
+	private int actStatus;
 	private FileService fileService;
 	private Iterator<Status> iterator;
 
+	
+	/**
+	 * Erstelle Objekte
+	 */
 	public void init() {
 		statusService = new StatusService();
 		conf = new Configuration();
-		prop = new IO_properties(statusService);
+		prop = new IO_properties(this);
 		dbconf = new DBConfiguration();
-		dbService = new DBService(dbconf, this);
+		dbService = new DBService(this);
 		fileService = new FileService(statusService);
-		aktStatus = 0;
+		actStatus = 0;
 		mailConf = new MailConfiguration();
 		admin = new Administrator();
-		adminService = new AdministratorService(dbService, statusService);
-		centerService = new CenterService(dbService, statusService);
+		adminService = new AdministratorService(this);
+		centerService = new CenterService(this);
 		statusbar = new Statusbar(statusService);
 		contactPerson = new ContactPerson();
 		center = new Center();
@@ -104,11 +108,11 @@ public class Main {
 		mainFrame = new MainFrame(this);
 		if(System.getProperty("user.language").equals("de"))
 		{
-			conf.loadProperties(Language.GER, statusService);
+			conf.loadLanguageProperties(Language.GER, this);
 		}
 		else
 		{
-			conf.loadProperties(Language.US, statusService);
+			conf.loadLanguageProperties(Language.US, this);
 		}
 		start();
 		mainFrame.repaint();
@@ -118,11 +122,17 @@ public class Main {
 		centerService.update(center);
 	}
 
+	/** 
+	 * Ruft die Methoden zur Datenbankerstellung auf
+	 */
 	public void createDatabase() {
 		dbService.createDatabase(dbconf);
 		dbService.createUser(dbconf);
 	}
 
+	/**
+	 * Ruft die Methoden zur Datenbank Konfiguration auf
+	 */
 	public void initDatabase() {
 		try {
 			dbService.executeMySQLDBScript(dbconf.getInitDBPath());
@@ -136,17 +146,23 @@ public class Main {
 	}
 
 	/**
-	 * @return the admin
+	 * @return Administrator
 	 */
 	public Administrator getAdmin() {
 		return admin;
 	}
 
+	/**
+	 * Ruft die Methoden zur Aenderung des Amdinistrators auf
+	 */
 	public void editAdmin() {
 		admin.setId(1);
 		adminService.update(admin);
 	}
 
+	/**
+	 * Ruft Methode auf um die JDBC Treiber zu kopieren
+	 */
 	public void copyJDBC() {
 		String JDBCPath = "";
 		String JDBCName = "";
@@ -165,6 +181,9 @@ public class Main {
 					(getConf().getlProp().getProperty("error.jar")));
 	}
 
+/**
+ * Ruft Methode auf um die JMA zu kopieren
+ */
 	public void copyMail() {
 		String mailPath = "";
 		String mailName = "";
@@ -184,6 +203,9 @@ public class Main {
 					(getConf().getlProp().getProperty("error.jar")));
 	}
 
+	/**
+	 * Ruft Methode auf um die RANDI2 Datei zu kopieren
+	 */
 	public void copyRandi2() {
 		String randi2Path = "";
 		String randi2Name = "";
@@ -205,6 +227,9 @@ public class Main {
 					(getConf().getlProp().getProperty("error.jar")));
 	}
 
+	/**
+	 * Ruft Methode auf um das Logo zu kopieren
+	 */
 	public void copyLogo() {
 		String logoPath = "";
 		String logoName = "";
@@ -229,18 +254,21 @@ public class Main {
 	}
 
 	public void editWebsite() {
-		prop.editWebsite(conf);
+		prop.editWebsite();
 	}
 
 	public void editInfoData() {
-		prop.infoData(conf);
+		prop.infoData();
 	}
 
 	public void editLabel() {
-		prop.labelsGER(conf);
-		prop.labelsUS(conf);
+		prop.labelsGER();
+		prop.labelsUS();
 	}
 
+	/**
+	 * Ruft Methode auf um die JAF zu kopieren
+	 */
 	public void copyJAF() {
 		String JAFPath = "";
 		String JAFName = "";
@@ -265,6 +293,9 @@ public class Main {
 		contextService.editContext();
 	}
 
+	/**
+	 * Startet den Tomcat Server unter UNIX
+	 */
 	public void startTomcatMac() {
 		try {
 			Runtime.getRuntime().exec(
@@ -277,6 +308,10 @@ public class Main {
 
 	}
 
+	/**
+	 * Startet den Tomcat Server unter Windows
+	 */
+	
 	public void startTomcatWin() {
 		try {
 			Runtime.getRuntime().exec(
@@ -289,6 +324,9 @@ public class Main {
 
 	}
 
+	/**
+	 * Starte den Ablauf des Installer
+	 */
 	public void start() {
 		mainFrame.initGUI();
 
@@ -333,7 +371,7 @@ public class Main {
 		statusService.getStatusList().add(ws18.getStatus());
 		statusService.getStatusList().add(ws19.getStatus());
 		statusService.getStatusList().add(ws20.getStatus());
-		ws1.getStatus().setAktive(true);
+		ws1.getStatus().setActive(true);
 
 		mainFrame.setMainPanel(ws1);
 		mainFrame.getbPrevious().setEnabled(false);
@@ -341,6 +379,9 @@ public class Main {
 		statusbar.initBar();
 	}
 
+	/**
+	 * Zeichnet alle Objekte neu
+	 */
 	public void repaint() {
 		mainFrame.remove(mainFrame.getbPrevious());
 		mainFrame.remove(mainFrame.getbNext());
@@ -411,234 +452,235 @@ public class Main {
 	}
 
 	/**
-	 * @param status
-	 *            the status to set
+	 * @param Setzt den aktuellen Status weiter
 	 */
 	public void setStatusNext() {
-mainFrame.remove(this.getMainFrame().getStatusText());
+mainFrame.getStatusText().setText("Aktueller Status: OK");
 		iterator = statusService.getStatusList().iterator();
 		boolean end = false;
 		Status akt;
 		Status next;
 		while (iterator.hasNext() && !end) {
 			akt = (Status) iterator.next();
-			if (akt.isAktive()) {
-				akt.setAktive(false);
+			if (akt.isActive()) {
+				akt.setActive(false);
 				next = (Status) iterator.next();
-				next.setAktive(true);
+				next.setActive(true);
 				end = true;
 			}
 
 		}
 		getStatusbar().removeAll();
 		getStatusbar().initBar();
-		aktStatus++;
-		if (aktStatus == 0) {
+		actStatus++;
+		if (actStatus == 0) {
 			mainFrame.getbPrevious().setEnabled(false);
 			mainFrame.setMainPanel(ws1);
 		}
-		if (aktStatus == 1) {
+		if (actStatus == 1) {
 			mainFrame.setMainPanel(ws2);
 			mainFrame.getbPrevious().setEnabled(true);
 		}
-		if (aktStatus == 2)
+		if (actStatus == 2)
 			mainFrame.setMainPanel(ws3);
-		if (aktStatus == 3)
+		if (actStatus == 3)
 			mainFrame.setMainPanel(ws4);
-		if (aktStatus == 4)
+		if (actStatus == 4)
 			mainFrame.setMainPanel(ws5);
-		if (aktStatus == 5)
+		if (actStatus == 5)
 			mainFrame.setMainPanel(ws6);
-		if (aktStatus == 6)
+		if (actStatus == 6)
 			mainFrame.setMainPanel(ws7);
-		if (aktStatus == 7)
+		if (actStatus == 7)
 			mainFrame.setMainPanel(ws8);
-		if (aktStatus == 8)
+		if (actStatus == 8)
 			mainFrame.setMainPanel(ws9);
-		if (aktStatus == 9)
+		if (actStatus == 9)
 			mainFrame.setMainPanel(ws10);
-		if (aktStatus == 10)
+		if (actStatus == 10)
 			mainFrame.setMainPanel(ws11);
-		if (aktStatus == 11)
+		if (actStatus == 11)
 			mainFrame.setMainPanel(ws12);
-		if (aktStatus == 12)
+		if (actStatus == 12)
 			mainFrame.setMainPanel(ws13);
-		if (aktStatus == 13)
+		if (actStatus == 13)
 			mainFrame.setMainPanel(ws14);
-		if (aktStatus == 14)
+		if (actStatus == 14)
 			mainFrame.setMainPanel(ws15);
-		if (aktStatus == 15)
+		if (actStatus == 15)
 			mainFrame.setMainPanel(ws16);
-		if (aktStatus == 16)
+		if (actStatus == 16)
 			mainFrame.setMainPanel(ws17);
-		if (aktStatus == 17)
+		if (actStatus == 17)
 			mainFrame.setMainPanel(ws18);
-		if (aktStatus == 18)
+		if (actStatus == 18)
 			mainFrame.setMainPanel(ws19);
-		if (aktStatus == 19) {
+		if (actStatus == 19) {
 			mainFrame.setMainPanel(ws20);
 			mainFrame.getbNext().setEnabled(false);
 		}
 
 	}
 
+	/**
+	 * Setzt den aktuellen Status zurueck
+	 */
 	public void setStatusPrevious() {
-		
+		mainFrame.getStatusText().setText("Aktueller Status: OK");
 		iterator = statusService.getStatusList().iterator();
 		boolean end = false;
 		Status akt = null;
 		Status prev = null;
 		while (iterator.hasNext() && !end) {
 			akt = (Status) iterator.next();
-			if (akt.isAktive()) {
-				akt.setAktive(false);
-				prev.setAktive(true);
+			if (akt.isActive()) {
+				akt.setActive(false);
+				prev.setActive(true);
 				end = true;
 			}
 			prev = akt;
 		}
 		getStatusbar().removeAll();
 		getStatusbar().initBar();
-		aktStatus--;
-		if (aktStatus == 0) {
+		actStatus--;
+		if (actStatus == 0) {
 			mainFrame.setMainPanel(ws1);
 			mainFrame.getbPrevious().setEnabled(false);
 		}
-		if (aktStatus == 1)
+		if (actStatus == 1)
 			mainFrame.setMainPanel(ws2);
-		if (aktStatus == 2)
+		if (actStatus == 2)
 			mainFrame.setMainPanel(ws3);
-		if (aktStatus == 3)
+		if (actStatus == 3)
 			mainFrame.setMainPanel(ws4);
-		if (aktStatus == 4)
+		if (actStatus == 4)
 			mainFrame.setMainPanel(ws5);
-		if (aktStatus == 5)
+		if (actStatus == 5)
 			mainFrame.setMainPanel(ws6);
-		if (aktStatus == 6)
+		if (actStatus == 6)
 			mainFrame.setMainPanel(ws7);
-		if (aktStatus == 7)
+		if (actStatus == 7)
 			mainFrame.setMainPanel(ws8);
-		if (aktStatus == 8)
+		if (actStatus == 8)
 			mainFrame.setMainPanel(ws9);
-		if (aktStatus == 9)
+		if (actStatus == 9)
 			mainFrame.setMainPanel(ws10);
-		if (aktStatus == 10)
+		if (actStatus == 10)
 			mainFrame.setMainPanel(ws11);
-		if (aktStatus == 11)
+		if (actStatus == 11)
 			mainFrame.setMainPanel(ws12);
-		if (aktStatus == 12)
+		if (actStatus == 12)
 			mainFrame.setMainPanel(ws13);
-		if (aktStatus == 13)
+		if (actStatus == 13)
 			mainFrame.setMainPanel(ws14);
-		if (aktStatus == 14)
+		if (actStatus == 14)
 			mainFrame.setMainPanel(ws15);
-		if (aktStatus == 15)
+		if (actStatus == 15)
 			mainFrame.setMainPanel(ws16);
-		if (aktStatus == 16)
+		if (actStatus == 16)
 			mainFrame.setMainPanel(ws17);
-		if (aktStatus == 16)
+		if (actStatus == 16)
 			mainFrame.setMainPanel(ws17);
-		if (aktStatus == 17)
+		if (actStatus == 17)
 			mainFrame.setMainPanel(ws18);
-		if (aktStatus == 18) {
+		if (actStatus == 18) {
 			mainFrame.setMainPanel(ws19);
 			mainFrame.getbNext().setEnabled(true);
 		}
-		if (aktStatus == 19)
+		if (actStatus == 19)
 			mainFrame.setMainPanel(ws20);
 
 	}
 
 	/**
-	 * @return the conf
+	 * @return Configuration
 	 */
 	public Configuration getConf() {
 		return conf;
 	}
 
 	/**
-	 * @return the prop
+	 * @return IO_properties
 	 */
 	public IO_properties getProp() {
 		return prop;
 	}
 
 	/**
-	 * @return the dbService
+	 * @return DBService
 	 */
 	public DBService getDbService() {
 		return dbService;
 	}
 
 	/**
-	 * @return the mailConf
+	 * @return MailConfiguration
 	 */
 	public MailConfiguration getMailConf() {
 		return mailConf;
 	}
 
 	/**
-	 * @return the dbconf
+	 * @return DBConfiguration
 	 */
 	public DBConfiguration getDbconf() {
 		return dbconf;
 	}
 
 	/**
-	 * @return the statusbar
+	 * @return Statusbar
 	 */
 	public Statusbar getStatusbar() {
 		return statusbar;
 	}
 
 	/**
-	 * @return the dbService
+	 * @return StatusService
 	 */
 	public StatusService getStatusService() {
 		return statusService;
 	}
 
 	/**
-	 * @return the center
+	 * @return Center
 	 */
 	public Center getCenter() {
 		return center;
 	}
 
 	/**
-	 * @return the urlService
+	 * @return URLService
 	 */
 	public URLService getUrlService() {
 		return urlService;
 	}
 
 	/**
-	 * @return the mainFrame
+	 * @return MainFrame
 	 */
 	public MainFrame getMainFrame() {
 		return mainFrame;
 	}
 
 	/**
-	 * @param mainFrame
-	 *            the mainFrame to set
+	 * @param Setzte MainFrame
 	 */
 	public void setMainFrame(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
 	}
 
 	/**
-	 * @param aktStatus the aktStatus to set
+	 * @param Setze aktuellen Status 
 	 */
-	public void setAktStatus(int aktStatus) {
-		this.aktStatus = aktStatus;
+	public void setactStatus(int actStatus) {
+		this.actStatus = actStatus;
 	}
 
 	/**
-	 * @return the aktStatus
+	 * @return aktuellen Status
 	 */
-	public int getAktStatus() {
-		return aktStatus;
+	public int getactStatus() {
+		return actStatus;
 	}
 
 	/**

@@ -3,10 +3,9 @@ package org.randi2.installer.model.services;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
 import org.randi2.installer.model.Administrator;
 import org.randi2.installer.model.Person;
-import org.randi2.installer.controller.StatusService;
+import org.randi2.installer.controller.Main;
 
 /**
  * 
@@ -14,17 +13,21 @@ import org.randi2.installer.controller.StatusService;
  */
 public class AdministratorService {
 
-	private DBService dbService;
-	private StatusService statusService;
+	private Main main;
 
-	public AdministratorService(DBService dbService, StatusService statusService) {
-		this.dbService = dbService;
+	public AdministratorService(Main main) {
+		this.main = main;
 	}
 
 	public Connection getConnection() {
-		return dbService.getConnection();
+		return main.getDbService().getConnection();
 	}
 
+	/**
+	 * Updatet die Tabellen Login und Person mit den Daten des Amdinistrators
+	 * 
+	 * @param person
+	 */
 	public void update(Person person) {
 		Administrator admin = (Administrator) person;
 		PreparedStatement pStatement;
@@ -54,8 +57,12 @@ public class AdministratorService {
 			pStatement.executeUpdate();
 			pStatement.close();
 		} catch (SQLException e) {
-			statusService.getAkt().setStatus(-1);
-			e.printStackTrace();
+			main.getStatusService().getAkt().setStatus(-1);
+			main.getMainFrame()
+					.getStatusText()
+					.setText(
+							main.getConf().getlProp()
+									.getProperty("error.datenbankUpdate"));
 		}
 	}
 }

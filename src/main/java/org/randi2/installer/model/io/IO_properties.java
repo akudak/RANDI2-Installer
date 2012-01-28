@@ -5,8 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Properties;
-import org.randi2.installer.controller.StatusService;
-import org.randi2.installer.controller.configuration.Configuration;
+import org.randi2.installer.controller.Main;
 
 /**
  * 
@@ -14,108 +13,135 @@ import org.randi2.installer.controller.configuration.Configuration;
  */
 
 public class IO_properties {
-	private StatusService statusService;
+	private Main main;
 
-	public IO_properties(StatusService statusService) {
-		this.statusService = statusService;
+	public IO_properties(Main main) {
+		this.main = main;
 	}
 
-	public void infoData(Configuration conf) {
+	/** 
+	 * aendert Tomcat/webapps/RANDI2/WEB-INF/classes/META-INF/configuration.properties
+	 */
+	public void infoData() {
 		Properties prop = new Properties();
 		try {
 			prop.load(new FileInputStream(
-					conf.getServerPath()
+					main.getConf().getServerPath()
 							+ "webapps/RANDI2/WEB-INF/classes/META-INF/configuration.properties"));
 		} catch (IOException e) {
-			statusService.getAkt().setStatus(-1);
+			main.getStatusService().getAkt().setStatus(-1);
 		}
-		prop.setProperty("mail.from", conf.getMail_from());
-		prop.setProperty("info.server", conf.getInfo_server());
-		prop.setProperty("info.hoster", conf.getInfo_hoster());
+		prop.setProperty("mail.from", main.getConf().getMail_from());
+		prop.setProperty("info.server", main.getConf().getInfo_server());
+		prop.setProperty("info.hoster", main.getConf().getInfo_hoster());
 		try {
 			prop.store(
 					new FileOutputStream(
-							conf.getServerPath()
+							main.getConf().getServerPath()
 									+ "webapps/RANDI2/WEB-INF/classes/META-INF/configuration.properties"),
 					null);
 		} catch (IOException e) {
-			statusService.getAkt().setStatus(-1);
+			main.getStatusService().getAkt().setStatus(-1);
+			main.getMainFrame().getStatusText().setText(main.getConf().getlProp()
+					.getProperty("error.configuration"));
 		}
 	}
 
-	public void labelsGER(Configuration conf) {
+	/** 
+	 * aendert Tomcat/webapps/RANDI2/WEB-INF/classes/de/randi2/jsf/i18n/labels_de_DE.properties
+	 */
+	public void labelsGER() {
 		Properties prop = new Properties();
 		try {
 			prop.load(new FileInputStream(
-					conf.getServerPath()
+					main.getConf().getServerPath()
 							+ "webapps/RANDI2/WEB-INF/classes/de/randi2/jsf/i18n/labels_de_DE.properties"));
 		} catch (IOException e) {
-			statusService.getAkt().setStatus(-1);
+			main.getStatusService().getAkt().setStatus(-1);
 		}
-		prop.setProperty("pages.registration.terms", conf.getDisclaimerGER());
+		prop.setProperty("pages.registration.terms", main.getConf().getDisclaimerGER());
 		prop.setProperty("pages.aboutPopup.hostingInst",
-				conf.getHostingInstGER());
+				main.getConf().getHostingInstGER());
 		try {
 			prop.store(
 					new FileOutputStream(
-							conf.getServerPath()
+							main.getConf().getServerPath()
 									+ "webapps/RANDI2/WEB-INF/classes/de/randi2/jsf/i18n/labels_de_DE.properties"),
 					null);
 		} catch (IOException e) {
-			statusService.getAkt().setStatus(-1);
+			main.getStatusService().getAkt().setStatus(-1);
+			main.getMainFrame().getStatusText().setText(main.getConf().getlProp()
+					.getProperty("error.language"));
 		}
 	}
-
-	public void labelsUS(Configuration conf) {
+	
+/**
+ * aendert Tomcat/webapps/RANDI2/WEB-INF/classes/de/randi2/jsf/i18n/labels_en_US.properties
+ */
+	public void labelsUS() {
 		Properties prop = new Properties();
 		try {
 			prop.load(new FileInputStream(
-					conf.getServerPath()
+					main.getConf().getServerPath()
 							+ "webapps/RANDI2/WEB-INF/classes/de/randi2/jsf/i18n/labels_en_US.properties"));
 		} catch (IOException e) {
-			statusService.getAkt().setStatus(-1);
+			main.getStatusService().getAkt().setStatus(-1);
 		}
-		prop.setProperty("pages.registration.terms", conf.getDisclaimerUS());
+		prop.setProperty("pages.registration.terms", main.getConf().getDisclaimerUS());
 		prop.setProperty("pages.aboutPopup.hostingInst",
-				conf.getHostingInstUS());
+				main.getConf().getHostingInstUS());
 		try {
 			prop.store(
 					new FileOutputStream(
-							conf.getServerPath()
+							main.getConf().getServerPath()
 									+ "webapps/RANDI2/WEB-INF/classes/de/randi2/jsf/i18n/labels_en_US.properties"),
 					null);
 		} catch (IOException e) {
-			statusService.getAkt().setStatus(-1);
+			main.getStatusService().getAkt().setStatus(-1);
+			main.getMainFrame().getStatusText().setText(main.getConf().getlProp()
+					.getProperty("error.language"));
 		}
 	}
 
-	public void editWebsite(Configuration conf) {
+	/**
+	 * aender Tomcat/webapps/RANDI2/RANDI2.properties
+	 */
+	public void editWebsite() {
 		Properties prop = new Properties();
 		try {
-			prop.load(new FileInputStream(conf.getServerPath()
+			prop.load(new FileInputStream(main.getConf().getServerPath()
 					+ "webapps/RANDI2/RANDI2.properties"));
 		} catch (IOException e) {
-			statusService.getAkt().setStatus(-1);
+			main.getStatusService().getAkt().setStatus(-1);
 		}
-		prop.setProperty("website2", conf.getWebsite());
-		if(conf.isSelfRegistration())
+		prop.setProperty("website2", main.getConf().getWebsite());
+		if(main.getCenter().isSelfRegistration())
 		prop.setProperty("selfRegistration", "true");
 		else
 			prop.setProperty("selfRegistration", "false");
 		try {
-			prop.store(new FileOutputStream(conf.getServerPath()
+			prop.store(new FileOutputStream(main.getConf().getServerPath()
 					+ "webapps/RANDI2/RANDI2.properties"), null);
 		} catch (IOException e) {
-			statusService.getAkt().setStatus(-1);
+			main.getStatusService().getAkt().setStatus(-1);
+			main.getMainFrame().getStatusText().setText(main.getConf().getlProp()
+					.getProperty("error.language"));
 		}
 	}
 
+	/**
+	 * Laedet eine beliebige Properties-Datei und gibt sie zurueck
+	 * @param pfad
+	 * @return
+	 */
 	public Properties loadProperties(URL pfad) {
 		Properties prop = new Properties();
 		try {
 			prop.load(new FileInputStream(pfad.getFile()));
 		} catch (IOException e) {
-			statusService.getAkt().setStatus(-1);
+			main.getStatusService().getAkt().setStatus(-1);
+			main.getMainFrame().getStatusText().setText(main.getConf().getlProp()
+					.getProperty("error.loadFile"));
 		}
 		return prop;
 	}

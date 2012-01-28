@@ -1,8 +1,6 @@
 package org.randi2.installer.model.services;
 
 import java.io.File;
-
-import org.randi2.installer.controller.Status;
 import org.randi2.installer.controller.StatusService;
 
 /**
@@ -18,6 +16,9 @@ public class FileService implements FileServiceInterface {
 		this.statusService = statusService;
 	}
 
+	/**
+	 * Benennt eine Datei um
+	 */
 	@Override
 	public void rename(String path, String name, String newName) {
 		File source = new File(path + name);
@@ -27,6 +28,9 @@ public class FileService implements FileServiceInterface {
 		}
 	}
 
+	/**
+	 * Korpiert eine Datei in ein neues Verzeichnis
+	 */
 	@Override
 	public void copy(String name, String oldPath, String newPath) {
 		File source = new File(oldPath + name);

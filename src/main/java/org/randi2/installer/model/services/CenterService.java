@@ -4,10 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import org.randi2.installer.model.Center;
+import org.randi2.installer.controller.Main;
 
-import org.randi2.installer.controller.StatusService;
 
 /**
  * 
@@ -15,17 +14,20 @@ import org.randi2.installer.controller.StatusService;
  */
 public class CenterService {
 
-	private DBService dbService;
-	private StatusService statusService;
+	private Main main;
 
-	public CenterService(DBService dbService, StatusService statusService) {
-		this.dbService = dbService;
+	public CenterService(Main main) {
+		this.main = main;
 	}
 
 	public Connection getConnection() {
-		return dbService.getConnection();
+		return main.getDbService().getConnection();
 	}
 
+	/**
+	 * Updatet die Tabellen TrialSite und Person
+	 * @param center
+	 */
 	public void update(Center center) {
 		PreparedStatement pStatement;
 		try {
@@ -36,15 +38,18 @@ public class CenterService {
 			pStatement.setString(2, center.getCity());
 			pStatement.setString(3, center.getCountry());
 			pStatement.setString(4, center.getName());
-			pStatement.setString(5, center.getPlz());
+			pStatement.setString(5, center.getPostcode());
 			pStatement.setString(6, center.getStreet());
 			pStatement.setLong(7, 1);
 			pStatement.executeUpdate();
 			pStatement.close();
 
-			PreparedStatement ps = dbService.getConnection().prepareStatement(
-					"SELECT contactPerson_id FROM TrialSite WHERE id='"
-							+ center.getId() + "'");
+			PreparedStatement ps = main
+					.getDbService()
+					.getConnection()
+					.prepareStatement(
+							"SELECT contactPerson_id FROM TrialSite WHERE id='"
+									+ center.getId() + "'");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				center.getContactPerson().setId(rs.getLong(1));
@@ -67,9 +72,12 @@ public class CenterService {
 			pStatement.executeUpdate();
 			pStatement.close();
 		} catch (SQLException e) {
-			System.out.println(e);
-			statusService.getAkt().setStatus(-1);
-			e.printStackTrace();
+			main.getStatusService().getAkt().setStatus(-1);
+			main.getMainFrame()
+					.getStatusText()
+					.setText(
+							main.getConf().getlProp()
+									.getProperty("error.datenbankUpdate"));
 		}
 	}
 }

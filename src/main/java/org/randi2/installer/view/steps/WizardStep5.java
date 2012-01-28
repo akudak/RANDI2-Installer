@@ -65,7 +65,7 @@ public class WizardStep5 extends MainPanel {
 		downloadPfadB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				main.getStatusService().getAkt().setStatus(1);
-				Chooser fileOpen = new Chooser();
+				Chooser fileOpen = new Chooser(main);
 				if (!main.getConf().setRandi2Path(fileOpen.getFile("war"))) {
 					main.getStatusService().getAkt().setStatus(-1);
 					main.getMainFrame().getStatusText().setText(

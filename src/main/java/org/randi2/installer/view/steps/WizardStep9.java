@@ -56,11 +56,10 @@ public class WizardStep9 extends MainPanel {
 		downloadPfadB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				main.getStatusService().getAkt().setStatus(1);
-				Chooser fileOpen = new Chooser();
+				Chooser fileOpen = new Chooser(main);
 				if (!main.getConf().setJAFPath(fileOpen.getFile("jar"))) {
 					main.getStatusService().getAkt().setStatus(-1);
-					main.getMainFrame()
-							.aktStatusPanel(
+					main.getMainFrame().getStatusText().setText(
 									(main.getConf().getlProp()
 											.getProperty("error.jar")));
 				}

@@ -7,7 +7,7 @@ import java.util.Iterator;
  * 
  * @author andreas
  * 
- *         Verwaltet eine Liste mit jeweiligem Status eines
+ *         Verwaltet eine Liste mit den jeweiligem Status eines
  *         Installationsschritts
  */
 public class StatusService {
@@ -20,72 +20,43 @@ public class StatusService {
 	}
 
 	/**
-	 * @return the statusList
+	 * @return Liste mit den Statuseintraegen
 	 */
 	public ArrayList<Status> getStatusList() {
 		return statusList;
 	}
 
 	/**
-	 * @param statusList
-	 *            the statusList to set
+	 * @param Setzte Statusliste
 	 */
 	public void setStatusList(ArrayList<Status> statusList) {
 		this.statusList = statusList;
 	}
 
-	/**
-	 * Setzt den aktuellen Status. Ein Status kann auch nachtraeglich
-	 * Fehlschalgen z.B. wenn die Eintragung in der DB fehlschlaegt.
-	 * 
-	 * @param status
-	 */
-/*
-	public void setAktStatus(int status) {
-		Status akt;
-		Status prev = null;
-		Status prev2 = null;
-		int i = 0;
-
-		iterator = statusList.iterator();
-		while (iterator.hasNext()) {
-			akt = (Status) iterator.next();
-			i++;
-			if (akt.isAktive()) {
-				akt.setStatus(status);
-
-				if (i == 12) {
-					prev.setStatus(status);
-				}
-
-				if (i == 15) {
-					prev.setStatus(status);
-					prev2.setStatus(status);
-				}
-			}
-			prev2 = prev;
-			prev = akt;
-		}
-	}
-*/
 	public Status getAkt() {
-		Status akt = null;
+		Status act = null;
 		iterator = statusList.iterator();
 		while (iterator.hasNext()) {
-			akt = (Status) iterator.next();
-			if (akt.isAktive())
-				return akt;
+			act = (Status) iterator.next();
+			if (act.isActive())
+				return act;
 		}
-		return akt;
+		return act;
 	}
-	public Status getNext(Status akt)
+	
+	/**
+	 * 
+	 * @param act
+	 * @return liefe den nachsten Status
+	 */
+	public Status getNext(Status act)
 	{
-		Status zeiger = null;
+		Status pointer = null;
 		Status next = null;
 		iterator = statusList.iterator();
 		while (iterator.hasNext()) {
-			zeiger = (Status) iterator.next();
-			if (zeiger==akt) {
+			pointer = (Status) iterator.next();
+			if (pointer==act) {
 				if(iterator.hasNext())
 				next = iterator.next();
 			}

@@ -18,6 +18,9 @@ public class Logo extends JPanel {
 		init();
 	}
 
+	/** Erzeugt Objekt
+	 * 
+	 */
 	public void init() {
 		this.setSize(351, 100);
 		this.setLocation(150, 20);

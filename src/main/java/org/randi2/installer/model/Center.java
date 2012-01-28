@@ -10,23 +10,23 @@ public class Center {
 
 	private String country;
 	private String city;
-	private String plz;
+	private String postcode;
 	private String street;
 	private String name;
 	private Person contactPerson;
 	private String password;
+	private boolean selfRegistration;
 	private long id;
 
 	/**
-	 * @return the country
+	 * @return Land des Zentrums
 	 */
 	public String getCountry() {
 		return country;
 	}
 
 	/**
-	 * @param country
-	 *            the country to set
+	 * @param Setzet Land
 	 */
 	public boolean setCountry(String country) {
 		if (country != null && !country.isEmpty()) {
@@ -37,15 +37,14 @@ public class Center {
 	}
 
 	/**
-	 * @return the city
+	 * @return Stadt des Zentrums
 	 */
 	public String getCity() {
 		return city;
 	}
 
 	/**
-	 * @param city
-	 *            the city to set
+	 * @param Setzet Stadt
 	 */
 	public boolean setCity(String city) {
 		if (city != null && !city.isEmpty()) {
@@ -56,34 +55,32 @@ public class Center {
 	}
 
 	/**
-	 * @return the plz
+	 * @return Postleitzahl
 	 */
-	public String getPlz() {
-		return plz;
+	public String getPostcode() {
+		return postcode;
 	}
 
 	/**
-	 * @param plz
-	 *            the plz to set
+	 * @param Setzte Postleitzahl
 	 */
-	public boolean setPlz(String plz) {
-		if (plz != null && !plz.isEmpty()) {
-			this.plz = plz;
+	public boolean setPostcode(String postcode) {
+		if (postcode != null && !postcode.isEmpty()) {
+			this.postcode = postcode;
 			return true;
 		} else
 			return false;
 	}
 
 	/**
-	 * @return the streat
+	 * @return Strasse
 	 */
 	public String getStreet() {
 		return street;
 	}
 
 	/**
-	 * @param streat
-	 *            the streat to set
+	 * @param Setzte Strasse
 	 */
 	public boolean setStreet(String street) {
 		if (street != null && !street.isEmpty()) {
@@ -94,30 +91,29 @@ public class Center {
 	}
 
 	/**
-	 * @return the ansprechpartner
+	 * @return Ansprechpartner
 	 */
 	public Person getContactPerson() {
 		return contactPerson;
 	}
 
 	/**
-	 * @param ansprechpartner
-	 *            the ansprechpartner to set
+	 * @param Setzte Ansprechpartner
 	 */
 	public void setContactPerson(Person contactPerson) {
 		this.contactPerson = contactPerson;
 	}
 
 	/**
-	 * @return the name
+	 * @return Name des Zentrum
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * @param name
-	 *            the name to set
+	 * @param Setze Name
+	 * 
 	 */
 	public boolean setName(String name) {
 		if (name != null && !name.isEmpty()) {
@@ -128,15 +124,14 @@ public class Center {
 	}
 
 	/**
-	 * @return the password
+	 * @return Password mit dem sich neue Benutzer am Zentrum authentifizieren koennen
 	 */
 	public String getPassword() {
 		return password;
 	}
 
 	/**
-	 * @param password
-	 *            the password to set
+	 * @param Setzte Passwort
 	 */
 	public boolean setPassword(String password1, String password2) {
 		PasswordValidator passwordValidator = new PasswordValidator();
@@ -148,18 +143,32 @@ public class Center {
 	}
 
 	/**
-	 * @return the id
+	 * @return ID
 	 */
 	public long getId() {
 		return id;
 	}
 
 	/**
-	 * @param id
-	 *            the id to set
+	 * @param Setzte ID
 	 */
 	public void setId(long id) {
 		this.id = id;
 	}
+	/**
+	 * 
+	 * @return
+	 *  Legt fest, ob sich neue Benutzer selbst in einem Zentrum anmelden duerfen
+	 */
+	public boolean isSelfRegistration() {
+		return selfRegistration;
+	}
 
+	/**
+	 * 
+	 * @param Setzte selfRegistration
+	 */
+	public void setSelfRegistration(boolean selfRegistration) {
+		this.selfRegistration = selfRegistration;
+	}
 }

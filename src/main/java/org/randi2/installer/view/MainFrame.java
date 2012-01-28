@@ -36,6 +36,9 @@ public class MainFrame extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
+	/** Erzeugt Objekte
+	 * 
+	 */
 	public void initGUI() {
 		this.statusbar = main.getStatusbar();
 		languagebar = new Languagebar(this.main);
@@ -52,7 +55,12 @@ public class MainFrame extends JFrame {
 		initButton();
 	}
 
-	public void repaintAll() {
+	
+	/**
+	 *  Loescht alle Pbjekte und fuegt sie wieder hinzu
+	 * 
+	 */
+		public void repaintAll() {
 		this.remove(statusbar);
 		this.remove(languagebar);
 		this.remove(bNext);
@@ -64,6 +72,10 @@ public class MainFrame extends JFrame {
 		repaint();
 	}
 
+		/**
+		 * Setzte das MainPanel neu
+		 * @param mainPanel
+		 */
 	public void setMainPanel(JPanel mainPanel) {
 		if (this.mainPanel != null)
 			this.remove(this.mainPanel);
@@ -72,6 +84,9 @@ public class MainFrame extends JFrame {
 		this.repaint();
 	}
 
+	/**
+	 * Erstelle Buttons
+	 */
 	public void initButton() {
 		bNext = new JButton(main.getConf().getlProp()
 				.getProperty("button.next"));
@@ -99,60 +114,56 @@ public class MainFrame extends JFrame {
 
 
 	/**
-	 * @return the bPrevious
+	 * @return Gibt Button zurueck wieder
 	 */
 	public JButton getbPrevious() {
 		return bPrevious;
 	}
 
 	/**
-	 * @param bPrevious
-	 *            the bPrevious to set
+	 * @param Setzte Button
 	 */
 	public void setbPrevious(JButton bPrevious) {
 		this.bPrevious = bPrevious;
 	}
 
 	/**
-	 * @return the bNext
+	 * @return Gibt Button weiter zurueck
 	 */
 	public JButton getbNext() {
 		return bNext;
 	}
 
 	/**
-	 * @param bNext
-	 *            the bNext to set
+	 * @param Setzte Button weiter
 	 */
 	public void setbNext(JButton bNext) {
 		this.bNext = bNext;
 	}
 
 	/**
-	 * @return the statusbar
+	 * @return Gibt Statusbar zurueck
 	 */
 	public JPanel getStatusbar() {
 		return statusbar;
 	}
 
 	/**
-	 * @param statusbar
-	 *            the statusbar to set
+	 * @param Setzte Statusbar
 	 */
 	public void setStatusbar(JPanel statusbar) {
 		this.statusbar = statusbar;
 	}
 
 	/**
-	 * @return the statusText
+	 * @return Liefert StatusTextzeilge
 	 */
 	public JTextField getStatusText() {
 		return statusText;
 	}
 
 	/**
-	 * @param statusText
-	 *            the statusText to set
+	 * @param Setzt StatusText
 	 */
 	public void setStatusText(JTextField statusText) {
 		this.statusText = statusText;

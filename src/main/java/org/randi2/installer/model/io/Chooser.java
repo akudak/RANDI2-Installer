@@ -5,6 +5,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileFilter;
 
+import org.randi2.installer.controller.Main;
 import org.randi2.installer.controller.configuration.Configuration;
 
 /**
@@ -14,12 +15,23 @@ import org.randi2.installer.controller.configuration.Configuration;
  */
 public class Chooser {
 
-	public Chooser() {
+	private Main main;
+
+	public Chooser(Main main) {
+		this.main = main;
 	}
 
+	/**
+	 * Oeffnet Verzeichnis um eiene Datei auszuwaehlen
+	 * 
+	 * @param conf
+	 * @param start
+	 * @return Pfad zur Datei
+	 */
 	public String getDirectorie(Configuration conf, String start) {
 		String path = "fail";
-		final JFileChooser chooser = new JFileChooser("Verzeichnis waehlen");
+		final JFileChooser chooser = new JFileChooser(main.getConf().getlProp()
+				.getProperty("label.directorie"));
 		chooser.setDialogType(JFileChooser.OPEN_DIALOG);
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		final File file = new File(start);
@@ -36,6 +48,11 @@ public class Chooser {
 		return path;
 	}
 
+	/**
+	 * 
+	 * @param format
+	 * @return Gibt Pfad der ausgewaehlten Datei zurueck
+	 */
 	public String getFile(final String format) {
 		String path = "";
 		JFileChooser chooser = new JFileChooser();

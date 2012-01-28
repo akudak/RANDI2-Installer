@@ -16,7 +16,7 @@ public class WizardStep13 extends MainPanel {
 	private JTextField nameT;
 	private JTextField countryT;
 	private JTextField streetT;
-	private JTextField plzT;
+	private JTextField postcodeT;
 	private JTextField cityT;
 
 	public WizardStep13(final Main main) {
@@ -85,11 +85,11 @@ public class WizardStep13 extends MainPanel {
 
 		this.add(cityT);
 
-		plzT = new JTextField();
-		plzT.setLocation(220, 160);
-		plzT.setSize(200, 20);
+		postcodeT = new JTextField();
+		postcodeT.setLocation(220, 160);
+		postcodeT.setSize(200, 20);
 
-		this.add(plzT);
+		this.add(postcodeT);
 
 		streetT = new JTextField();
 		streetT.setLocation(220, 200);
@@ -119,7 +119,7 @@ public class WizardStep13 extends MainPanel {
 				if (!main.getCenter().setCountry(countryT.getText()))
 					main.getStatusService().getAkt().setStatus(-1);
 
-				if (!main.getCenter().setPlz(plzT.getText()))
+				if (!main.getCenter().setPostcode(postcodeT.getText()))
 					main.getStatusService().getAkt().setStatus(-1);
 
 				if (!main.getCenter().setStreet(streetT.getText()))
