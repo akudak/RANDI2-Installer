@@ -694,14 +694,29 @@ mainFrame.getStatusText().setText("Aktueller Status: OK");
 		return actStatus;
 	}
 
+	/**
+	 * Setzte Configuration
+	 * @param conf
+	 */
 	public void setConf(Configuration conf) {
 		this.conf = conf;
 	}
 
+	/**
+	 * Setzte StatusService
+	 * @param statusService
+	 */
 	public void setStatusService(StatusService statusService) {
 		this.statusService = statusService;
 	}
 
+	/**
+	 * Setze Center
+	 * @param center
+	 */
+	public void setCenter(Center center) {
+		this.center = center;
+	}
 	/**
 	 * @param args
 	 * @throws SQLException

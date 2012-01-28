@@ -62,10 +62,19 @@ public class DBConfigurationTest {
 		// Negativ Test
 
 		// Setzet leeren String
-		assertFalse(DBCONF.setPassword(EMPTY, EMPTY));
+		assertTrue(DBCONF.setPassword(EMPTY, EMPTY));
 
-		// Darf nicht null sein
-		assertFalse(DBCONF.setPassword(NULL, NULL));
+		
+		
+		// Positiv Test
+		assertTrue(DBCONF.setPasswordCon(PASSWORD1, PASSWORD2));
+
+		assertEquals(PASSWORD1, DBCONF.getPasswordCon());
+		// Negativ Test
+
+		// Setzet leeren String
+		assertTrue(DBCONF.setPasswordCon(EMPTY, EMPTY));
+
 	}
 
 	public void setInitDBPath() {

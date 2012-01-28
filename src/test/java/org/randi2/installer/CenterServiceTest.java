@@ -26,7 +26,7 @@ public class CenterServiceTest {
 	private static DBConfiguration DBCONF;
 	private static final String TITLE = "Dr,";
 	private static final long ID1 = 1;
-// 	private static final String PASSWORD = "1$password";
+	private static final String PASSWORD = "1$password";
 	private static final String EMAIL = "mail@test.de";
 	private static final String FAX = "012334243";
 	private static final String FIRSTNAME = "Hans";
@@ -47,6 +47,9 @@ public class CenterServiceTest {
 		DBCONF.setMySQL(true);
 		DBCONF.setUsernameCon("root");
 		DBCONF.setPasswordCon("", "");
+		DBCONF.setUsername("admin");
+		DBCONF.setPassword("www", "www");
+		MAIN = new Main();
 		MAIN.setDbconf(DBCONF);
 		DBSERVICE = new DBService(MAIN);
 		CENTER = new Center();
@@ -60,7 +63,7 @@ public class CenterServiceTest {
 		CONTACTPERSON.setSurname(SURNAME);
 		CONTACTPERSON.setMobile(MOBILE);
 		CONTACTPERSON.setPhone(PHONE);
-		//CENTER.setPassword(PASSWORD, PASSWORD);
+		CENTER.econde(PASSWORD, PASSWORD);
 		CENTER.setCity(CITY);
 		CENTER.setCountry(COUNTRY);
 		CENTER.setName(NAME);

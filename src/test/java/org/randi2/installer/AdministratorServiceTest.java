@@ -1,7 +1,6 @@
 package org.randi2.installer;
 
 import static org.junit.Assert.assertEquals;
-
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -42,6 +41,8 @@ public class AdministratorServiceTest {
 		DBCONF.setMySQL(true);
 		DBCONF.setUsernameCon("root");
 		DBCONF.setPasswordCon("", "");
+		DBCONF.setUsername("admin");
+		DBCONF.setPassword("www", "www");
 		MAIN = new Main();
 		MAIN.setDbconf(DBCONF);
 		DBSERVICE = new DBService(MAIN);

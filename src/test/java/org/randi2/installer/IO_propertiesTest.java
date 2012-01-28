@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
+
+import org.randi2.installer.model.Center;
 import org.randi2.installer.model.io.IO_properties;
 import org.randi2.installer.controller.Main;
 import org.randi2.installer.controller.StatusService;
@@ -18,6 +20,7 @@ import org.randi2.installer.controller.configuration.Configuration;
 public class IO_propertiesTest {
 
 	private static IO_properties IO_PROP;
+	private static Center CENTER;
 	private static Configuration CONF;
 	private static final String MAIL_FROM = "andreas";
 	private static final String INFO_SERVER = "Randi2.de";
@@ -39,11 +42,16 @@ public class IO_propertiesTest {
 		CONF.setHostingInstGER(PAGES_ABOUTPOPUP_HOSTINGINST);
 		CONF.setDisclaimerUS(PAGES_REGISTRTION_TERMS);
 		CONF.setHostingInstUS(PAGES_REGISTRTION_TERMS);
+		CENTER = new Center();
+		CENTER.setSelfRegistration(true);
+		MAIN = new Main();
+		MAIN.setConf(CONF);
+		MAIN.setStatusService(STATUSSERVICE);
+		MAIN.setCenter(CENTER);
 		CONF.setServerPath(ClassLoader.getSystemResource("")
 				.getFile());
 		CONF.setWebsite(WEBSITE);
-		MAIN.setConf(CONF);
-		MAIN.setStatusService(STATUSSERVICE);
+
 		IO_PROP = new IO_properties(MAIN);
 	}
 

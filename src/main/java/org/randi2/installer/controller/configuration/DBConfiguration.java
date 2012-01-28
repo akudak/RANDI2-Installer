@@ -109,7 +109,7 @@ public class DBConfiguration {
 
 	public boolean setPasswordCon(String passwordCon1, String passwordCon2) {
 		if (passwordCon1.equals(passwordCon2)) {
-			this.password = passwordCon1;
+			this.passwordCon = passwordCon1;
 			return true;
 		} else
 			return false;

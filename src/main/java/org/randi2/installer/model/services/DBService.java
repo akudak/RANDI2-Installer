@@ -45,8 +45,6 @@ public class DBService {
 							(main.getConf().getlProp()
 									.getProperty("error.driverLoad")));
 			main.getStatusService().getAkt().setStatus(-1);
-			;
-
 		}
 		try {
 			if (main.getDbconf().isMySQL())

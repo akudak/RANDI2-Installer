@@ -22,15 +22,21 @@ public class DBServiceTest {
 	private static DBService DBSERVICE;
 	private static DBConfiguration DBCONF;
 	private static Main MAIN;
+	private static final String ADMIN = "admin";
+	private static final String ROOT = "root";
+	private static final String PASSWORD = "www";
+	private static final String SERVER = "127.0.0.1";
 	private static final String USERNAME_FAIL = "lola";
 
 	@BeforeClass
 	public static void seUpBeforeClass() {
 		DBCONF = new DBConfiguration();
-		DBCONF.setServer("127.0.0.1");
+		DBCONF.setServer(SERVER);
 		DBCONF.setMySQL(true);
-		DBCONF.setUsernameCon("root");
+		DBCONF.setUsernameCon(ROOT);
 		DBCONF.setPasswordCon("", "");
+		DBCONF.setUsername(ADMIN);
+		DBCONF.setPassword(PASSWORD, PASSWORD);
 		MAIN = new Main();
 		MAIN.setDbconf(DBCONF);
 		DBSERVICE = new DBService(MAIN);
