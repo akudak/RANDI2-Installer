@@ -14,30 +14,31 @@ import java.util.Properties;
  */
 public class URLService {
 
-
 	private Main main;
 	private Properties link;
+
 	public URLService(Main main) {
 		this.main = main;
+		loadLink();
 	}
 
 	public void openURL(String urlText) {
 		URL url = null;
 		try {
 			if (urlText.equalsIgnoreCase("Tomcat"))
-			 url=new URL(link.getProperty("url.tomcat"));
+				url = new URL(link.getProperty("url.tomcat"));
 			else if (urlText.equalsIgnoreCase("Xampp"))
-				url=new URL(link.getProperty("url.xampp"));
+				url = new URL(link.getProperty("url.xampp"));
 			else if (urlText.equalsIgnoreCase("jdbc_mysql"))
-				url=new URL(link.getProperty("url.jdbcMySQL"));
+				url = new URL(link.getProperty("url.jdbcMySQL"));
 			else if (urlText.equalsIgnoreCase("jdbc_postgre"))
-				url=new URL(link.getProperty("url.jdbcPostgreSQL"));
+				url = new URL(link.getProperty("url.jdbcPostgreSQL"));
 			else if (urlText.equalsIgnoreCase("java_mail"))
-				url=new URL(link.getProperty("url.jma"));
+				url = new URL(link.getProperty("url.jma"));
 			else if (urlText.equalsIgnoreCase("randi2"))
-				url=new URL(link.getProperty("url.randi2"));
+				url = new URL(link.getProperty("url.randi2"));
 			else if (urlText.equalsIgnoreCase("jaf"))
-				url=new URL(link.getProperty("url.jaf"));
+				url = new URL(link.getProperty("url.jaf"));
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -52,11 +53,11 @@ public class URLService {
 				e.printStackTrace();
 			}
 		}
-		
-		
+
 	}
-	public void loadLink()
-	{
-	link = main.getProp().loadProperties(ClassLoader.getSystemResource("installer.properties"));
+
+	public void loadLink() {
+		link = main.getProp().loadProperties(
+				ClassLoader.getSystemResource("installer.properties"));
 	}
 }

@@ -145,7 +145,7 @@ public class WizardStep2 extends MainPanel {
 		
 		JButton insertB = new JButton(main.getConf().getlProp()
 				.getProperty("button.save"));
-		insertB.setLocation(340, 250);
+		insertB.setLocation(315, 250);
 		insertB.setSize(80, 20);
 
 		this.add(insertB);

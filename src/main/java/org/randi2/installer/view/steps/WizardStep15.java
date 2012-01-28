@@ -92,7 +92,7 @@ public class WizardStep15 extends MainPanel {
 		JLabel passwordL1 = new JLabel(main.getConf().getlProp()
 				.getProperty("label.password"));
 		passwordL1.setLocation(10, 200);
-		passwordL1.setSize(100, 20);
+		passwordL1.setSize(180, 20);
 		
 	
 		this.add(passwordL1);
@@ -100,7 +100,7 @@ public class WizardStep15 extends MainPanel {
 		JLabel passwordL2 = new JLabel(main.getConf().getlProp()
 				.getProperty("label.repeat"));
 		passwordL2.setLocation(10, 240);
-		passwordL2.setSize(100, 20);
+		passwordL2.setSize(180, 20);
 
 		this.add(passwordL2);
 
