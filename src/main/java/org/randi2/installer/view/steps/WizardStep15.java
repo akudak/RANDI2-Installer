@@ -2,10 +2,13 @@ package org.randi2.installer.view.steps;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import org.randi2.installer.view.MainPanel;
 import org.randi2.installer.controller.Main;
@@ -35,14 +38,14 @@ public class WizardStep15 extends MainPanel {
 
 		JLabel firstnameL = new JLabel(main.getConf().getlProp()
 				.getProperty("label.mobile"));
-		firstnameL.setLocation(10, 80);
+		firstnameL.setLocation(10, 60);
 		firstnameL.setSize(200, 20);
 
 		this.add(firstnameL);
 
 		JLabel surnameL = new JLabel(main.getConf().getlProp()
 				.getProperty("label.fax"));
-		surnameL.setLocation(10, 120);
+		surnameL.setLocation(10, 100);
 		surnameL.setSize(200, 20);
 
 		this.add(surnameL);
@@ -50,17 +53,46 @@ public class WizardStep15 extends MainPanel {
 		
 
 		JLabel contactPersonL = new JLabel(main.getConf().getlProp()
-				.getProperty("label.contactPersonInfo2"));
-		contactPersonL.setLocation(10, 160);
-		contactPersonL.setSize(600, 160);
+				.getProperty("label.pwAuthentication"));
+		contactPersonL.setLocation(10, 130);
+		contactPersonL.setSize(600, 20);
 
 		this.add(contactPersonL);
+		
+		JRadioButton aButton = new JRadioButton(main.getConf().getlProp()
+				.getProperty("check.yes"));
+		JRadioButton bButton = new JRadioButton(main.getConf().getlProp()
+				.getProperty("check.no"));
+		
+
+		ButtonGroup myButtonGroup2 = new ButtonGroup();
+		myButtonGroup2.add(aButton);
+		myButtonGroup2.add(bButton);
+	
+
+		aButton.setLocation(100, 160);
+		bButton.setLocation(160, 160);
+	
+
+		aButton.setSize(50, 20);
+		bButton.setSize(50, 20);
+	
+
+		aButton.setVisible(true);
+		bButton.setVisible(true);
+		
+		this.add(aButton);
+		this.add(bButton);
+	
+
+		this.setVisible(true);
+
 
 		
 		JLabel passwordL1 = new JLabel(main.getConf().getlProp()
 				.getProperty("label.password"));
 		passwordL1.setLocation(10, 200);
-		passwordL1.setSize(200, 20);
+		passwordL1.setSize(100, 20);
 		
 	
 		this.add(passwordL1);
@@ -68,24 +100,24 @@ public class WizardStep15 extends MainPanel {
 		JLabel passwordL2 = new JLabel(main.getConf().getlProp()
 				.getProperty("label.repeat"));
 		passwordL2.setLocation(10, 240);
-		passwordL2.setSize(200, 20);
+		passwordL2.setSize(100, 20);
 
 		this.add(passwordL2);
 
 		phoneT = new JTextField();
-		phoneT.setLocation(220, 80);
+		phoneT.setLocation(220, 20);
 		phoneT.setSize(200, 20);
 
 		this.add(phoneT);
 
 		mobileT = new JTextField();
-		mobileT.setLocation(220, 120);
+		mobileT.setLocation(220, 60);
 		mobileT.setSize(200, 20);
 
 		this.add(mobileT);
 
 		faxT = new JTextField();
-		faxT.setLocation(220, 160);
+		faxT.setLocation(220, 100);
 		faxT.setSize(200, 20);
 
 		this.add(faxT);
@@ -102,6 +134,23 @@ public class WizardStep15 extends MainPanel {
 
 		this.add(passwordT2);
 
+		aButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			passwordT1.setEnabled(true);
+			passwordT2.setEnabled(true);
+			main.getConf().setSelfRegistration(true);
+			}
+		});
+
+		bButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				passwordT1.setEnabled(false);
+				passwordT2.setEnabled(false);
+				main.getConf().setSelfRegistration(true);
+			}
+		});
+		
+		
 		JButton insertB = new JButton(main.getConf().getlProp()
 				.getProperty("button.save"));
 		insertB.setLocation(340, 280);

@@ -98,6 +98,7 @@ public class IO_properties {
 			statusService.getAkt().setStatus(-1);
 		}
 		prop.setProperty("website2", conf.getWebsite());
+		prop.setProperty("selfRegistration", conf.getSelfRegistration());
 		try {
 			prop.store(new FileOutputStream(conf.getServerPath()
 					+ "webapps/RANDI2/RANDI2.properties"), null);

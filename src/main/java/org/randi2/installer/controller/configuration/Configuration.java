@@ -24,6 +24,7 @@ public class Configuration {
 	private String disclaimerGER;
 	private String disclaimerUS;
 	private String logoPath;
+	private boolean selfRegistration;
 
 	/**
 	 * @return the info_server
@@ -315,5 +316,13 @@ public class Configuration {
 			return true;
 		} else
 			return false;
+	}
+
+	public boolean isSelfRegistration() {
+		return selfRegistration;
+	}
+
+	public void setSelfRegistration(boolean selfRegistration) {
+		this.selfRegistration = selfRegistration;
 	}
 }
