@@ -155,7 +155,7 @@ public class WizardStep11 extends MainPanel {
 					main.getAdmin().setPrefLocale("us");
 
 				if (main.getStatusService().getAkt().getStatus() == -1)
-					main.getMainFrame().aktStatusPanel(
+					main.getMainFrame().getStatusText().setText(
 							(main.getConf().getlProp()
 									.getProperty("error.insert")));
 			}

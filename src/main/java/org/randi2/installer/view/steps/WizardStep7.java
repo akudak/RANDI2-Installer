@@ -62,8 +62,7 @@ public class WizardStep7 extends MainPanel {
 				Chooser fileOpen = new Chooser();
 				if (!main.getConf().setJDBCPath(fileOpen.getFile("jar"))) {
 					main.getStatusService().getAkt().setStatus(-1);
-					main.getMainFrame()
-							.aktStatusPanel(
+						main.getMainFrame().getStatusText().setText(
 									(main.getConf().getlProp()
 											.getProperty("error.jar")));
 				}

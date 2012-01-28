@@ -161,7 +161,7 @@ public class Main {
 			}
 			fileService.copy(JDBCName, JDBCPath, conf.getServerPath() + "lib/");
 		} else
-			getMainFrame().aktStatusPanel(
+			getMainFrame().getStatusText().setText(
 					(getConf().getlProp().getProperty("error.jar")));
 	}
 
@@ -180,7 +180,7 @@ public class Main {
 			fileService.copy(mailName, mailPath, conf.getServerPath() + "lib/");
 			mailConf.setJarPath(mailPath);
 		} else
-			getMainFrame().aktStatusPanel(
+			getMainFrame().getStatusText().setText(
 					(getConf().getlProp().getProperty("error.jar")));
 	}
 
@@ -201,7 +201,7 @@ public class Main {
 					+ "webapps/");
 			conf.setRandi2Path(randi2Path);
 		} else
-			getMainFrame().aktStatusPanel(
+			getMainFrame().getStatusText().setText(
 					(getConf().getlProp().getProperty("error.jar")));
 	}
 
@@ -210,7 +210,7 @@ public class Main {
 		String logoName = "";
 		if (conf.getLogoPath() == null || conf.getLogoPath().isEmpty()) {
 			statusService.getAkt().setStatus(-1);
-			getMainFrame().aktStatusPanel(
+			getMainFrame().getStatusText().setText(
 					(getConf().getlProp().getProperty("error.logo")));
 		} else {
 			for (int i = conf.getLogoPath().length() - 1; i >= 0; i--) {
@@ -256,7 +256,7 @@ public class Main {
 			fileService.copy(JAFName, JAFPath, conf.getServerPath() + "lib/");
 			conf.setJAFPath(JAFPath);
 		} else
-			getMainFrame().aktStatusPanel(
+			getMainFrame().getStatusText().setText(
 					(getConf().getlProp().getProperty("error.jar")));
 	}
 
@@ -271,7 +271,7 @@ public class Main {
 					new String[] { conf.getServerPath() + "bin/startup.sh" });
 		} catch (IOException e) {
 			getStatusService().getAkt().setStatus(-1);
-			getMainFrame().aktStatusPanel(
+			getMainFrame().getStatusText().setText(
 					(getConf().getlProp().getProperty("error.startTomcat")));
 		}
 
@@ -283,7 +283,7 @@ public class Main {
 					new String[] { conf.getServerPath() + "bin/startup.bat" });
 		} catch (IOException e) {
 			getStatusService().getAkt().setStatus(-1);
-			getMainFrame().aktStatusPanel(
+			getMainFrame().getStatusText().setText(
 					(getConf().getlProp().getProperty("error.startTomcat")));
 		}
 
@@ -415,7 +415,7 @@ public class Main {
 	 *            the status to set
 	 */
 	public void setStatusNext() {
-		mainFrame.remove(mainFrame.getStatusLabel());
+mainFrame.remove(this.getMainFrame().getStatusText());
 		iterator = statusService.getStatusList().iterator();
 		boolean end = false;
 		Status akt;
@@ -483,7 +483,7 @@ public class Main {
 	}
 
 	public void setStatusPrevious() {
-		mainFrame.remove(mainFrame.getStatusLabel());
+		
 		iterator = statusService.getStatusList().iterator();
 		boolean end = false;
 		Status akt = null;

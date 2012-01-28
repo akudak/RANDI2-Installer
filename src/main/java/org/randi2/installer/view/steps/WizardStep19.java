@@ -63,7 +63,7 @@ public class WizardStep19 extends MainPanel {
 				if (main.getStatusService().getAkt().getStatus() != -1)
 					main.editLabel();
 				else
-					main.getMainFrame().aktStatusPanel(
+					main.getMainFrame().getStatusText().setText(
 							(main.getConf().getlProp()
 									.getProperty("error.insert")));
 			}

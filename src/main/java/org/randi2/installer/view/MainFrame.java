@@ -5,8 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 import org.randi2.installer.controller.Main;
 
 /**
@@ -21,7 +22,7 @@ public class MainFrame extends JFrame {
 	private JPanel mainPanel;
 	private JButton bPrevious;
 	private JButton bNext;
-	private JLabel statusLabel;
+	private JTextField statusText;
 	private Logo logo;
 	private Languagebar languagebar;
 
@@ -39,11 +40,12 @@ public class MainFrame extends JFrame {
 		this.statusbar = main.getStatusbar();
 		languagebar = new Languagebar(this.main);
 		logo = new Logo();
-		statusLabel = new JLabel();
-		statusLabel.setSize(500, 28);
-		statusLabel.setLocation(60, 520);
-		statusLabel.setVisible(false);
-		this.add(statusLabel);
+		statusText = new JTextField();
+		statusText.setSize(500, 28);
+		statusText.setLocation(60, 520);
+		statusText.setVisible(true);
+		statusText.setEditable(false);
+		this.add(statusText);
 		this.add(logo);
 		this.add(statusbar);
 		this.add(languagebar);
@@ -56,7 +58,7 @@ public class MainFrame extends JFrame {
 		this.remove(bNext);
 		this.remove(bPrevious);
 		this.remove(logo);
-		this.remove(statusLabel);
+		this.remove(statusText);
 		initGUI();
 		this.remove(mainPanel);
 		repaint();
@@ -95,15 +97,6 @@ public class MainFrame extends JFrame {
 		});
 	}
 
-	public void aktStatusPanel(String text) {
-		this.remove(statusLabel);
-		statusLabel.setSize(500, 28);
-		statusLabel.setLocation(60, 520);
-		statusLabel.setText(text);
-		statusLabel.setVisible(true);
-		this.add(statusLabel);
-		this.repaint();
-	}
 
 	/**
 	 * @return the bPrevious
@@ -153,16 +146,18 @@ public class MainFrame extends JFrame {
 	/**
 	 * @return the statusText
 	 */
-	public JLabel getStatusLabel() {
-		return statusLabel;
+	public JTextField getStatusText() {
+		return statusText;
 	}
 
 	/**
 	 * @param statusText
 	 *            the statusText to set
 	 */
-	public void setStatusLabel(JLabel statusLabel) {
-		this.statusLabel = statusLabel;
+	public void setStatusText(JTextField statusText) {
+		this.statusText = statusText;
+		this.add(statusText);
+		this.repaint();
 	}
 
 }

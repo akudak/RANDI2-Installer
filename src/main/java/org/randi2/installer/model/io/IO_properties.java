@@ -98,7 +98,10 @@ public class IO_properties {
 			statusService.getAkt().setStatus(-1);
 		}
 		prop.setProperty("website2", conf.getWebsite());
-		prop.setProperty("selfRegistration", conf.getSelfRegistration());
+		if(conf.isSelfRegistration())
+		prop.setProperty("selfRegistration", "true");
+		else
+			prop.setProperty("selfRegistration", "false");
 		try {
 			prop.store(new FileOutputStream(conf.getServerPath()
 					+ "webapps/RANDI2/RANDI2.properties"), null);

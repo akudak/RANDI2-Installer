@@ -112,7 +112,7 @@ public class WizardStep4 extends MainPanel {
 					main.getStatusService().getAkt().setStatus(-1);
 
 				if (main.getStatusService().getAkt().getStatus() == -1)
-					main.getMainFrame().aktStatusPanel(
+					main.getMainFrame().getStatusText().setText(
 							(main.getConf().getlProp()
 									.getProperty("error.insert")));
 				else

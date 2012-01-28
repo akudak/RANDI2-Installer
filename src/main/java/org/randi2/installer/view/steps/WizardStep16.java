@@ -75,7 +75,7 @@ public class WizardStep16 extends MainPanel {
 				else {
 					main.getStatusService().getAkt().setStatus(-1);
 					downloadPathT.setText("");
-					main.getMainFrame().aktStatusPanel(
+					main.getMainFrame().getStatusText().setText(
 							(main.getConf().getlProp()
 									.getProperty("error.logo")));
 				}
@@ -102,7 +102,7 @@ public class WizardStep16 extends MainPanel {
 					main.copyLogo();
 					main.editWebsite();
 				} else
-					main.getMainFrame().aktStatusPanel(
+					main.getMainFrame().getStatusText().setText(
 							(main.getConf().getlProp()
 									.getProperty("error.insert")));
 

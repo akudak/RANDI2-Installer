@@ -38,11 +38,13 @@ public class DBService {
 				Class.forName("org.postgresql.Driver");
 		} catch (ClassNotFoundException e) {
 			main.getMainFrame()
-					.aktStatusPanel(
+					.getStatusText()
+					.setText(
 							(main.getConf().getlProp()
 									.getProperty("error.driverLoad")));
-			main.getStatusService().getAkt().setStatus(-1);;
-			e.printStackTrace();
+			main.getStatusService().getAkt().setStatus(-1);
+			;
+
 		}
 		try {
 			if (dbconf.isMySQL())
@@ -50,14 +52,16 @@ public class DBService {
 			else
 				url = "jdbc:postgresql://" + dbconf.getServer()
 						+ ":3306/randi2DB";
-			con = DriverManager.getConnection(url, dbconf.getUsername(), dbconf.getPassword());
+			con = DriverManager.getConnection(url, dbconf.getUsername(),
+					dbconf.getPassword());
 		} catch (SQLException e) {
 			main.getMainFrame()
-					.aktStatusPanel(
+					.getStatusText()
+					.setText(
 							(main.getConf().getlProp()
 									.getProperty("error.driverLoad")));
 			main.getStatusService().getAkt().setStatus(-1);
-			e.printStackTrace();
+
 		}
 		return con;
 	}
@@ -110,18 +114,22 @@ public class DBService {
 						}
 					} catch (SQLException error) {
 						main.getStatusService().getAkt().setStatus(-1);
-						main.getMainFrame().aktStatusPanel(
-								(main.getConf().getlProp()
-										.getProperty("error.dbSkript")));
+						main.getMainFrame()
+								.getStatusText()
+								.setText(
+										(main.getConf().getlProp()
+												.getProperty("error.dbSkript")));
 					}
 				}
 				in.close();
 				isScriptExecuted = true;
 			} catch (Exception e) {
 				System.out.println(e);
-				main.getMainFrame().aktStatusPanel(
-						(main.getConf().getlProp()
-								.getProperty("error.dbSkript")));
+				main.getMainFrame()
+						.getStatusText()
+						.setText(
+								(main.getConf().getlProp()
+										.getProperty("error.dbSkript")));
 				main.getStatusService().getAkt().setStatus(-1);
 			}
 			return isScriptExecuted;
@@ -140,7 +148,8 @@ public class DBService {
 		} catch (ClassNotFoundException e) {
 			main.getStatusService().getAkt().setStatus(-1);
 			main.getMainFrame()
-					.aktStatusPanel(
+					.getStatusText()
+					.setText(
 							(main.getConf().getlProp()
 									.getProperty("error.driverLoad")));
 		}
@@ -150,13 +159,16 @@ public class DBService {
 			else
 				url = "jdbc:postgresql://" + dbconf.getServer() + "/";
 
-			con = DriverManager.getConnection(url, dbconf.getUsername(), dbconf.getPassword());
+			con = DriverManager.getConnection(url, dbconf.getUsername(),
+					dbconf.getPassword());
 		} catch (SQLException e) {
-			main.getMainFrame().aktStatusPanel(
-					(main.getConf().getlProp()
-							.getProperty("error.dbConnection")));
+			main.getMainFrame()
+					.getStatusText()
+					.setText(
+							(main.getConf().getlProp()
+									.getProperty("error.dbConnection")));
 			main.getStatusService().getAkt().setStatus(-1);
-			e.printStackTrace();
+
 		}
 		return con;
 	}
@@ -170,10 +182,12 @@ public class DBService {
 				st.executeUpdate("CREATE DATABASE IF NOT EXISTS randi2DB");
 			} catch (SQLException e) {
 				main.getStatusService().getAkt().setStatus(-1);
-				main.getMainFrame().aktStatusPanel(
-						(main.getConf().getlProp()
-								.getProperty("error.createDB")));
-				e.printStackTrace();
+				main.getMainFrame()
+						.getStatusText()
+						.setText(
+								(main.getConf().getlProp()
+										.getProperty("error.createDB")));
+
 			}
 			// Testen, ob Datenbank bereits exisitiert, wenn nicht anlegen
 
@@ -221,10 +235,11 @@ public class DBService {
 				}
 			} catch (SQLException e) {
 				main.getStatusService().getAkt().setStatus(-1);
-				main.getMainFrame().aktStatusPanel(
-						(main.getConf().getlProp()
-								.getProperty("error.dbCreateUser")));
-				e.printStackTrace();
+				main.getMainFrame()
+						.getStatusText()
+						.setText(
+								(main.getConf().getlProp()
+										.getProperty("error.dbCreateUser")));
 			}
 		}
 	}

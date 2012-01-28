@@ -189,7 +189,7 @@ public class WizardStep15 extends MainPanel {
 				if (main.getStatusService().getAkt().getStatus() != -1)
 					main.configCenterInfo();
 				else
-					main.getMainFrame().aktStatusPanel(
+					main.getMainFrame().getStatusText().setText(
 							(main.getConf().getlProp()
 									.getProperty("error.insert")));
 

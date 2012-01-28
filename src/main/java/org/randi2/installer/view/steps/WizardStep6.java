@@ -88,8 +88,7 @@ public class WizardStep6 extends MainPanel {
 				Chooser fileOpen = new Chooser();
 				if (!main.getDbconf().setInitDBPath(fileOpen.getFile("sql"))) {
 					main.getStatusService().getAkt().setStatus(-1);
-					main.getMainFrame()
-							.aktStatusPanel(
+					main.getMainFrame().getStatusText().setText(
 									(main.getConf().getlProp()
 											.getProperty("error.sql")));
 				}

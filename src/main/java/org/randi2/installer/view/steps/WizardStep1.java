@@ -67,7 +67,7 @@ public class WizardStep1 extends MainPanel {
 				Chooser fileOpen = new Chooser();
 
 				if (main.getConf().setServerPath(
-						fileOpen.getDirectorie(main.getConf(), "/home")))
+						fileOpen.getDirectorie(main.getConf(), "")))
 					downloadPathT.setText(main.getConf().getServerPath());
 				else
 					main.getStatusService().getAkt().setStatus(-1);
@@ -75,7 +75,7 @@ public class WizardStep1 extends MainPanel {
 				if (main.getStatusService().getAkt().getStatus() != -1)
 					main.getStatusService().getAkt().setStatus(1);
 				else
-					main.getMainFrame().aktStatusPanel(
+					main.getMainFrame().getStatusText().setText(
 							(main.getConf().getlProp()
 									.getProperty("error.tomcat")));
 			}
