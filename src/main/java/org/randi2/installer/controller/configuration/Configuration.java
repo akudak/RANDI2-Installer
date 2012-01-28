@@ -117,11 +117,11 @@ public class Configuration {
 
 	public void loadLanguageProperties(Language language, Main main) {
 		if (Language.GER.equals(language)) {
-			main.getProp().loadProperties(ClassLoader
+		lProp=	main.getProp().loadProperties(ClassLoader
 					.getSystemResource("labels_de_DE.properties"));
 			this.language = language;
 		} else {
-			main.getProp().loadProperties(ClassLoader
+		lProp=	main.getProp().loadProperties(ClassLoader
 					.getSystemResource("labels_us_US.properties"));
 			this.language = language;
 		}
