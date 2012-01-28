@@ -1,12 +1,8 @@
 package org.randi2.installer.controller.configuration;
 
 import java.util.Properties;
-
 import org.randi2.installer.controller.Main;
-import org.randi2.installer.controller.StatusService;
-
 import org.randi2.installer.model.enumerations.*;
-import org.randi2.installer.model.io.IO_properties;
 
 public class Configuration {
 
