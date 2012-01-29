@@ -1,4 +1,4 @@
-package org.randi2.installer.model.services;
+package org.randi2.installer.services;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

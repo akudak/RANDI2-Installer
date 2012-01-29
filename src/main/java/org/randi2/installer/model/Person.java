@@ -1,7 +1,6 @@
 package org.randi2.installer.model;
 
 import org.randi2.installer.utility.validations.EMailRANDI2Validator;
-import org.randi2.installer.utility.validations.PasswordValidator;
 import org.randi2.installer.utility.validations.TelephoneNumberValidator;
 import org.randi2.installer.model.enumerations.Gender;
 
@@ -18,7 +17,6 @@ public class Person {
 	private String phone;
 	private String mobile;
 	private String fax;
-	private String password;
 	private Gender sex;
 	private long id;
 
@@ -157,26 +155,6 @@ public class Person {
 
 	}
 
-	/**
-	 * @return Passwort
-	 */
-	public String getPassword() {
-		return password;
-	}
-
-	/**
-	 * @param Setzte Passwort
-	 */
-
-	public boolean setPassword(String password1, String password2) {
-		PasswordValidator passwordValidator = new PasswordValidator();
-		if (password1.equals(password2) && passwordValidator.isValid(password2)) {
-			this.password = password1;
-			return true;
-		} else
-			return false;
-	}
-	
 
 	/**
 	 * @return Geschlecht

@@ -1,4 +1,4 @@
-package org.randi2.installer.model.services;
+package org.randi2.installer.services;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -41,13 +41,13 @@ public class AdministratorService {
 			admin.setPrefLocale("us");
 		}
 		try {
+			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+			Date date = new Date();
 			pStatement = getConnection()
 					.prepareStatement(
 							"UPDATE Login SET updatedAt = ?, password = ?, prefLocale = ?, username = ? WHERE person_id = ?");
-			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-			Date date = new Date();
+		
 			String dateS = dateFormat.format(date);
-
 			pStatement.setString(1, dateS);
 			pStatement.setString(2, admin.getPassword());
 			pStatement.setString(3, admin.getPrefLocale());

@@ -9,7 +9,7 @@ import javax.swing.JTextField;
 
 import org.randi2.installer.view.MainPanel;
 
-import org.randi2.installer.model.io.Chooser;
+import org.randi2.installer.io.Chooser;
 
 import org.randi2.installer.controller.Main;
 

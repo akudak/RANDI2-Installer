@@ -1,4 +1,4 @@
-package org.randi2.installer.model.io;
+package org.randi2.installer.io;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

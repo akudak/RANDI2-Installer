@@ -9,17 +9,17 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
 
+import org.randi2.installer.io.IOProperties;
 import org.randi2.installer.model.Center;
-import org.randi2.installer.model.io.IO_properties;
 import org.randi2.installer.controller.Main;
 import org.randi2.installer.controller.StatusService;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.randi2.installer.controller.configuration.Configuration;
 
-public class IO_propertiesTest {
+public class IOPropertiesTest {
 
-	private static IO_properties IO_PROP;
+	private static IOProperties IO_PROP;
 	private static Center CENTER;
 	private static Configuration CONF;
 	private static final String MAIL_FROM = "andreas";
@@ -52,7 +52,7 @@ public class IO_propertiesTest {
 				.getFile());
 		CONF.setWebsite(WEBSITE);
 
-		IO_PROP = new IO_properties(MAIN);
+		IO_PROP = new IOProperties(MAIN);
 	}
 
 	@Test

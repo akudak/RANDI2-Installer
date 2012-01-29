@@ -7,16 +7,15 @@ import java.util.Iterator;
 import org.randi2.installer.controller.configuration.Configuration;
 import org.randi2.installer.controller.configuration.DBConfiguration;
 import org.randi2.installer.controller.configuration.MailConfiguration;
+import org.randi2.installer.io.ContextService;
+import org.randi2.installer.io.IOProperties;
 import org.randi2.installer.model.Administrator;
 import org.randi2.installer.model.Center;
 import org.randi2.installer.model.ContactPerson;
 import org.randi2.installer.model.enumerations.Language;
-import org.randi2.installer.model.io.ContextService;
-import org.randi2.installer.model.io.IO_properties;
-import org.randi2.installer.model.services.AdministratorService;
-import org.randi2.installer.model.services.CenterService;
-import org.randi2.installer.model.services.DBService;
-import org.randi2.installer.model.services.FileService;
+import org.randi2.installer.services.AdministratorService;
+import org.randi2.installer.services.CenterService;
+import org.randi2.installer.services.DBService;
 import org.randi2.installer.view.MainFrame;
 import org.randi2.installer.view.Statusbar;
 import org.randi2.installer.view.steps.WizardStep1;
@@ -39,6 +38,7 @@ import org.randi2.installer.view.steps.WizardStep6;
 import org.randi2.installer.view.steps.WizardStep7;
 import org.randi2.installer.view.steps.WizardStep8;
 import org.randi2.installer.view.steps.WizardStep9;
+
 
 public class Main {
 	private Configuration conf;
@@ -78,7 +78,7 @@ public class Main {
 	private Center center;
 	private ContactPerson contactPerson;
 
-	private IO_properties prop;
+	private IOProperties prop;
 	private int actStatus;
 	private FileService fileService;
 	private Iterator<Status> iterator;
@@ -93,7 +93,7 @@ public class Main {
 	public void init() {
 		statusService = new StatusService();
 		conf = new Configuration();
-		prop = new IO_properties(this);
+		prop = new IOProperties(this);
 		dbconf = new DBConfiguration();
 		dbService = new DBService(this);
 		fileService = new FileService(statusService);
@@ -119,8 +119,7 @@ public class Main {
 		}
 		start();
 		mainFrame.repaint();
-		admin.setPassword("123", "12313");
-	}
+		}
 
 	public void configCenterInfo() {
 		centerService.update(center);
@@ -606,7 +605,7 @@ mainFrame.getStatusText().setText("Aktueller Status: OK");
 	/**
 	 * @return IO_properties
 	 */
-	public IO_properties getProp() {
+	public IOProperties getProp() {
 		return prop;
 	}
 

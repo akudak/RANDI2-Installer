@@ -9,12 +9,13 @@ import java.sql.SQLException;
 import org.randi2.installer.model.Center;
 import org.randi2.installer.model.ContactPerson;
 import org.randi2.installer.model.enumerations.Gender;
-import org.randi2.installer.model.services.CenterService;
-import org.randi2.installer.model.services.DBService;
+import org.randi2.installer.services.CenterService;
+import org.randi2.installer.services.DBService;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.randi2.installer.controller.Main;
 import org.randi2.installer.controller.configuration.DBConfiguration;
+
 
 public class CenterServiceTest {
 
@@ -41,7 +42,7 @@ public class CenterServiceTest {
 	private static final String STREET = "Mittelberg";
 
 	@BeforeClass
-	public static void setUpBeforeClass() {  
+	public static void setUpBeforeClass() throws IOException, SQLException {  
 		DBCONF = new DBConfiguration();
 		DBCONF.setServer("127.0.0.1");
 		DBCONF.setMySQL(true);
@@ -71,16 +72,21 @@ public class CenterServiceTest {
 		CENTER.setStreet(STREET);
 		CENTER.setId(ID1);
 		CENTER.setContactPerson(CONTACTPERSON);
-	}
-
-	@Test
-	public void update() throws SQLException, IOException {
+		
 		// Datenbank mit Tabellen erstellen
 		DBSERVICE.createDatabase(DBCONF);
 		DBSERVICE.createUser(DBCONF);
 		String url = ClassLoader.getSystemResource("").getFile()
 				+ "randi2_073_InitData.sql";
 		DBSERVICE.executeMySQLDBScript(url);
+	}
+	
+
+
+
+	@Test
+	public void update() throws SQLException {
+		
 		CENTERSERVICE.update(CENTER);
 
 		// Positv Test

@@ -1,7 +1,6 @@
-package org.randi2.installer.model.services;
+package org.randi2.installer.controller;
 
 import java.io.File;
-import org.randi2.installer.controller.StatusService;
 
 /**
  * 

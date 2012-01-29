@@ -7,12 +7,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.randi2.installer.model.Administrator;
 import org.randi2.installer.model.enumerations.Gender;
-import org.randi2.installer.model.services.AdministratorService;
-import org.randi2.installer.model.services.DBService;
+import org.randi2.installer.services.AdministratorService;
+import org.randi2.installer.services.DBService;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.randi2.installer.controller.Main;
 import org.randi2.installer.controller.configuration.DBConfiguration;
+
 
 public class AdministratorServiceTest {
 
@@ -35,7 +37,7 @@ public class AdministratorServiceTest {
 	private static final Gender SEX = Gender.MALE;
 
 	@BeforeClass
-	public static void setUpBeforeClass() {
+	public static void setUpBeforeClass() throws IOException, SQLException {
 		DBCONF = new DBConfiguration();
 		DBCONF.setServer("127.0.0.1");
 		DBCONF.setMySQL(true);
@@ -61,16 +63,21 @@ public class AdministratorServiceTest {
 		ADMIN.setSurname(SURNAME);
 		ADMIN.setMobile(MOBILE);
 		ADMIN.setPhone(PHONE);
-	}
-
-	@Test
-	public void update() throws SQLException, IOException {
+		
 		// Datenbank mit Tabellen erstellen
 		DBSERVICE.createDatabase(DBCONF);
 		DBSERVICE.createUser(DBCONF);
 		String url = ClassLoader.getSystemResource("").getFile()
 				+ "randi2_073_InitData.sql";
 		DBSERVICE.executeMySQLDBScript(url);
+	}
+
+	
+
+	@Test
+	public void update() throws SQLException {
+		
+		// Admin mit eingetragenden Werten Updaten
 		ADMINSERVICE.update(ADMIN);
 
 		// Positv Test
@@ -108,5 +115,6 @@ public class AdministratorServiceTest {
 		// Negativ Test
 		// Ungueltige Eingaben nicht moeglich, da sie in der Klasse Administrtor
 		// beim setzten ueberprueft werden.
+		
 	}
 }

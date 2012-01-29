@@ -6,7 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import org.randi2.installer.view.MainPanel;
-import org.randi2.installer.model.io.Chooser;
+import org.randi2.installer.io.Chooser;
 import org.randi2.installer.controller.Main;
 
 public class WizardStep9 extends MainPanel {

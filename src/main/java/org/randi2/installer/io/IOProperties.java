@@ -1,4 +1,4 @@
-package org.randi2.installer.model.io;
+package org.randi2.installer.io;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -12,10 +12,10 @@ import org.randi2.installer.controller.Main;
  * @author andreas Aendert Einstellungen in den Properties.
  */
 
-public class IO_properties {
+public class IOProperties {
 	private Main main;
 
-	public IO_properties(Main main) {
+	public IOProperties(Main main) {
 		this.main = main;
 	}
 

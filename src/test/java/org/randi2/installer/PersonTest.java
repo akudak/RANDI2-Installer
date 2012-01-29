@@ -9,14 +9,12 @@ import org.junit.Test;
 public class PersonTest {
 
 	private static Person PERSON;
-	private final static String PASSWORD_OK = "1$password";
-	private final static String PASSWORD2_TOSHORT = "www";
-	private final static String PASSWORD2_TOLONG = "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww";
 	private final static String EMPTY = "";
 	private final static String NAME = "Lola";
 	private final static String NULL = null;
 	private final static String EMAIL = "lola@randi2.de";
 	private final static String EMAIL_FAIL = "e@r";
+	private final static String EMAIL_FAIL2 = "sadasda.de";
 	private final static String PHONE = "012213-312321";
 	private final static String PHONE2 = "012213312321";
 	private final static String PHONE_FAIL = "0.12a";
@@ -24,27 +22,6 @@ public class PersonTest {
 	@BeforeClass
 	public static void setUpBeforeClass() {
 		PERSON = new Person();
-	}
-
-	@Test
-	public void setPassword() {
-		// Positive Test
-		assertTrue(PERSON.setPassword(PASSWORD_OK, PASSWORD_OK));
-
-		// Schaue, ob es richtig gestezt wurde
-		assertEquals(PASSWORD_OK, PERSON.getPassword());
-
-		// Negativ Test
-
-		// Passwort ist zu kurz
-		assertFalse(PERSON.setPassword(PASSWORD2_TOSHORT, PASSWORD2_TOSHORT));
-
-		// Passwort ist zu lang
-		assertFalse(PERSON.setPassword(PASSWORD2_TOLONG, PASSWORD2_TOLONG));
-
-		// Ungleiche passwoerter
-		assertFalse(PERSON.setPassword(PASSWORD_OK, PASSWORD2_TOSHORT));
-
 	}
 
 	@Test
@@ -93,6 +70,9 @@ public class PersonTest {
 
 		// Ungueltige EMAIl
 		assertFalse(PERSON.setMail(EMAIL_FAIL));
+		
+		// Ungueltige EMAIl
+		assertFalse(PERSON.setMail(EMAIL_FAIL2));
 
 		// Ungueltige EMAIl
 		assertFalse(PERSON.setMail(NAME));

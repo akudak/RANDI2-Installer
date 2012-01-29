@@ -5,13 +5,14 @@ import static org.junit.Assert.assertNotSame;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import org.randi2.installer.model.services.DBService;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import com.mysql.jdbc.Statement;
 import org.randi2.installer.controller.Main;
 import org.randi2.installer.controller.configuration.DBConfiguration;
+import org.randi2.installer.services.DBService;
+
 
 /**
  * 
@@ -75,24 +76,45 @@ public class DBServiceTest {
 	@Test
 	public void createUser() throws SQLException {
 		// Alle User sind geloescht
-		// Lege User und DB an
+		// Lege User an
 		DBSERVICE.createUser(DBCONF);
-		DBSERVICE.createDatabase(DBCONF);
 		// Hole User
 		PreparedStatement ps = DBSERVICE.getFirstConnection().prepareStatement(
 				"SELECT user FROM mysql.user WHERE user='"
 						+ DBCONF.getUsername() + "'");
 		ResultSet rs = ps.executeQuery();
-		String user = "";
 		while (rs.next()) {
-			user = user + rs.getString(1);
+			// Testet, ob User korrekt angelegt wurde
+			assertEquals(DBCONF.getUsername(), rs.getString(1));
+
+			// Negativ Test, ob richtiger User angelegt wurde
+			assertNotSame(DBCONF.getUsername(), USERNAME_FAIL);
 		}
 		rs.close();
 
-		// Testet, ob User korrekt angelegt wurde
-		assertEquals(DBCONF.getUsername(), user);
-
 		// Negativ Test, ob richtiger User angelegt wurde
 		assertNotSame(DBCONF.getUsername(), USERNAME_FAIL);
+	}
+
+	// Datenbank wird geloescht
+	@Before
+	public void setUpBefore() throws SQLException {
+		Statement st = (Statement) DBSERVICE.getFirstConnection()
+				.createStatement();
+		st.executeUpdate("DROP DATABASE IF EXISTS randi2DB");
+	}
+
+	@Test
+	public void createDatabse() throws SQLException {
+
+		// Datenbank erstellen
+		DBSERVICE.createDatabase(DBCONF);
+		Statement st = (Statement) DBSERVICE.getFirstConnection()
+				.createStatement();
+		// Tabelle erstellen
+		st.executeUpdate("CREATE TABLE randi2DB.Test (id int)");
+		// Eintrag machen und schauen, ob es eingetragen wurde
+		assertEquals(1,
+				st.executeUpdate("Insert into randi2DB.Test (id) values (1)"));
 	}
 }
