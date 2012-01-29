@@ -13,7 +13,6 @@ import org.randi2.installer.controller.Main;
 import org.randi2.installer.controller.configuration.DBConfiguration;
 import org.randi2.installer.services.DBService;
 
-
 /**
  * 
  * @author andreas Die MySQL Datenbank muss laufen.

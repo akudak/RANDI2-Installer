@@ -616,6 +616,9 @@ mainFrame.getStatusText().setText("Aktueller Status: OK");
 		return dbService;
 	}
 
+	public void setDbService(DBService dbService) {
+		this.dbService = dbService;
+	}
 	/**
 	 * @return MailConfiguration
 	 */

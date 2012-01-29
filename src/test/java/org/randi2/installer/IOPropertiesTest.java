@@ -48,8 +48,7 @@ public class IOPropertiesTest {
 		MAIN.setConf(CONF);
 		MAIN.setStatusService(STATUSSERVICE);
 		MAIN.setCenter(CENTER);
-		CONF.setServerPath(ClassLoader.getSystemResource("")
-				.getFile());
+		CONF.setServerPath(ClassLoader.getSystemResource("").getFile());
 		CONF.setWebsite(WEBSITE);
 
 		IO_PROP = new IOProperties(MAIN);

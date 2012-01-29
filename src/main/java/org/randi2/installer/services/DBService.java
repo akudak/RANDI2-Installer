@@ -150,7 +150,6 @@ public class DBService {
 			else
 				Class.forName("org.postgresql.Driver");
 		} catch (ClassNotFoundException e) {
-			System.out.println("Fehler");
 			main.getStatusService().getAkt().setStatus(-1);
 			main.getMainFrame()
 					.getStatusText()

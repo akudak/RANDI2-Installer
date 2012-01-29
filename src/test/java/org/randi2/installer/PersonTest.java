@@ -70,7 +70,7 @@ public class PersonTest {
 
 		// Ungueltige EMAIl
 		assertFalse(PERSON.setMail(EMAIL_FAIL));
-		
+
 		// Ungueltige EMAIl
 		assertFalse(PERSON.setMail(EMAIL_FAIL2));
 

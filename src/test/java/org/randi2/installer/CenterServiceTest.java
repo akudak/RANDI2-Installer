@@ -16,7 +16,6 @@ import org.junit.Test;
 import org.randi2.installer.controller.Main;
 import org.randi2.installer.controller.configuration.DBConfiguration;
 
-
 public class CenterServiceTest {
 
 	private static Center CENTER;
@@ -42,7 +41,7 @@ public class CenterServiceTest {
 	private static final String STREET = "Mittelberg";
 
 	@BeforeClass
-	public static void setUpBeforeClass() throws IOException, SQLException {  
+	public static void setUpBeforeClass() throws IOException, SQLException {
 		DBCONF = new DBConfiguration();
 		DBCONF.setServer("127.0.0.1");
 		DBCONF.setMySQL(true);
@@ -53,6 +52,7 @@ public class CenterServiceTest {
 		MAIN = new Main();
 		MAIN.setDbconf(DBCONF);
 		DBSERVICE = new DBService(MAIN);
+		MAIN.setDbService(DBSERVICE);
 		CENTER = new Center();
 		CENTERSERVICE = new CenterService(MAIN);
 		CONTACTPERSON = new ContactPerson();
@@ -72,7 +72,7 @@ public class CenterServiceTest {
 		CENTER.setStreet(STREET);
 		CENTER.setId(ID1);
 		CENTER.setContactPerson(CONTACTPERSON);
-		
+
 		// Datenbank mit Tabellen erstellen
 		DBSERVICE.createDatabase(DBCONF);
 		DBSERVICE.createUser(DBCONF);
@@ -80,22 +80,21 @@ public class CenterServiceTest {
 				+ "randi2_073_InitData.sql";
 		DBSERVICE.executeMySQLDBScript(url);
 	}
-	
-
-
 
 	@Test
 	public void update() throws SQLException {
-		
+
 		CENTERSERVICE.update(CENTER);
 
 		// Positv Test
 
 		// Testet, ob die Daten korrekt in die Tabelle TrialSite eingetragen
 		// werden
-		PreparedStatement ps = DBSERVICE.getConnection().prepareStatement(
-				"SELECT city, country, name, postcode, street, contactPerson_id FROM TrialSite WHERE id='"
-						+ CENTER.getId() + "'");
+		PreparedStatement ps = DBSERVICE
+				.getConnection()
+				.prepareStatement(
+						"SELECT city, country, name, postcode, street, contactPerson_id FROM TrialSite WHERE id='"
+								+ CENTER.getId() + "'");
 		ResultSet rs = ps.executeQuery();
 		while (rs.next()) {
 			assertEquals(rs.getString(1), CITY);

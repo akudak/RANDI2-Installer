@@ -9,12 +9,10 @@ import org.randi2.installer.model.Administrator;
 import org.randi2.installer.model.enumerations.Gender;
 import org.randi2.installer.services.AdministratorService;
 import org.randi2.installer.services.DBService;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.randi2.installer.controller.Main;
 import org.randi2.installer.controller.configuration.DBConfiguration;
-
 
 public class AdministratorServiceTest {
 
@@ -48,6 +46,7 @@ public class AdministratorServiceTest {
 		MAIN = new Main();
 		MAIN.setDbconf(DBCONF);
 		DBSERVICE = new DBService(MAIN);
+		MAIN.setDbService(DBSERVICE);
 		ADMIN = new Administrator();
 		ADMINSERVICE = new AdministratorService(MAIN);
 		ADMIN.setAcademicTitle(TITLE);
@@ -63,7 +62,7 @@ public class AdministratorServiceTest {
 		ADMIN.setSurname(SURNAME);
 		ADMIN.setMobile(MOBILE);
 		ADMIN.setPhone(PHONE);
-		
+
 		// Datenbank mit Tabellen erstellen
 		DBSERVICE.createDatabase(DBCONF);
 		DBSERVICE.createUser(DBCONF);
@@ -72,11 +71,9 @@ public class AdministratorServiceTest {
 		DBSERVICE.executeMySQLDBScript(url);
 	}
 
-	
-
 	@Test
 	public void update() throws SQLException {
-		
+
 		// Admin mit eingetragenden Werten Updaten
 		ADMINSERVICE.update(ADMIN);
 
@@ -115,6 +112,6 @@ public class AdministratorServiceTest {
 		// Negativ Test
 		// Ungueltige Eingaben nicht moeglich, da sie in der Klasse Administrtor
 		// beim setzten ueberprueft werden.
-		
+
 	}
 }
