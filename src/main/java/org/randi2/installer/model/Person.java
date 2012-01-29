@@ -1,7 +1,7 @@
 package org.randi2.installer.model;
 
-import org.randi2.installer.utility.validations.EMailRANDI2Validator;
-import org.randi2.installer.utility.validations.TelephoneNumberValidator;
+import org.randi2.installer.validations.EMailRANDI2Validator;
+import org.randi2.installer.validations.TelephoneNumberValidator;
 import org.randi2.installer.model.enumerations.Gender;
 
 /**

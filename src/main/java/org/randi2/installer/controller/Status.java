@@ -40,6 +40,8 @@ public class Status {
 			this.status = status;
 			main.getStatusbar().removeAll();
 			main.getStatusbar().initBar();
+			main.getMainFrame().remove(main.getMainFrame().getStatusText());
+			main.getMainFrame().add(main.getMainFrame().getStatusText());
 		}
 	}
 

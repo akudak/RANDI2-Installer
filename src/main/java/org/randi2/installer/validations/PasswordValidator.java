@@ -1,4 +1,4 @@
-package org.randi2.installer.utility.validations;
+package org.randi2.installer.validations;
 
 /* 
  * (c) 2008- RANDI2 Core Development Team

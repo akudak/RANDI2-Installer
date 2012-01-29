@@ -1,4 +1,4 @@
-package org.randi2.installer.controller;
+package org.randi2.installer.io;
 
 public interface FileServiceInterface {
 

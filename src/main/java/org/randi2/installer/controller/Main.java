@@ -8,6 +8,7 @@ import org.randi2.installer.controller.configuration.Configuration;
 import org.randi2.installer.controller.configuration.DBConfiguration;
 import org.randi2.installer.controller.configuration.MailConfiguration;
 import org.randi2.installer.io.ContextService;
+import org.randi2.installer.io.FileService;
 import org.randi2.installer.io.IOProperties;
 import org.randi2.installer.model.Administrator;
 import org.randi2.installer.model.Center;
@@ -38,7 +39,6 @@ import org.randi2.installer.view.steps.WizardStep6;
 import org.randi2.installer.view.steps.WizardStep7;
 import org.randi2.installer.view.steps.WizardStep8;
 import org.randi2.installer.view.steps.WizardStep9;
-
 
 public class Main {
 	private Configuration conf;
@@ -83,10 +83,10 @@ public class Main {
 	private FileService fileService;
 	private Iterator<Status> iterator;
 
-	public Main()
-	{
-		
+	public Main() {
+
 	}
+
 	/**
 	 * Erstelle Objekte
 	 */
@@ -109,23 +109,20 @@ public class Main {
 		center.setContactPerson(contactPerson);
 		urlService = new URLService(this);
 		mainFrame = new MainFrame(this);
-		if(System.getProperty("user.language").equals("de"))
-		{
+		if (System.getProperty("user.language").equals("de")) {
 			conf.loadLanguageProperties(Language.GER, this);
-		}
-		else
-		{
+		} else {
 			conf.loadLanguageProperties(Language.US, this);
 		}
 		start();
 		mainFrame.repaint();
-		}
+	}
 
 	public void configCenterInfo() {
 		centerService.update(center);
 	}
 
-	/** 
+	/**
 	 * Ruft die Methoden zur Datenbankerstellung auf
 	 */
 	public void createDatabase() {
@@ -184,9 +181,9 @@ public class Main {
 					(getConf().getlProp().getProperty("error.jar")));
 	}
 
-/**
- * Ruft Methode auf um die JMA zu kopieren
- */
+	/**
+	 * Ruft Methode auf um die JMA zu kopieren
+	 */
 	public void copyMail() {
 		String mailPath = "";
 		String mailName = "";
@@ -314,7 +311,7 @@ public class Main {
 	/**
 	 * Startet den Tomcat Server unter Windows
 	 */
-	
+
 	public void startTomcatWin() {
 		try {
 			Runtime.getRuntime().exec(
@@ -386,11 +383,16 @@ public class Main {
 	 * Zeichnet alle Objekte neu
 	 */
 	public void repaint() {
+
+		mainFrame.remove(mainFrame.getStatusText());
 		mainFrame.remove(mainFrame.getbPrevious());
 		mainFrame.remove(mainFrame.getbNext());
-
+		mainFrame.getStatusText().setText((getConf().getlProp().getProperty(
+				"error.actStatus")));
 		mainFrame.initButton();
+		mainFrame.add(mainFrame.getStatusText());
 		mainFrame.repaint();
+
 		ws1.removeAll();
 		ws1.initGUI();
 		ws2.removeAll();
@@ -455,10 +457,12 @@ public class Main {
 	}
 
 	/**
-	 * @param Setzt den aktuellen Status weiter
+	 * @param Setzt
+	 *            den aktuellen Status weiter
 	 */
 	public void setStatusNext() {
-mainFrame.getStatusText().setText("Aktueller Status: OK");
+		mainFrame.getStatusText().setText(
+				getConf().getlProp().getProperty("error.actStatus"));
 		iterator = statusService.getStatusList().iterator();
 		boolean end = false;
 		Status akt;
@@ -529,7 +533,8 @@ mainFrame.getStatusText().setText("Aktueller Status: OK");
 	 * Setzt den aktuellen Status zurueck
 	 */
 	public void setStatusPrevious() {
-		mainFrame.getStatusText().setText("Aktueller Status: OK");
+		mainFrame.getStatusText().setText(
+				getConf().getlProp().getProperty("error.actStatus"));
 		iterator = statusService.getStatusList().iterator();
 		boolean end = false;
 		Status akt = null;
@@ -619,6 +624,7 @@ mainFrame.getStatusText().setText("Aktueller Status: OK");
 	public void setDbService(DBService dbService) {
 		this.dbService = dbService;
 	}
+
 	/**
 	 * @return MailConfiguration
 	 */
@@ -632,12 +638,12 @@ mainFrame.getStatusText().setText("Aktueller Status: OK");
 	public DBConfiguration getDbconf() {
 		return dbconf;
 	}
-	
+
 	/**
 	 * @return DBConfiguration
 	 */
 	public void setDbconf(DBConfiguration dbconf) {
-		this.dbconf=dbconf;
+		this.dbconf = dbconf;
 	}
 
 	/**
@@ -676,14 +682,16 @@ mainFrame.getStatusText().setText("Aktueller Status: OK");
 	}
 
 	/**
-	 * @param Setzte MainFrame
+	 * @param Setzte
+	 *            MainFrame
 	 */
 	public void setMainFrame(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
 	}
 
 	/**
-	 * @param Setze aktuellen Status 
+	 * @param Setze
+	 *            aktuellen Status
 	 */
 	public void setactStatus(int actStatus) {
 		this.actStatus = actStatus;
@@ -698,6 +706,7 @@ mainFrame.getStatusText().setText("Aktueller Status: OK");
 
 	/**
 	 * Setzte Configuration
+	 * 
 	 * @param conf
 	 */
 	public void setConf(Configuration conf) {
@@ -706,6 +715,7 @@ mainFrame.getStatusText().setText("Aktueller Status: OK");
 
 	/**
 	 * Setzte StatusService
+	 * 
 	 * @param statusService
 	 */
 	public void setStatusService(StatusService statusService) {
@@ -714,11 +724,13 @@ mainFrame.getStatusText().setText("Aktueller Status: OK");
 
 	/**
 	 * Setze Center
+	 * 
 	 * @param center
 	 */
 	public void setCenter(Center center) {
 		this.center = center;
 	}
+
 	/**
 	 * @param args
 	 * @throws SQLException

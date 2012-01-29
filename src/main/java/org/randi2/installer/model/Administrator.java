@@ -1,6 +1,6 @@
 package org.randi2.installer.model;
 
-import org.randi2.installer.utility.validations.PasswordValidator;
+import org.randi2.installer.validations.PasswordValidator;
 import org.springframework.security.providers.encoding.ShaPasswordEncoder;
 
 /**

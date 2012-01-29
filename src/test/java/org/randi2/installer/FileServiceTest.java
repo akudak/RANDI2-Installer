@@ -4,8 +4,8 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.randi2.installer.controller.FileService;
 import org.randi2.installer.controller.StatusService;
+import org.randi2.installer.io.FileService;
 
 public class FileServiceTest {
 

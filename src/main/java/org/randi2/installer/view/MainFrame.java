@@ -43,7 +43,8 @@ public class MainFrame extends JFrame {
 		this.statusbar = main.getStatusbar();
 		languagebar = new Languagebar(this.main);
 		logo = new Logo();
-		statusText = new JTextField();
+		statusText = new JTextField(main.getConf().getlProp()
+				.getProperty("error.actStatus"));
 		statusText.setSize(500, 28);
 		statusText.setLocation(60, 520);
 		statusText.setVisible(true);
