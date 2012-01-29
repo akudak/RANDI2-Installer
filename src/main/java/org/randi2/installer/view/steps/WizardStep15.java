@@ -53,7 +53,7 @@ public class WizardStep15 extends MainPanel {
 		
 
 		JLabel contactPersonL = new JLabel(main.getConf().getlProp()
-				.getProperty("label.pwAuthentication"));
+				.getProperty("label.pwAuthentification"));
 		contactPersonL.setLocation(10, 130);
 		contactPersonL.setSize(600, 20);
 

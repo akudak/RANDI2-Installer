@@ -33,7 +33,7 @@ public class WizardStep16 extends MainPanel {
 		this.add(logoL);
 
 		logoPathB = new JButton(main.getConf().getlProp()
-				.getProperty("button.pfad"));
+				.getProperty("button.open"));
 		logoPathB.setLocation(10, 60);
 		logoPathB.setSize(70, 20);
 

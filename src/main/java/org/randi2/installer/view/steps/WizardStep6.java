@@ -62,7 +62,7 @@ public class WizardStep6 extends MainPanel {
 		this.add(downloadPathT);
 
 		JButton initDBPfadB = new JButton(main.getConf().getlProp()
-				.getProperty("button.pfad"));
+				.getProperty("button.open"));
 		initDBPfadB.setLocation(10, 150);
 		initDBPfadB.setSize(70, 20);
 

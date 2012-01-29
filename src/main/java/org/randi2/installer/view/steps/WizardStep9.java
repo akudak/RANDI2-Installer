@@ -40,14 +40,14 @@ public class WizardStep9 extends MainPanel {
 		});
 
 		JLabel downloadPfadL = new JLabel(main.getConf().getlProp()
-				.getProperty("label.jarJAFPfad"));
+				.getProperty("label.jarJAFPath"));
 		downloadPfadL.setLocation(10, 90);
 		downloadPfadL.setSize(400, 20);
 
 		this.add(downloadPfadL);
 
 		JButton downloadPfadB = new JButton(main.getConf().getlProp()
-				.getProperty("button.pfad"));
+				.getProperty("button.open"));
 		downloadPfadB.setLocation(10, 120);
 		downloadPfadB.setSize(70, 20);
 

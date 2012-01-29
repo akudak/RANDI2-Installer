@@ -127,6 +127,6 @@ public class CenterServiceTest {
 
 		// Negativ Test
 		// Ungueltige Eingaben nicht moeglich, da sie in der Klasse Administrtor
-		// beim setzten ueberprueft werden.
+		// beim Setzten ueberprueft werden.
 	}
 }

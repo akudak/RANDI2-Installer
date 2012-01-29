@@ -36,7 +36,7 @@ public class WizardStep5 extends MainPanel {
 		this.add(downloadButton);
 
 		JLabel downloadPfadL = new JLabel(main.getConf().getlProp()
-				.getProperty("label.warPfad"));
+				.getProperty("label.warPath"));
 		downloadPfadL.setLocation(10, 90);
 		downloadPfadL.setSize(400, 20);
 
@@ -50,7 +50,7 @@ public class WizardStep5 extends MainPanel {
 		this.add(downloadPathT);
 
 		JButton downloadPfadB = new JButton(main.getConf().getlProp()
-				.getProperty("button.pfad"));
+				.getProperty("button.open"));
 		downloadPfadB.setLocation(10, 120);
 		downloadPfadB.setSize(70, 20);
 

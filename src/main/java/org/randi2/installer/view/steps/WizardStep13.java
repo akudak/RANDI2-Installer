@@ -54,7 +54,7 @@ public class WizardStep13 extends MainPanel {
 		this.add(cityL);
 
 		JLabel plzL = new JLabel(main.getConf().getlProp()
-				.getProperty("label.plz"));
+				.getProperty("label.postcode"));
 		plzL.setLocation(10, 160);
 		plzL.setSize(200, 20);
 
