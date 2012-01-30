@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+
+
 import org.randi2.installer.controller.Main;
 import org.randi2.installer.controller.configuration.DBConfiguration;
 
@@ -50,8 +52,7 @@ public class DBService {
 			if (main.getDbconf().isMySQL())
 				url = "jdbc:mysql://" + main.getDbconf().getServer() + ":3306/randi2DB";
 			else
-				url = "jdbc:postgresql://" + main.getDbconf().getServer()
-						+ "/randi2DB";
+				url = "jdbc:postgresql://" + main.getDbconf().getServer()+ ":5432/postgres";
 			con = DriverManager.getConnection(url, main.getDbconf().getUsernameCon(),
 					main.getDbconf().getPasswordCon());
 		} catch (SQLException e) {
@@ -161,9 +162,10 @@ public class DBService {
 			if (main.getDbconf().isMySQL())
 				url = "jdbc:mysql://" + main.getDbconf().getServer() + "/";
 			else
-				url = "jdbc:postgresql://" + main.getDbconf().getServer() + "/";
+				url = "jdbc:postgresql://" + main.getDbconf().getServer() + ":5432/postgres";
 		
 	con = DriverManager.getConnection(url, main.getDbconf().getUsernameCon(),main.getDbconf().getPasswordCon());
+
 		} catch (SQLException e) {
 			main.getMainFrame()
 					.getStatusText()
@@ -182,12 +184,29 @@ public class DBService {
 	 * @param dbconf
 	 */
 	public void createDatabase(DBConfiguration dbconf) {
+		
 		// Datenbank randi2DB erstellen MySql
-		if (dbconf.isMySQL()) {
+		if (main.getDbconf().isMySQL())
+			{
 			try {
 				Statement st = (Statement) getFirstConnection()
 						.createStatement();
-				st.executeUpdate("CREATE DATABASE IF NOT EXISTS randi2DB");
+		st.executeUpdate("CREATE DATABASE randi2DB IF NOT EXISTS");
+			} catch (SQLException e) {
+				main.getStatusService().getAkt().setStatus(-1);
+				main.getMainFrame()
+						.getStatusText()
+						.setText(
+								(main.getConf().getlProp()
+										.getProperty("error.createDB")));
+			}
+		}
+		else
+		{
+			try {
+				Statement st = (Statement) getFirstConnection()
+						.createStatement();
+		st.executeUpdate("CREATE DATABASE randi2DB");
 			} catch (SQLException e) {
 				main.getStatusService().getAkt().setStatus(-1);
 				main.getMainFrame()
@@ -199,6 +218,7 @@ public class DBService {
 		
 		
 		}
+	
 	}
 
 	/**
