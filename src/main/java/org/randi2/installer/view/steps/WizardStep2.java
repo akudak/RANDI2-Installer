@@ -20,6 +20,7 @@ public class WizardStep2 extends MainPanel {
 	private JPasswordField passwordT1;
 	private JPasswordField passwordT2;
 	private JButton insertB;
+
 	public WizardStep2(final Main main) {
 		super(main);
 		initGUI();
@@ -90,25 +91,31 @@ public class WizardStep2 extends MainPanel {
 		passwordL2.setLocation(10, 210);
 
 		this.add(passwordL2);
-		
-		
-		 adminT = new JTextField();
+
+		adminT = new JTextField();
 		adminT.setSize(200, 20);
 		adminT.setLocation(200, 130);
-
+		adminT.setEnabled(false);
 		this.add(adminT);
 
-		 passwordT1 = new JPasswordField();
+		passwordT1 = new JPasswordField();
 		passwordT1.setSize(200, 20);
 		passwordT1.setLocation(200, 170);
-
+		passwordT1.setEnabled(false);
 		this.add(passwordT1);
 
-		 passwordT2 = new JPasswordField();
+		passwordT2 = new JPasswordField();
 		passwordT2.setSize(200, 20);
 		passwordT2.setLocation(200, 210);
-
+		passwordT2.setEnabled(false);
 		this.add(passwordT2);
+
+		insertB = new JButton(main.getConf().getlProp()
+				.getProperty("button.save"));
+		insertB.setLocation(315, 250);
+		insertB.setSize(80, 20);
+		insertB.setEnabled(false);
+		this.add(insertB);
 
 		cButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -136,14 +143,6 @@ public class WizardStep2 extends MainPanel {
 			}
 		});
 
-		
-		 insertB = new JButton(main.getConf().getlProp()
-				.getProperty("button.save"));
-		insertB.setLocation(315, 250);
-		insertB.setSize(80, 20);
-
-		this.add(insertB);
-		
 		eButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				main.getDbconf().setMySQL(true);
@@ -158,8 +157,6 @@ public class WizardStep2 extends MainPanel {
 				main.getStatusService().getAkt().setStatus(1);
 			}
 		});
-		
-	
 
 		insertB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -169,28 +166,23 @@ public class WizardStep2 extends MainPanel {
 
 				String p1 = "";
 				String p2 = "";
-		
-					for (int i = 0; i < passwordT1.getPassword().length; i++)
+
+				for (int i = 0; i < passwordT1.getPassword().length; i++)
 					p1 = p1 + passwordT1.getPassword()[i];
 
 				for (int k = 0; k < passwordT2.getPassword().length; k++)
 					p2 = p2 + passwordT2.getPassword()[k];
-		
-			
-				
-				if(main.getDbconf().isDatabase())
-				{
-				if (!main.getDbconf().setPasswordCon(p1, p2))
-					main.getStatusService().getAkt().setStatus(-1);
 
-				
-				if (!main.getDbconf().setUsernameCon(adminT.getText()))
-					main.getStatusService().getAkt().setStatus(-1);
+				if (main.getDbconf().isDatabase()) {
+					if (!main.getDbconf().setPasswordCon(p1, p2))
+						main.getStatusService().getAkt().setStatus(-1);
+
+					if (!main.getDbconf().setUsernameCon(adminT.getText()))
+						main.getStatusService().getAkt().setStatus(-1);
 				}
-
 
 			}
 		});
-		
+
 	}
 }

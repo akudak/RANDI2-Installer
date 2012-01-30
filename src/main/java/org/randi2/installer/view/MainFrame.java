@@ -36,7 +36,8 @@ public class MainFrame extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
-	/** Erzeugt Objekte
+	/**
+	 * Erzeugt Objekte
 	 * 
 	 */
 	public void initGUI() {
@@ -56,12 +57,11 @@ public class MainFrame extends JFrame {
 		initButton();
 	}
 
-	
 	/**
-	 *  Loescht alle Pbjekte und fuegt sie wieder hinzu
+	 * Loescht alle Pbjekte und fuegt sie wieder hinzu
 	 * 
 	 */
-		public void repaintAll() {
+	public void repaintAll() {
 		this.remove(statusbar);
 		this.remove(languagebar);
 		this.remove(bNext);
@@ -73,10 +73,11 @@ public class MainFrame extends JFrame {
 		repaint();
 	}
 
-		/**
-		 * Setzte das MainPanel neu
-		 * @param mainPanel
-		 */
+	/**
+	 * Setzte das MainPanel neu
+	 * 
+	 * @param mainPanel
+	 */
 	public void setMainPanel(JPanel mainPanel) {
 		if (this.mainPanel != null)
 			this.remove(this.mainPanel);
@@ -113,7 +114,6 @@ public class MainFrame extends JFrame {
 		});
 	}
 
-
 	/**
 	 * @return Gibt Button zurueck wieder
 	 */
@@ -122,7 +122,8 @@ public class MainFrame extends JFrame {
 	}
 
 	/**
-	 * @param Setzte Button
+	 * @param Setzte
+	 *            Button
 	 */
 	public void setbPrevious(JButton bPrevious) {
 		this.bPrevious = bPrevious;
@@ -136,7 +137,8 @@ public class MainFrame extends JFrame {
 	}
 
 	/**
-	 * @param Setzte Button weiter
+	 * @param Setzte
+	 *            Button weiter
 	 */
 	public void setbNext(JButton bNext) {
 		this.bNext = bNext;
@@ -150,7 +152,8 @@ public class MainFrame extends JFrame {
 	}
 
 	/**
-	 * @param Setzte Statusbar
+	 * @param Setzte
+	 *            Statusbar
 	 */
 	public void setStatusbar(JPanel statusbar) {
 		this.statusbar = statusbar;
@@ -164,7 +167,8 @@ public class MainFrame extends JFrame {
 	}
 
 	/**
-	 * @param Setzt StatusText
+	 * @param Setzt
+	 *            StatusText
 	 */
 	public void setStatusText(JTextField statusText) {
 		this.statusText = statusText;

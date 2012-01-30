@@ -387,8 +387,8 @@ public class Main {
 		mainFrame.remove(mainFrame.getStatusText());
 		mainFrame.remove(mainFrame.getbPrevious());
 		mainFrame.remove(mainFrame.getbNext());
-		mainFrame.getStatusText().setText((getConf().getlProp().getProperty(
-				"error.actStatus")));
+		mainFrame.getStatusText().setText(
+				(getConf().getlProp().getProperty("error.actStatus")));
 		mainFrame.initButton();
 		mainFrame.add(mainFrame.getStatusText());
 		mainFrame.repaint();
@@ -461,143 +461,151 @@ public class Main {
 	 *            den aktuellen Status weiter
 	 */
 	public void setStatusNext() {
-		mainFrame.getStatusText().setText(
-				getConf().getlProp().getProperty("error.actStatus"));
-		iterator = statusService.getStatusList().iterator();
-		boolean end = false;
-		Status akt;
-		Status next;
-		while (iterator.hasNext() && !end) {
-			akt = (Status) iterator.next();
-			if (akt.isActive()) {
-				akt.setActive(false);
-				next = (Status) iterator.next();
-				next.setActive(true);
-				end = true;
+		if (statusService.getAkt().getStatus() != 1)
+			mainFrame.getStatusText().setText(
+					getConf().getlProp().getProperty("error.passStatus"));
+		else {
+			mainFrame.getStatusText().setText(
+					getConf().getlProp().getProperty("error.actStatus"));
+			iterator = statusService.getStatusList().iterator();
+			boolean end = false;
+			Status akt;
+			Status next;
+			while (iterator.hasNext() && !end) {
+				akt = (Status) iterator.next();
+				if (akt.isActive()) {
+					akt.setActive(false);
+					next = (Status) iterator.next();
+					next.setActive(true);
+					end = true;
+				}
+
 			}
-
+			getStatusbar().removeAll();
+			getStatusbar().initBar();
+			actStatus++;
+			if (actStatus == 0) {
+				mainFrame.getbPrevious().setEnabled(false);
+				mainFrame.setMainPanel(ws1);
+			}
+			if (actStatus == 1) {
+				mainFrame.setMainPanel(ws2);
+				mainFrame.getbPrevious().setEnabled(true);
+			}
+			if (actStatus == 2)
+				mainFrame.setMainPanel(ws3);
+			if (actStatus == 3)
+				mainFrame.setMainPanel(ws4);
+			if (actStatus == 4)
+				mainFrame.setMainPanel(ws5);
+			if (actStatus == 5)
+				mainFrame.setMainPanel(ws6);
+			if (actStatus == 6)
+				mainFrame.setMainPanel(ws7);
+			if (actStatus == 7)
+				mainFrame.setMainPanel(ws8);
+			if (actStatus == 8)
+				mainFrame.setMainPanel(ws9);
+			if (actStatus == 9)
+				mainFrame.setMainPanel(ws10);
+			if (actStatus == 10)
+				mainFrame.setMainPanel(ws11);
+			if (actStatus == 11)
+				mainFrame.setMainPanel(ws12);
+			if (actStatus == 12)
+				mainFrame.setMainPanel(ws13);
+			if (actStatus == 13)
+				mainFrame.setMainPanel(ws14);
+			if (actStatus == 14)
+				mainFrame.setMainPanel(ws15);
+			if (actStatus == 15)
+				mainFrame.setMainPanel(ws16);
+			if (actStatus == 16)
+				mainFrame.setMainPanel(ws17);
+			if (actStatus == 17)
+				mainFrame.setMainPanel(ws18);
+			if (actStatus == 18)
+				mainFrame.setMainPanel(ws19);
+			if (actStatus == 19) {
+				mainFrame.setMainPanel(ws20);
+				mainFrame.getbNext().setEnabled(false);
+			}
 		}
-		getStatusbar().removeAll();
-		getStatusbar().initBar();
-		actStatus++;
-		if (actStatus == 0) {
-			mainFrame.getbPrevious().setEnabled(false);
-			mainFrame.setMainPanel(ws1);
-		}
-		if (actStatus == 1) {
-			mainFrame.setMainPanel(ws2);
-			mainFrame.getbPrevious().setEnabled(true);
-		}
-		if (actStatus == 2)
-			mainFrame.setMainPanel(ws3);
-		if (actStatus == 3)
-			mainFrame.setMainPanel(ws4);
-		if (actStatus == 4)
-			mainFrame.setMainPanel(ws5);
-		if (actStatus == 5)
-			mainFrame.setMainPanel(ws6);
-		if (actStatus == 6)
-			mainFrame.setMainPanel(ws7);
-		if (actStatus == 7)
-			mainFrame.setMainPanel(ws8);
-		if (actStatus == 8)
-			mainFrame.setMainPanel(ws9);
-		if (actStatus == 9)
-			mainFrame.setMainPanel(ws10);
-		if (actStatus == 10)
-			mainFrame.setMainPanel(ws11);
-		if (actStatus == 11)
-			mainFrame.setMainPanel(ws12);
-		if (actStatus == 12)
-			mainFrame.setMainPanel(ws13);
-		if (actStatus == 13)
-			mainFrame.setMainPanel(ws14);
-		if (actStatus == 14)
-			mainFrame.setMainPanel(ws15);
-		if (actStatus == 15)
-			mainFrame.setMainPanel(ws16);
-		if (actStatus == 16)
-			mainFrame.setMainPanel(ws17);
-		if (actStatus == 17)
-			mainFrame.setMainPanel(ws18);
-		if (actStatus == 18)
-			mainFrame.setMainPanel(ws19);
-		if (actStatus == 19) {
-			mainFrame.setMainPanel(ws20);
-			mainFrame.getbNext().setEnabled(false);
-		}
-
 	}
 
 	/**
 	 * Setzt den aktuellen Status zurueck
 	 */
 	public void setStatusPrevious() {
-		mainFrame.getStatusText().setText(
-				getConf().getlProp().getProperty("error.actStatus"));
-		iterator = statusService.getStatusList().iterator();
-		boolean end = false;
-		Status akt = null;
-		Status prev = null;
-		while (iterator.hasNext() && !end) {
-			akt = (Status) iterator.next();
-			if (akt.isActive()) {
-				akt.setActive(false);
-				prev.setActive(true);
-				end = true;
+		if (statusService.getAkt().getStatus() != 1)
+			mainFrame.getStatusText().setText(
+					getConf().getlProp().getProperty("error.passStatus"));
+		else {
+			mainFrame.getStatusText().setText(
+					getConf().getlProp().getProperty("error.actStatus"));
+			iterator = statusService.getStatusList().iterator();
+			boolean end = false;
+			Status akt = null;
+			Status prev = null;
+			while (iterator.hasNext() && !end) {
+				akt = (Status) iterator.next();
+				if (akt.isActive()) {
+					akt.setActive(false);
+					prev.setActive(true);
+					end = true;
+				}
+				prev = akt;
 			}
-			prev = akt;
+			getStatusbar().removeAll();
+			getStatusbar().initBar();
+			actStatus--;
+			if (actStatus == 0) {
+				mainFrame.setMainPanel(ws1);
+				mainFrame.getbPrevious().setEnabled(false);
+			}
+			if (actStatus == 1)
+				mainFrame.setMainPanel(ws2);
+			if (actStatus == 2)
+				mainFrame.setMainPanel(ws3);
+			if (actStatus == 3)
+				mainFrame.setMainPanel(ws4);
+			if (actStatus == 4)
+				mainFrame.setMainPanel(ws5);
+			if (actStatus == 5)
+				mainFrame.setMainPanel(ws6);
+			if (actStatus == 6)
+				mainFrame.setMainPanel(ws7);
+			if (actStatus == 7)
+				mainFrame.setMainPanel(ws8);
+			if (actStatus == 8)
+				mainFrame.setMainPanel(ws9);
+			if (actStatus == 9)
+				mainFrame.setMainPanel(ws10);
+			if (actStatus == 10)
+				mainFrame.setMainPanel(ws11);
+			if (actStatus == 11)
+				mainFrame.setMainPanel(ws12);
+			if (actStatus == 12)
+				mainFrame.setMainPanel(ws13);
+			if (actStatus == 13)
+				mainFrame.setMainPanel(ws14);
+			if (actStatus == 14)
+				mainFrame.setMainPanel(ws15);
+			if (actStatus == 15)
+				mainFrame.setMainPanel(ws16);
+			if (actStatus == 16)
+				mainFrame.setMainPanel(ws17);
+			if (actStatus == 16)
+				mainFrame.setMainPanel(ws17);
+			if (actStatus == 17)
+				mainFrame.setMainPanel(ws18);
+			if (actStatus == 18) {
+				mainFrame.setMainPanel(ws19);
+				mainFrame.getbNext().setEnabled(true);
+			}
+			if (actStatus == 19)
+				mainFrame.setMainPanel(ws20);
 		}
-		getStatusbar().removeAll();
-		getStatusbar().initBar();
-		actStatus--;
-		if (actStatus == 0) {
-			mainFrame.setMainPanel(ws1);
-			mainFrame.getbPrevious().setEnabled(false);
-		}
-		if (actStatus == 1)
-			mainFrame.setMainPanel(ws2);
-		if (actStatus == 2)
-			mainFrame.setMainPanel(ws3);
-		if (actStatus == 3)
-			mainFrame.setMainPanel(ws4);
-		if (actStatus == 4)
-			mainFrame.setMainPanel(ws5);
-		if (actStatus == 5)
-			mainFrame.setMainPanel(ws6);
-		if (actStatus == 6)
-			mainFrame.setMainPanel(ws7);
-		if (actStatus == 7)
-			mainFrame.setMainPanel(ws8);
-		if (actStatus == 8)
-			mainFrame.setMainPanel(ws9);
-		if (actStatus == 9)
-			mainFrame.setMainPanel(ws10);
-		if (actStatus == 10)
-			mainFrame.setMainPanel(ws11);
-		if (actStatus == 11)
-			mainFrame.setMainPanel(ws12);
-		if (actStatus == 12)
-			mainFrame.setMainPanel(ws13);
-		if (actStatus == 13)
-			mainFrame.setMainPanel(ws14);
-		if (actStatus == 14)
-			mainFrame.setMainPanel(ws15);
-		if (actStatus == 15)
-			mainFrame.setMainPanel(ws16);
-		if (actStatus == 16)
-			mainFrame.setMainPanel(ws17);
-		if (actStatus == 16)
-			mainFrame.setMainPanel(ws17);
-		if (actStatus == 17)
-			mainFrame.setMainPanel(ws18);
-		if (actStatus == 18) {
-			mainFrame.setMainPanel(ws19);
-			mainFrame.getbNext().setEnabled(true);
-		}
-		if (actStatus == 19)
-			mainFrame.setMainPanel(ws20);
-
 	}
 
 	/**

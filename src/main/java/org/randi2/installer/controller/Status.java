@@ -24,7 +24,8 @@ public class Status {
 	}
 
 	/**
-	 * @param Setzt, ob ein Status in der Statusbar angezeigt wird
+	 * @param Setzt
+	 *            , ob ein Status in der Statusbar angezeigt wird
 	 */
 	public void setVisible(boolean visible) {
 		this.visible = visible;
@@ -33,7 +34,7 @@ public class Status {
 	/**
 	 * 
 	 * @param status
-	 *  Setzte den Status
+	 *            Setzte den Status
 	 */
 	public void setStatus(int status) {
 		if (status != this.status) {
@@ -57,7 +58,8 @@ public class Status {
 	}
 
 	/**
-	 * @param Setzt, , ob ein Status zur Zeit bearbeitet wird
+	 * @param Setzt
+	 *            , , ob ein Status zur Zeit bearbeitet wird
 	 */
 	public void setActive(boolean active) {
 		this.active = active;
