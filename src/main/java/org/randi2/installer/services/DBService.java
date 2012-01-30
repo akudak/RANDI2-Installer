@@ -51,7 +51,7 @@ public class DBService {
 				url = "jdbc:mysql://" + main.getDbconf().getServer() + ":3306/randi2DB";
 			else
 				url = "jdbc:postgresql://" + main.getDbconf().getServer()
-						+ ":3306/randi2DB";
+						+ "/randi2DB";
 			con = DriverManager.getConnection(url, main.getDbconf().getUsernameCon(),
 					main.getDbconf().getPasswordCon());
 		} catch (SQLException e) {
@@ -89,7 +89,7 @@ public class DBService {
 	 */
 	public boolean executeMySQLDBScript(String aSQLScriptFilePath)
 			throws IOException, SQLException {
-		if (main.getDbconf().isMySQL()) {
+		
 			boolean isScriptExecuted = false;
 			Statement stmt = (Statement) getConnection().createStatement();
 			try {
@@ -132,9 +132,9 @@ public class DBService {
 				main.getStatusService().getAkt().setStatus(-1);
 			}
 			return isScriptExecuted;
-		} else
-			return false;
-	}
+		} 
+
+	
 
 	
 	/**
@@ -197,8 +197,7 @@ public class DBService {
 										.getProperty("error.createDB")));
 			}
 		
-		} else {
-			// fuer Postgre muss es noch programmiert werden
+		
 		}
 	}
 

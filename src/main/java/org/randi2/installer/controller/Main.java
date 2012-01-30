@@ -461,10 +461,10 @@ public class Main {
 	 *            den aktuellen Status weiter
 	 */
 	public void setStatusNext() {
-		if (statusService.getAkt().getStatus()!= 1)
+	/*	if (statusService.getAkt().getStatus()!= 1)
 			mainFrame.getStatusText().setText(
 					getConf().getlProp().getProperty("error.passStatus"));
-		else {
+		else {*/
 			mainFrame.getStatusText().setText(
 					getConf().getlProp().getProperty("error.actStatus"));
 			iterator = statusService.getStatusList().iterator();
@@ -531,7 +531,7 @@ public class Main {
 				mainFrame.getbNext().setEnabled(false);
 			}
 		}
-	}
+//	}
 
 	/**
 	 * Setzt den aktuellen Status zurueck

@@ -42,16 +42,23 @@ public class WizardStep1 extends MainPanel {
 		downloadPfadL.setSize(400, 20);
 
 		this.add(downloadPfadL);
+		
+		JLabel downloadTomcatL = new JLabel(main.getConf().getlProp()
+				.getProperty("label.downloadTomcatPath"));
+		downloadTomcatL.setLocation(10, 120);
+		downloadTomcatL.setSize(600, 20);
+
+		this.add(downloadTomcatL);
 
 		downloadPathT = new JTextField();
 		downloadPathT.setSize(350, 20);
-		downloadPathT.setLocation(100, 120);
+		downloadPathT.setLocation(100, 160);
 		downloadPathT.setEditable(false);
 
 		this.add(downloadPathT);
 		JButton downloadPfadB = new JButton(main.getConf().getlProp()
 				.getProperty("button.open"));
-		downloadPfadB.setLocation(10, 120);
+		downloadPfadB.setLocation(10, 160);
 		downloadPfadB.setSize(70, 20);
 
 		this.add(downloadPfadB);

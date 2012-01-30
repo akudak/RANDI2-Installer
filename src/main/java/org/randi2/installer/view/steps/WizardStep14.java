@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -119,7 +118,7 @@ public class WizardStep14 extends MainPanel {
 		insertB.setSize(80, 20);
 
 		this.add(insertB);
-		
+
 		JLabel mandatoryL = new JLabel(main.getConf().getlProp()
 				.getProperty("label.mandatory"));
 		mandatoryL.setSize(150, 20);
@@ -142,10 +141,10 @@ public class WizardStep14 extends MainPanel {
 		insertB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				main.getStatusService().getAkt().setStatus(1);
-				
+
 				main.getCenter().getContactPerson()
 						.setAcademicTitle(titleT.getText());
-				
+
 				if (!main.getCenter().getContactPerson()
 						.setFirstname(firstnameT.getText()))
 					main.getStatusService().getAkt().setStatus(-1);
@@ -159,9 +158,11 @@ public class WizardStep14 extends MainPanel {
 					main.getStatusService().getAkt().setStatus(-1);
 
 				if (main.getStatusService().getAkt().getStatus() == -1)
-					main.getMainFrame().getStatusText().setText(
-							(main.getConf().getlProp()
-									.getProperty("error.insert")));
+					main.getMainFrame()
+							.getStatusText()
+							.setText(
+									(main.getConf().getlProp()
+											.getProperty("error.insert")));
 			}
 		});
 	}
