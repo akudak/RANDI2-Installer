@@ -77,7 +77,7 @@ public class AdministratorService {
 					.getStatusText()
 					.setText(
 							main.getConf().getlProp()
-									.getProperty("error.datenbankUpdate"));
+									.getProperty("error.databaseUpdate"));
 		}
 	}
 }

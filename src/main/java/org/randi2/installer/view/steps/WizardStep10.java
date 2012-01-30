@@ -92,6 +92,12 @@ public class WizardStep10 extends MainPanel {
 
 		this.add(insertB);
 
+		JLabel mandatoryL = new JLabel(main.getConf().getlProp()
+				.getProperty("label.mandatory"));
+		mandatoryL.setSize(150, 20);
+		mandatoryL.setLocation(205, 240);
+
+		this.add(mandatoryL);
 		insertB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				main.getStatusService().getAkt().setStatus(1);

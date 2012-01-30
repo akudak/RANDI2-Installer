@@ -48,6 +48,14 @@ public class WizardStep18 extends MainPanel {
 
 		this.add(insertB);
 
+		
+		JLabel mandatoryL = new JLabel(main.getConf().getlProp()
+				.getProperty("label.mandatory"));
+		mandatoryL.setSize(150, 20);
+		mandatoryL.setLocation(395, 200);
+
+		this.add(mandatoryL);
+		
 		insertB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				final JFrame jFrame = new JFrame();

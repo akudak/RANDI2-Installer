@@ -82,7 +82,7 @@ public class Person {
 	 */
 	public boolean setMail(String mail) {
 		EMailRANDI2Validator emailRANDI2Validator = new EMailRANDI2Validator();
-		if (emailRANDI2Validator.isValid(mail)) {
+		if (mail != null && !mail.isEmpty() && emailRANDI2Validator.isValid(mail)) {
 			this.mail = mail;
 			return true;
 		}
@@ -103,7 +103,7 @@ public class Person {
 	public boolean setPhone(String phone) {
 		{
 			TelephoneNumberValidator telephoneNumberValidator = new TelephoneNumberValidator();
-			if (telephoneNumberValidator.isValid(phone)) {
+			if (phone != null && !phone.isEmpty() && telephoneNumberValidator.isValid(phone)) {
 				this.phone = phone;
 				return true;
 			} else
@@ -124,7 +124,7 @@ public class Person {
 	public boolean setMobile(String mobile) {
 		{
 			TelephoneNumberValidator telephoneNumberValidator = new TelephoneNumberValidator();
-			if (telephoneNumberValidator.isValid(mobile)) {
+			if (mobile != null && !mobile.isEmpty() && telephoneNumberValidator.isValid(mobile)) {
 				this.mobile = mobile;
 				return true;
 			} else
@@ -146,7 +146,7 @@ public class Person {
 	public boolean setFax(String fax) {
 		{
 			TelephoneNumberValidator telephoneNumberValidator = new TelephoneNumberValidator();
-			if (telephoneNumberValidator.isValid(fax)) {
+			if (fax != null && !fax.isEmpty() && telephoneNumberValidator.isValid(fax)) {
 				this.fax = fax;
 				return true;
 			} else
@@ -166,7 +166,8 @@ public class Person {
 	/**
 	 * @param Setzte Geschlecht
 	 */
-	public void setSex(Gender sex) {
+	public void setSex(Gender sex) 
+	{
 		this.sex = sex;
 	}
 

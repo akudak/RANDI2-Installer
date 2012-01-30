@@ -42,6 +42,12 @@ public class Status {
 			main.getStatusbar().removeAll();
 			main.getStatusbar().initBar();
 			main.getMainFrame().remove(main.getMainFrame().getStatusText());
+			if (status == 1)
+				main.getMainFrame()
+						.getStatusText()
+						.setText(
+								main.getConf().getlProp()
+										.getProperty("error.actStatus"));
 			main.getMainFrame().add(main.getMainFrame().getStatusText());
 		}
 	}

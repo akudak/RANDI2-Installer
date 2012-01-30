@@ -119,6 +119,13 @@ public class WizardStep14 extends MainPanel {
 		insertB.setSize(80, 20);
 
 		this.add(insertB);
+		
+		JLabel mandatoryL = new JLabel(main.getConf().getlProp()
+				.getProperty("label.mandatory"));
+		mandatoryL.setSize(150, 20);
+		mandatoryL.setLocation(205, 280);
+
+		this.add(mandatoryL);
 
 		aButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -134,11 +141,11 @@ public class WizardStep14 extends MainPanel {
 
 		insertB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				final JFrame jFrame = new JFrame();
-				jFrame.setSize(300, 150);
 				main.getStatusService().getAkt().setStatus(1);
+				
 				main.getCenter().getContactPerson()
 						.setAcademicTitle(titleT.getText());
+				
 				if (!main.getCenter().getContactPerson()
 						.setFirstname(firstnameT.getText()))
 					main.getStatusService().getAkt().setStatus(-1);

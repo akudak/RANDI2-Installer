@@ -120,6 +120,12 @@ public class WizardStep11 extends MainPanel {
 		insertB.setSize(80, 20);
 
 		this.add(insertB);
+		JLabel mandatoryL = new JLabel(main.getConf().getlProp()
+				.getProperty("label.mandatory"));
+		mandatoryL.setSize(150, 20);
+		mandatoryL.setLocation(205, 280);
+
+		this.add(mandatoryL);
 
 		aButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

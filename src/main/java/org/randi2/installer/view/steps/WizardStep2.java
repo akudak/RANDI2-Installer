@@ -79,14 +79,14 @@ public class WizardStep2 extends MainPanel {
 		this.add(adminL);
 
 		JLabel passwordL1 = new JLabel(main.getConf().getlProp()
-				.getProperty("label.password"));
+				.getProperty("label.passwordCon"));
 		passwordL1.setSize(200, 20);
 		passwordL1.setLocation(10, 170);
 
 		this.add(passwordL1);
 
 		JLabel passwordL2 = new JLabel(main.getConf().getlProp()
-				.getProperty("label.repeat"));
+				.getProperty("label.repeatCon"));
 		passwordL2.setSize(200, 20);
 		passwordL2.setLocation(10, 210);
 
@@ -117,6 +117,13 @@ public class WizardStep2 extends MainPanel {
 		insertB.setEnabled(false);
 		this.add(insertB);
 
+		JLabel mandatoryL = new JLabel(main.getConf().getlProp()
+				.getProperty("label.mandatory"));
+		mandatoryL.setSize(150, 20);
+		mandatoryL.setLocation(180, 250);
+
+		this.add(mandatoryL);
+		
 		cButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				main.getDbconf().setMySQL(true);
@@ -161,8 +168,6 @@ public class WizardStep2 extends MainPanel {
 		insertB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				main.getStatusService().getAkt().setStatus(1);
-				final JFrame jFrame = new JFrame();
-				jFrame.setSize(300, 150);
 
 				String p1 = "";
 				String p2 = "";
@@ -178,7 +183,10 @@ public class WizardStep2 extends MainPanel {
 						main.getStatusService().getAkt().setStatus(-1);
 
 					if (!main.getDbconf().setUsernameCon(adminT.getText()))
+					{
 						main.getStatusService().getAkt().setStatus(-1);
+						main.getMainFrame().getStatusText().setText(main.getConf().getlProp().getProperty("error.insert"));
+					}
 				}
 
 			}

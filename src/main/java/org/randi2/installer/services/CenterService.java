@@ -88,7 +88,7 @@ public class CenterService {
 					.getStatusText()
 					.setText(
 							main.getConf().getlProp()
-									.getProperty("error.datenbankUpdate"));
+									.getProperty("error.databaseUpdate"));
 		}
 	}
 }

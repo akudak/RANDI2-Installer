@@ -91,7 +91,7 @@ public class Administrator extends Person {
 	 */
 	public boolean econde(String password1, String password2) {
 		PasswordValidator passwordValidator = new PasswordValidator();
-		if (password1.equals(password2) && passwordValidator.isValid(password2)){
+		if (password1 != null && !password1.isEmpty() && password1.equals(password2) && passwordValidator.isValid(password2)){
 			ShaPasswordEncoder passwordEncoder = new ShaPasswordEncoder(256);
 			setPassword(passwordEncoder.encodePassword(password1,
 					this.getUsername()));
