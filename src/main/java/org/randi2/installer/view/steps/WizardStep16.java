@@ -99,8 +99,7 @@ public class WizardStep16 extends MainPanel {
 
 		insertB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				final JFrame jFrame = new JFrame();
-				jFrame.setSize(300, 150);
+
 				main.getStatusService().getAkt().setStatus(1);
 
 				if (!main.getConf().setWebsite(contactWebsiteT.getText()))

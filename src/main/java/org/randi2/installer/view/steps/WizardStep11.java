@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -20,6 +19,7 @@ public class WizardStep11 extends MainPanel {
 	private JTextField adminFirstnameT;
 	private JTextField adminSurnameT;
 	private JTextField adminUsernameT;
+	private boolean genderB = false;
 
 	public WizardStep11(final Main main) {
 		super(main);
@@ -130,20 +130,21 @@ public class WizardStep11 extends MainPanel {
 		aButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				main.getAdmin().setSex(Gender.FEMALE);
+				genderB = true;
 			}
 		});
 
 		bButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				main.getAdmin().setSex(Gender.MALE);
+				genderB = true;
 			}
 		});
 
 		insertB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				final JFrame jFrame = new JFrame();
-				jFrame.setSize(300, 150);
-				main.getStatusService().getAkt().setStatus(1);
+				if (genderB)
+					main.getStatusService().getAkt().setStatus(1);
 				main.getAdmin().setAcademicTitle(adminTitleT.getText());
 
 				if (!main.getAdmin().setFirstname(adminFirstnameT.getText()))
@@ -161,9 +162,11 @@ public class WizardStep11 extends MainPanel {
 					main.getAdmin().setPrefLocale("us");
 
 				if (main.getStatusService().getAkt().getStatus() == -1)
-					main.getMainFrame().getStatusText().setText(
-							(main.getConf().getlProp()
-									.getProperty("error.insert")));
+					main.getMainFrame()
+							.getStatusText()
+							.setText(
+									(main.getConf().getlProp()
+											.getProperty("error.insert")));
 			}
 		});
 	}

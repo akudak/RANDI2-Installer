@@ -18,6 +18,7 @@ public class WizardStep14 extends MainPanel {
 	private JTextField firstnameT;
 	private JTextField surnameT;
 	private JTextField mailT;
+	private boolean genderB =false;
 
 	public WizardStep14(Main main) {
 		super(main);
@@ -126,20 +127,24 @@ public class WizardStep14 extends MainPanel {
 
 		this.add(mandatoryL);
 
+	
 		aButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				main.getCenter().getContactPerson().setSex(Gender.FEMALE);
+				genderB=true;
 			}
 		});
 
 		bButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				main.getCenter().getContactPerson().setSex(Gender.MALE);
+				genderB =true;
 			}
 		});
 
 		insertB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(genderB)
 				main.getStatusService().getAkt().setStatus(1);
 
 				main.getCenter().getContactPerson()

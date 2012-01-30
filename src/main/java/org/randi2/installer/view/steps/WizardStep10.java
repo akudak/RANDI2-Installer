@@ -101,8 +101,6 @@ public class WizardStep10 extends MainPanel {
 		insertB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				main.getStatusService().getAkt().setStatus(1);
-				final JFrame jFrame = new JFrame();
-				jFrame.setSize(300, 150);
 
 				if (!main.getMailConf().setServer(serverMailT.getText()))
 					main.getStatusService().getAkt().setStatus(-1);

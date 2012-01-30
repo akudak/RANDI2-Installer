@@ -33,7 +33,7 @@ public class Languagebar extends JPanel {
 		this.setBackground(Color.WHITE);
 
 		ImageIcon ger = new ImageIcon(
-				ClassLoader.getSystemResource("ger_40x40.gif"));
+				ClassLoader.getSystemResource("DE_40x40.png"));
 		JButton bGer = new JButton(ger);
 		bGer.setSize(50, 50);
 		bGer.setLocation(10, 5);
@@ -41,7 +41,7 @@ public class Languagebar extends JPanel {
 		this.add(bGer);
 
 		ImageIcon us = new ImageIcon(
-				ClassLoader.getSystemResource("us_40x40.gif"));
+				ClassLoader.getSystemResource("US_40x40.png"));
 		JButton bUS = new JButton(us);
 		bUS.setSize(50, 50);
 		bUS.setLocation(70, 5);

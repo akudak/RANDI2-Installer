@@ -40,7 +40,7 @@ public class WizardStep17 extends MainPanel {
 		this.add(mailFrom);
 
 		JLabel infoServer = new JLabel(main.getConf().getlProp()
-				.getProperty("label.infoServer"));
+				.getProperty("label.website"));
 		infoServer.setLocation(10, 120);
 		infoServer.setSize(200, 20);
 
@@ -87,8 +87,7 @@ public class WizardStep17 extends MainPanel {
 
 		insertB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				final JFrame jFrame = new JFrame();
-				jFrame.setSize(300, 150);
+
 				main.getStatusService().getAkt().setStatus(1);
 				if (!main.getConf().setMail_from(mailFromT.getText()))
 					main.getStatusService().getAkt().setStatus(-1);
