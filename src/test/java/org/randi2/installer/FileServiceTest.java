@@ -10,8 +10,8 @@ import org.randi2.installer.io.FileService;
 public class FileServiceTest {
 
 	private static FileService FILESERVICE;
-	private static final String PATH = ClassLoader.getSystemResource(
-			"").getFile();
+	private static final String PATH = ClassLoader.getSystemResource("")
+			.getFile();
 	private static final String NAME = "TestDatei.txt";
 	private static final String NAME2 = "TestDatei2.txt";
 
@@ -20,6 +20,7 @@ public class FileServiceTest {
 		FILESERVICE = new FileService(new StatusService());
 
 	}
+
 	/**
 	 * 
 	 * 
