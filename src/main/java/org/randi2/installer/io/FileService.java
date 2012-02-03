@@ -3,6 +3,7 @@ package org.randi2.installer.io;
 import java.io.File;
 
 import org.randi2.installer.controller.StatusService;
+import org.randi2.installer.model.enumerations.StatusEnum;
 
 /**
  * 
@@ -25,7 +26,7 @@ public class FileService implements FileServiceInterface {
 		File source = new File(path + name);
 		File destination = new File(path + newName);
 		if (!source.renameTo(destination)) {
-			statusService.getAkt().setStatus(-1);
+			statusService.getAkt().setStatus(StatusEnum.FAIL);
 		}
 	}
 
@@ -37,7 +38,7 @@ public class FileService implements FileServiceInterface {
 		File source = new File(oldPath + name);
 		File destination = new File(newPath + name);
 		if (!source.renameTo(destination)) {
-			statusService.getAkt().setStatus(-1);
+			statusService.getAkt().setStatus(StatusEnum.FAIL);
 		}
 	}
 }

@@ -37,6 +37,7 @@ public class DBServiceTest {
 		DBCONF.setPasswordCon("", "");
 		DBCONF.setUsername(ADMIN);
 		DBCONF.setPassword(PASSWORD, PASSWORD);
+		DBCONF.setName("randi2DB");
 		MAIN = new Main();
 		MAIN.setDbconf(DBCONF);
 		DBSERVICE = new DBService(MAIN);
@@ -72,6 +73,20 @@ public class DBServiceTest {
 		} while (!user.equals(""));
 	}
 
+	/**
+	 * 
+	 * 
+	 * executeMySQLDBScript Testen
+	 * 
+	 * Tabelle Test nachher wieder lšschen
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
 	@Test
 	public void createUser() throws SQLException {
 		// Alle User sind geloescht

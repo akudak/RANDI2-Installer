@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import org.randi2.installer.model.Center;
 import org.randi2.installer.model.ContactPerson;
 import org.randi2.installer.model.enumerations.Gender;
@@ -21,11 +22,14 @@ public class CenterServiceTest {
 	private static Center CENTER;
 	private static CenterService CENTERSERVICE;
 	private static ContactPerson CONTACTPERSON;
-	private static Main MAIN;
 	private static DBService DBSERVICE;
 	private static DBConfiguration DBCONF;
+	private static Main MAIN;
+	private static final String ROOT = "root";
+	private static final String SERVER = "127.0.0.1";
 	private static final String TITLE = "Dr,";
 	private static final long ID1 = 1;
+	private static final long ID2 = 2;
 	private static final String PASSWORD = "1$password";
 	private static final String EMAIL = "mail@test.de";
 	private static final String FAX = "012334243";
@@ -42,17 +46,24 @@ public class CenterServiceTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws IOException, SQLException {
-		DBCONF = new DBConfiguration();
-		DBCONF.setServer("127.0.0.1");
-		DBCONF.setMySQL(true);
-		DBCONF.setUsernameCon("root");
-		DBCONF.setPasswordCon("", "");
-		DBCONF.setUsername("admin");
-		DBCONF.setPassword("www", "www");
 		MAIN = new Main();
+		DBCONF = new DBConfiguration();
+		DBCONF.setServer(SERVER);
+		DBCONF.setMySQL(true);
+		DBCONF.setUsername(NAME);
+		DBCONF.setPassword(PASSWORD, PASSWORD);
+		DBCONF.setUsernameCon(ROOT);
+		DBCONF.setPasswordCon("", "");
+		DBCONF.setName("randi2DB");
 		MAIN.setDbconf(DBCONF);
 		DBSERVICE = new DBService(MAIN);
+		DBSERVICE.createDatabase(DBCONF);
+		DBSERVICE.createUser(DBCONF);
 		MAIN.setDbService(DBSERVICE);
+
+		String url = ClassLoader.getSystemResource("").getFile()
+				+ "randi2_073_InitData.sql";
+		DBSERVICE.executeSQLDBScript(url);
 		CENTER = new Center();
 		CENTERSERVICE = new CenterService(MAIN);
 		CONTACTPERSON = new ContactPerson();
@@ -64,6 +75,7 @@ public class CenterServiceTest {
 		CONTACTPERSON.setSurname(SURNAME);
 		CONTACTPERSON.setMobile(MOBILE);
 		CONTACTPERSON.setPhone(PHONE);
+		CONTACTPERSON.setId(ID2);
 		CENTER.econde(PASSWORD, PASSWORD);
 		CENTER.setCity(CITY);
 		CENTER.setCountry(COUNTRY);
@@ -73,16 +85,32 @@ public class CenterServiceTest {
 		CENTER.setId(ID1);
 		CENTER.setContactPerson(CONTACTPERSON);
 
-		// Datenbank mit Tabellen erstellen
-		DBSERVICE.createDatabase(DBCONF);
-		DBSERVICE.createUser(DBCONF);
-		String url = ClassLoader.getSystemResource("").getFile()
-				+ "randi2_073_InitData.sql";
-		DBSERVICE.executeMySQLDBScript(url);
 	}
 
 	@Test
 	public void update() throws SQLException {
+
+		// Hole Timestamp Login
+		Timestamp tsTrialSite = null;
+		PreparedStatement ps = DBSERVICE.getConnection().prepareStatement(
+				"SELECT updatedAt FROM TrialSite WHERE id= '" + CENTER.getId()
+						+ " ' ");
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			tsTrialSite = rs.getTimestamp(1);
+		}
+		rs.close();
+
+		// Hole Timestamp Person
+		Timestamp tsPerson = null;
+		ps = DBSERVICE.getConnection().prepareStatement(
+				"SELECT updatedAt FROM PERSON WHERE id='"
+						+ CONTACTPERSON.getId() + "'");
+		rs = ps.executeQuery();
+		while (rs.next()) {
+			tsPerson = rs.getTimestamp(1);
+		}
+		rs.close();
 
 		CENTERSERVICE.update(CENTER);
 
@@ -90,12 +118,12 @@ public class CenterServiceTest {
 
 		// Testet, ob die Daten korrekt in die Tabelle TrialSite eingetragen
 		// werden
-		PreparedStatement ps = DBSERVICE
+		ps = DBSERVICE
 				.getConnection()
 				.prepareStatement(
-						"SELECT city, country, name, postcode, street, contactPerson_id FROM TrialSite WHERE id='"
+						"SELECT city, country, name, postcode, street, contactPerson_id, updatedAt FROM TrialSite WHERE id='"
 								+ CENTER.getId() + "'");
-		ResultSet rs = ps.executeQuery();
+		rs = ps.executeQuery();
 		while (rs.next()) {
 			assertEquals(rs.getString(1), CITY);
 			assertEquals(rs.getString(2), COUNTRY);
@@ -103,6 +131,7 @@ public class CenterServiceTest {
 			assertEquals(rs.getString(4), POSTCODE);
 			assertEquals(rs.getString(5), STREET);
 			CONTACTPERSON.setId(rs.getLong(6));
+			assertEquals(rs.getTimestamp(7).compareTo(tsTrialSite), 1);
 		}
 		rs.close();
 
@@ -110,7 +139,7 @@ public class CenterServiceTest {
 		ps = DBSERVICE
 				.getConnection()
 				.prepareStatement(
-						"SELECT email, fax, firstname, mobile, phone, sex, surname, title FROM Person WHERE id='"
+						"SELECT email, fax, firstname, mobile, phone, sex, surname, title, updatedAt FROM Person WHERE id='"
 								+ CONTACTPERSON.getId() + "'");
 		rs = ps.executeQuery();
 		while (rs.next()) {
@@ -122,6 +151,7 @@ public class CenterServiceTest {
 			assertEquals(rs.getString(6), SEX.toString());
 			assertEquals(rs.getString(7), SURNAME);
 			assertEquals(rs.getString(8), TITLE);
+			assertEquals(rs.getTimestamp(9).compareTo(tsPerson), 1);
 		}
 		rs.close();
 

@@ -3,10 +3,11 @@ package org.randi2.installer.view;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Locale;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import org.randi2.installer.model.enumerations.Language;
 import org.randi2.installer.controller.Main;
 
 /**
@@ -51,7 +52,7 @@ public class Languagebar extends JPanel {
 		this.setVisible(true);
 		bGer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				main.getConf().loadLanguageProperties(Language.GER,
+				main.getConf().loadLanguageProperties(Locale.GERMANY,
 						main);
 				main.repaint();
 			}
@@ -59,7 +60,7 @@ public class Languagebar extends JPanel {
 
 		bUS.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				main.getConf().loadLanguageProperties(Language.US,
+				main.getConf().loadLanguageProperties(Locale.US,
 						main);
 				main.repaint();
 			}

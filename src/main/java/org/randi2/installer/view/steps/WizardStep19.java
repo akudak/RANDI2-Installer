@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import org.randi2.installer.model.enumerations.StatusEnum;
 import org.randi2.installer.view.MainPanel;
 import org.randi2.installer.controller.Main;
 
@@ -56,15 +58,15 @@ public class WizardStep19 extends MainPanel {
 		insertB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				main.getStatusService().getAkt().setStatus(1);
+				main.getStatusService().getAkt().setStatus(StatusEnum.SUCCESS);
 				if (!main.getConf()
 						.setHostingInstGER(hostingInstGERT.getText()))
-					main.getStatusService().getAkt().setStatus(-1);
+					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 
 				if (!main.getConf().setHostingInstUS(hostingInstUST.getText()))
-					main.getStatusService().getAkt().setStatus(-1);
+					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 
-				if (main.getStatusService().getAkt().getStatus() != -1)
+				if (!main.getStatusService().getAkt().getStatus().equals(StatusEnum.FAIL))
 					main.editLabel();
 				else
 					main.getMainFrame().getStatusText().setText(

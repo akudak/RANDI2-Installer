@@ -17,6 +17,7 @@ public class AdministratorTest {
 	private final static String USERNAME_TOLONG = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 	private final static String SHA = "b110305f87eac883525c414568c3a847290039f30a3aa534b5e603a3ac604264";
 	private final static String SHA_TOSHORT = "b110305f87eac883525c414568c3a8";
+	private final static String SHA_TOLONG = "b110305f87eac883525c414568c3a8b110305f87eac883525c414568c3a8b110305f87eac883525c414568c3a8";
 	private final static String PASSWORD = "1$password";
 	private final static String PASSWORD2 = "1$heidelberg";
 
@@ -44,17 +45,25 @@ public class AdministratorTest {
 		assertTrue(ADMIN.econde(PASSWORD, PASSWORD));
 		assertEquals(ADMIN.getPassword(), SHA);
 
-		// Setzte gueltigen SHA Wert
-		assertTrue(ADMIN.setPassword(SHA));
-
 		// Negativ Test
 
 		// Setzte zwei ungleiche Passwoertet
 		assertFalse(ADMIN.econde(PASSWORD, PASSWORD2));
 
+	}
+
+	@Test
+	public void setPassword() {
+		// Setzte gueltigen SHA Wert
+		assertTrue(ADMIN.setPassword(SHA));
+
+		// Negativ
 		// Setzte zu kurzen SHA Wert
 
 		assertFalse(ADMIN.setPassword(SHA_TOSHORT));
 
+		// Setzte zu langen SHA Wert
+
+		assertFalse(ADMIN.setPassword(SHA_TOLONG));
 	}
 }

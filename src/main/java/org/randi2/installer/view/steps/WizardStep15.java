@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+
+import org.randi2.installer.model.enumerations.StatusEnum;
 import org.randi2.installer.view.MainPanel;
 import org.randi2.installer.controller.Main;
 
@@ -166,7 +168,7 @@ public class WizardStep15 extends MainPanel {
 
 		insertB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				main.getStatusService().getAkt().setStatus(1);
+				main.getStatusService().getAkt().setStatus(StatusEnum.SUCCESS);
 
 				String p1 = "";
 				String p2 = "";
@@ -177,20 +179,20 @@ public class WizardStep15 extends MainPanel {
 					p2 = p2 + passwordT2.getPassword()[k];
 
 				if (!main.getCenter().econde(p1, p2))
-					main.getStatusService().getAkt().setStatus(-1);
+					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 
 				if (!main.getCenter().getContactPerson().setFax(faxT.getText()))
-					main.getStatusService().getAkt().setStatus(-1);
+					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 
 				if (!main.getCenter().getContactPerson()
 						.setMobile(mobileT.getText()))
-					main.getStatusService().getAkt().setStatus(-1);
+					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 
 				if (!main.getCenter().getContactPerson()
 						.setPhone(phoneT.getText()))
-					main.getStatusService().getAkt().setStatus(-1);
+					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 
-				if (main.getStatusService().getAkt().getStatus() != -1)
+				if (!main.getStatusService().getAkt().getStatus().equals(StatusEnum.FAIL))
 					main.configCenterInfo();
 				else
 					main.getMainFrame().getStatusText().setText(

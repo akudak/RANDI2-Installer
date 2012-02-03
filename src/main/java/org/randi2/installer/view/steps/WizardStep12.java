@@ -6,6 +6,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import org.randi2.installer.model.enumerations.StatusEnum;
 import org.randi2.installer.view.MainPanel;
 import org.randi2.installer.controller.Main;
 
@@ -74,37 +76,37 @@ public class WizardStep12 extends MainPanel {
 
 		this.add(passwordL2);
 
-		adminEMailT = new JTextField();
+		adminEMailT = new JTextField("test@test.de");
 		adminEMailT.setLocation(220, 40);
 		adminEMailT.setSize(200, 20);
 
 		this.add(adminEMailT);
 
-		adminFaxT = new JTextField();
+		adminFaxT = new JTextField("4234234234234");
 		adminFaxT.setLocation(220, 80);
 		adminFaxT.setSize(200, 20);
 
 		this.add(adminFaxT);
 
-		adminMobileT = new JTextField();
+		adminMobileT = new JTextField("3214234234");
 		adminMobileT.setLocation(220, 120);
 		adminMobileT.setSize(200, 20);
 
 		this.add(adminMobileT);
 
-		adminPhoneT = new JTextField();
+		adminPhoneT = new JTextField("23121312312");
 		adminPhoneT.setLocation(220, 160);
 		adminPhoneT.setSize(200, 20);
 
 		this.add(adminPhoneT);
 
-		adminPasswordT1 = new JPasswordField();
+		adminPasswordT1 = new JPasswordField("1$password");
 		adminPasswordT1.setLocation(220, 200);
 		adminPasswordT1.setSize(200, 20);
 
 		this.add(adminPasswordT1);
 
-		adminPasswordT2 = new JPasswordField();
+		adminPasswordT2 = new JPasswordField("1$password");
 		adminPasswordT2.setLocation(220, 240);
 		adminPasswordT2.setSize(200, 20);
 
@@ -126,7 +128,7 @@ public class WizardStep12 extends MainPanel {
 
 		insertB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				main.getStatusService().getAkt().setStatus(1);
+				main.getStatusService().getAkt().setStatus(StatusEnum.SUCCESS);
 				String p1 = "";
 				String p2 = "";
 				for (int i = 0; i < adminPasswordT1.getPassword().length; i++)
@@ -136,21 +138,21 @@ public class WizardStep12 extends MainPanel {
 					p2 = p2 + adminPasswordT2.getPassword()[k];
 
 				if (!main.getAdmin().econde(p1, p2))
-					main.getStatusService().getAkt().setStatus(-1);
+					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 
 				if (!main.getAdmin().setMail(adminEMailT.getText()))
-					main.getStatusService().getAkt().setStatus(-1);
+					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 
 				if (!main.getAdmin().setFax(adminFaxT.getText()))
-					main.getStatusService().getAkt().setStatus(-1);
+					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 
 				if (!main.getAdmin().setMobile(adminMobileT.getText()))
-					main.getStatusService().getAkt().setStatus(-1);
+					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 
 				if (!main.getAdmin().setPhone(adminPhoneT.getText()))
-					main.getStatusService().getAkt().setStatus(-1);
+					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 
-				if (main.getStatusService().getAkt().getStatus() != -1)
+				if (!main.getStatusService().getAkt().getStatus().equals(StatusEnum.FAIL))
 					main.editAdmin();
 				else
 					main.getMainFrame().getStatusText().setText(

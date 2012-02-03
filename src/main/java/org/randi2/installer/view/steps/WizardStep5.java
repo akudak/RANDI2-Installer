@@ -8,6 +8,7 @@ import javax.swing.JTextField;
 
 import org.randi2.installer.view.MainPanel;
 import org.randi2.installer.io.Chooser;
+import org.randi2.installer.model.enumerations.StatusEnum;
 import org.randi2.installer.controller.Main;
 
 public class WizardStep5 extends MainPanel {
@@ -64,17 +65,17 @@ public class WizardStep5 extends MainPanel {
 
 		downloadPfadB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				main.getStatusService().getAkt().setStatus(1);
+				main.getStatusService().getAkt().setStatus(StatusEnum.SUCCESS);
 				Chooser fileOpen = new Chooser(main);
 				if (!main.getConf().setRandi2Path(fileOpen.getFile("war"))) {
-					main.getStatusService().getAkt().setStatus(-1);
+					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 					main.getMainFrame().getStatusText().setText(
 									(main.getConf().getlProp()
 											.getProperty("error.war")));
 				}
 
 				downloadPathT.setText(main.getConf().getRandi2Path());
-				if (main.getStatusService().getAkt().getStatus() != -1)
+				if (!main.getStatusService().getAkt().getStatus().equals(StatusEnum.FAIL))
 					main.copyRandi2();
 
 			}

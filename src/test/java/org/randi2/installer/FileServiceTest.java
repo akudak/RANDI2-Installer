@@ -20,6 +20,15 @@ public class FileServiceTest {
 		FILESERVICE = new FileService(new StatusService());
 
 	}
+	/**
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * Inhalt checken
+	 */
 
 	@Test
 	public void rename() {

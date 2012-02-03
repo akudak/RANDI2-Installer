@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import org.randi2.installer.view.MainPanel;
 import org.randi2.installer.io.Chooser;
+import org.randi2.installer.model.enumerations.StatusEnum;
 import org.randi2.installer.controller.Main;
 
 public class WizardStep6 extends MainPanel {
@@ -43,12 +44,10 @@ public class WizardStep6 extends MainPanel {
 
 		this.add(startTomcatWinB);
 
-		if (main.getDbconf().isMySQL())
+	
 			initDBL = new JLabel(main.getConf().getlProp()
 					.getProperty("label.initDBMySQL"));
-		else
-			initDBL = new JLabel(main.getConf().getlProp()
-					.getProperty("label.initDBPostgre"));
+
 		initDBL.setLocation(10, 120);
 		initDBL.setSize(600, 20);
 
@@ -70,24 +69,25 @@ public class WizardStep6 extends MainPanel {
 
 		startTomcatMacB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				main.getStatusService().getAkt().setStatus(1);
+				main.getStatusService().getAkt().setStatus(StatusEnum.SUCCESS);
 				main.startTomcatMac();
 			}
 		});
 
 		startTomcatWinB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				main.getStatusService().getAkt().setStatus(1);
+				main.getStatusService().getAkt().setStatus(StatusEnum.SUCCESS);
 				main.startTomcatWin();
 			}
 		});
 
 		initDBPfadB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				main.getStatusService().getAkt().setStatus(1);
+				main.getStatusService().getAkt().setStatus(StatusEnum.SUCCESS);
 				Chooser fileOpen = new Chooser(main);
 				if (!main.getDbconf().setInitDBPath(fileOpen.getFile("sql"))) {
-					main.getStatusService().getAkt().setStatus(-1);
+					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
+					System.out.println("fehler");
 					main.getMainFrame().getStatusText().setText(
 									(main.getConf().getlProp()
 											.getProperty("error.loadSQL")));

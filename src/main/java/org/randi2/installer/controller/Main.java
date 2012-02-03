@@ -3,7 +3,7 @@ package org.randi2.installer.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Iterator;
-
+import java.util.Locale;
 import org.randi2.installer.controller.configuration.Configuration;
 import org.randi2.installer.controller.configuration.DBConfiguration;
 import org.randi2.installer.controller.configuration.MailConfiguration;
@@ -13,7 +13,7 @@ import org.randi2.installer.io.IOProperties;
 import org.randi2.installer.model.Administrator;
 import org.randi2.installer.model.Center;
 import org.randi2.installer.model.ContactPerson;
-import org.randi2.installer.model.enumerations.Language;
+import org.randi2.installer.model.enumerations.StatusEnum;
 import org.randi2.installer.services.AdministratorService;
 import org.randi2.installer.services.CenterService;
 import org.randi2.installer.services.DBService;
@@ -110,9 +110,9 @@ public class Main {
 		urlService = new URLService(this);
 		mainFrame = new MainFrame(this);
 		if (System.getProperty("user.language").equals("de")) {
-			conf.loadLanguageProperties(Language.GER, this);
+			conf.loadLanguageProperties(Locale.GERMANY, this);
 		} else {
-			conf.loadLanguageProperties(Language.US, this);
+			conf.loadLanguageProperties(Locale.US, this);
 		}
 		start();
 		mainFrame.repaint();
@@ -135,12 +135,12 @@ public class Main {
 	 */
 	public void initDatabase() {
 		try {
-			dbService.executeMySQLDBScript(dbconf.getInitDBPath());
+			dbService.executeSQLDBScript(dbconf.getInitDBPath());
 		} catch (IOException e) {
-			statusService.getAkt().setStatus(-1);
+			statusService.getAkt().setStatus(StatusEnum.FAIL);
 			e.printStackTrace();
 		} catch (SQLException e) {
-			statusService.getAkt().setStatus(-1);
+			statusService.getAkt().setStatus(StatusEnum.FAIL);
 			e.printStackTrace();
 		}
 	}
@@ -234,7 +234,7 @@ public class Main {
 		String logoPath = "";
 		String logoName = "";
 		if (conf.getLogoPath() == null || conf.getLogoPath().isEmpty()) {
-			statusService.getAkt().setStatus(-1);
+			statusService.getAkt().setStatus(StatusEnum.FAIL);
 			getMainFrame().getStatusText().setText(
 					(getConf().getlProp().getProperty("error.logo")));
 		} else {
@@ -301,7 +301,7 @@ public class Main {
 			Runtime.getRuntime().exec(
 					new String[] { conf.getServerPath() + "bin/startup.sh" });
 		} catch (IOException e) {
-			getStatusService().getAkt().setStatus(-1);
+			getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 			getMainFrame().getStatusText().setText(
 					(getConf().getlProp().getProperty("error.startTomcat")));
 		}
@@ -317,7 +317,7 @@ public class Main {
 			Runtime.getRuntime().exec(
 					new String[] { conf.getServerPath() + "bin/startup.bat" });
 		} catch (IOException e) {
-			getStatusService().getAkt().setStatus(-1);
+			getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 			getMainFrame().getStatusText().setText(
 					(getConf().getlProp().getProperty("error.startTomcat")));
 		}
@@ -471,6 +471,13 @@ public class Main {
 			boolean end = false;
 			Status akt;
 			Status next;
+
+			if(actStatus==1 && this.dbconf.isDatabase())
+			{
+				this.getStatusService().getNext(this.getStatusService().getNext(this.getStatusService().getNext(this.getStatusService().getAkt()))).setActive(true);
+				this.getStatusService().getAkt().setActive(false);
+			}
+			else
 			while (iterator.hasNext() && !end) {
 				akt = (Status) iterator.next();
 				if (akt.isActive()) {
@@ -483,6 +490,9 @@ public class Main {
 			}
 			getStatusbar().removeAll();
 			getStatusbar().initBar();
+			if(actStatus==1 && this.dbconf.isDatabase())
+				actStatus=4;
+				else
 			actStatus++;
 			if (actStatus == 0) {
 				mainFrame.getbPrevious().setEnabled(false);
@@ -543,6 +553,14 @@ public class Main {
 			boolean end = false;
 			Status akt = null;
 			Status prev = null;
+			
+			// Ist bereits eine DB vorhanden werden die Schritte 2 und 3 uebersprugnen
+			if(actStatus==4 && this.dbconf.isDatabase())
+			{
+			this.getStatusService().getStatusList().get(4).setActive(false);
+			this.getStatusService().getStatusList().get(1).setActive(true);
+			}
+			else
 			while (iterator.hasNext() && !end) {
 				akt = (Status) iterator.next();
 				if (akt.isActive()) {
@@ -554,7 +572,12 @@ public class Main {
 			}
 			getStatusbar().removeAll();
 			getStatusbar().initBar();
+			
+			if(actStatus==4 && this.dbconf.isDatabase())
+				actStatus=1;
+			else
 			actStatus--;
+			
 			if (actStatus == 0) {
 				mainFrame.setMainPanel(ws1);
 				mainFrame.getbPrevious().setEnabled(false);
@@ -566,7 +589,7 @@ public class Main {
 			if (actStatus == 3)
 				mainFrame.setMainPanel(ws4);
 			if (actStatus == 4)
-				mainFrame.setMainPanel(ws5);
+					mainFrame.setMainPanel(ws5);
 			if (actStatus == 5)
 				mainFrame.setMainPanel(ws6);
 			if (actStatus == 6)

@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import org.randi2.installer.model.enumerations.StatusEnum;
 import org.randi2.installer.view.MainPanel;
 
 import org.randi2.installer.controller.Main;
@@ -87,17 +88,17 @@ public class WizardStep17 extends MainPanel {
 		insertB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				main.getStatusService().getAkt().setStatus(1);
+				main.getStatusService().getAkt().setStatus(StatusEnum.SUCCESS);
 				if (!main.getConf().setMail_from(mailFromT.getText()))
-					main.getStatusService().getAkt().setStatus(-1);
+					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 
 				if (!main.getConf().setInfo_server(infoServerT.getText()))
-					main.getStatusService().getAkt().setStatus(-1);
+					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 
 				if (!main.getConf().setInfo_hoster(infoHosterT.getText()))
-					main.getStatusService().getAkt().setStatus(-1);
+					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 
-				if (main.getStatusService().getAkt().getStatus() != -1)
+				if (!main.getStatusService().getAkt().getStatus().equals(StatusEnum.FAIL))
 					main.editInfoData();
 				else
 					main.getMainFrame().getStatusText().setText(

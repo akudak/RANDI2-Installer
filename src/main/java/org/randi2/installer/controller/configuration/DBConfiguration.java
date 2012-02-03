@@ -15,6 +15,7 @@ public class DBConfiguration {
 	private String passwordCon;
 	private String initDBPath;
 	private boolean database;
+	private String name;
 	
 	
 	/**
@@ -165,5 +166,17 @@ public class DBConfiguration {
 	 */
 	public void setDatabase(boolean database) {
 		this.database = database;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public boolean setName(String name) {
+		if (name != null && !name.isEmpty()) {
+			this.name = name;
+			return true;
+		} else
+			return false;
 	}
 }

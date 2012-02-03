@@ -7,6 +7,8 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Properties;
 
+import org.randi2.installer.model.enumerations.StatusEnum;
+
 /**
  * 
  * @author andreas Oeffnet eine URL, damit der Benutzer die noetige Datei runter
@@ -46,11 +48,11 @@ public class URLService {
 			try {
 				Desktop.getDesktop().browse(url.toURI());
 			} catch (IOException e) {
-				main.getStatusService().getAkt().setStatus(-1);
+				main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 	main.getMainFrame().getStatusText().setText(main.getConf().getlProp()
 			.getProperty("error.url"));
 			} catch (URISyntaxException e) {
-				main.getStatusService().getAkt().setStatus(-1);
+				main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 				main.getMainFrame().getStatusText().setText(main.getConf().getlProp()
 						.getProperty("error.url"));
 			}

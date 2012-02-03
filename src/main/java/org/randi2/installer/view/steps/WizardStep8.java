@@ -8,6 +8,7 @@ import javax.swing.JTextField;
 
 import org.randi2.installer.view.MainPanel;
 import org.randi2.installer.io.Chooser;
+import org.randi2.installer.model.enumerations.StatusEnum;
 import org.randi2.installer.controller.Main;
 
 public class WizardStep8 extends MainPanel {
@@ -63,10 +64,10 @@ public class WizardStep8 extends MainPanel {
 
 		downloadPfadB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				main.getStatusService().getAkt().setStatus(1);
+				main.getStatusService().getAkt().setStatus(StatusEnum.SUCCESS);
 				Chooser fileOpen = new Chooser(main);
 				if (!main.getMailConf().setJarPath(fileOpen.getFile("jar"))) {
-					main.getStatusService().getAkt().setStatus(-1);
+					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 					main.getMainFrame().getStatusText().setText(
 									(main.getConf().getlProp()
 											.getProperty("error.jar")));

@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import org.randi2.installer.model.enumerations.StatusEnum;
 import org.randi2.installer.view.MainPanel;
 import org.randi2.installer.controller.Main;
 
@@ -99,13 +100,13 @@ public class WizardStep10 extends MainPanel {
 		this.add(mandatoryL);
 		insertB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				main.getStatusService().getAkt().setStatus(1);
+				main.getStatusService().getAkt().setStatus(StatusEnum.SUCCESS);
 
 				if (!main.getMailConf().setServer(serverMailT.getText()))
-					main.getStatusService().getAkt().setStatus(-1);
+					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 
 				if (!main.getMailConf().setUsername(usernameT.getText()))
-					main.getStatusService().getAkt().setStatus(1);
+					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 
 				String p1 = "";
 				String p2 = "";
@@ -116,9 +117,9 @@ public class WizardStep10 extends MainPanel {
 					p2 = p2 + passwordT2.getPassword()[k];
 
 				if (!main.getMailConf().setPassword(p1, p2))
-					main.getStatusService().getAkt().setStatus(-1);
+					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 
-				if (main.getStatusService().getAkt().getStatus() != -1)
+				if (!main.getStatusService().getAkt().getStatus().equals(StatusEnum.FAIL))
 					main.confContext();
 				else
 					main.getMainFrame().getStatusText().setText(

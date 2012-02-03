@@ -1,8 +1,9 @@
 package org.randi2.installer.controller.configuration;
 
+import java.util.Locale;
 import java.util.Properties;
 import org.randi2.installer.controller.Main;
-import org.randi2.installer.model.enumerations.*;
+
 
 public class Configuration {
 
@@ -11,7 +12,7 @@ public class Configuration {
 	private String website;
 	private String serverPath;
 	private Properties lProp;
-	private Language language;
+	private Locale language;
 	private String randi2Path;
 	private String jdbcPath;
 	private String jafPath;
@@ -111,8 +112,8 @@ public class Configuration {
 	 * Lade Sprach Properties-Datei
 	 */
 
-	public void loadLanguageProperties(Language language, Main main) {
-		if (Language.GER.equals(language)) {
+	public void loadLanguageProperties(Locale language, Main main) {
+		if (Locale.GERMANY.equals(language)) {
 		lProp=	main.getProp().loadProperties(ClassLoader
 					.getSystemResource("labels_de_DE.properties"));
 			this.language = language;
@@ -126,14 +127,14 @@ public class Configuration {
 	/**
 	 * @return Sprache
 	 */
-	public Language getLanguage() {
+	public Locale getLanguage() {
 		return language;
 	}
 
 	/**
 	 * @param Setzte Sprache
 	 */
-	public void setLanguage(Language language) {
+	public void setLanguage(Locale language) {
 		this.language = language;
 	}
 

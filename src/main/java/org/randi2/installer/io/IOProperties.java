@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Properties;
 import org.randi2.installer.controller.Main;
+import org.randi2.installer.model.enumerations.StatusEnum;
 
 /**
  * 
@@ -29,7 +30,7 @@ public class IOProperties {
 					main.getConf().getServerPath()
 							+ "webapps/RANDI2/WEB-INF/classes/META-INF/configuration.properties"));
 		} catch (IOException e) {
-			main.getStatusService().getAkt().setStatus(-1);
+			main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 		}
 		prop.setProperty("mail.from", main.getConf().getMail_from());
 		prop.setProperty("info.server", main.getConf().getInfo_server());
@@ -41,7 +42,7 @@ public class IOProperties {
 									+ "webapps/RANDI2/WEB-INF/classes/META-INF/configuration.properties"),
 					null);
 		} catch (IOException e) {
-			main.getStatusService().getAkt().setStatus(-1);
+			main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 			main.getMainFrame().getStatusText().setText(main.getConf().getlProp()
 					.getProperty("error.configuration"));
 		}
@@ -57,7 +58,7 @@ public class IOProperties {
 					main.getConf().getServerPath()
 							+ "webapps/RANDI2/WEB-INF/classes/de/randi2/jsf/i18n/labels_de_DE.properties"));
 		} catch (IOException e) {
-			main.getStatusService().getAkt().setStatus(-1);
+			main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 		}
 		prop.setProperty("pages.registration.terms", main.getConf().getDisclaimerGER());
 		prop.setProperty("pages.aboutPopup.hostingInst",
@@ -69,7 +70,7 @@ public class IOProperties {
 									+ "webapps/RANDI2/WEB-INF/classes/de/randi2/jsf/i18n/labels_de_DE.properties"),
 					null);
 		} catch (IOException e) {
-			main.getStatusService().getAkt().setStatus(-1);
+			main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 			main.getMainFrame().getStatusText().setText(main.getConf().getlProp()
 					.getProperty("error.language"));
 		}
@@ -85,7 +86,7 @@ public class IOProperties {
 					main.getConf().getServerPath()
 							+ "webapps/RANDI2/WEB-INF/classes/de/randi2/jsf/i18n/labels_en_US.properties"));
 		} catch (IOException e) {
-			main.getStatusService().getAkt().setStatus(-1);
+			main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 		}
 		prop.setProperty("pages.registration.terms", main.getConf().getDisclaimerUS());
 		prop.setProperty("pages.aboutPopup.hostingInst",
@@ -97,7 +98,7 @@ public class IOProperties {
 									+ "webapps/RANDI2/WEB-INF/classes/de/randi2/jsf/i18n/labels_en_US.properties"),
 					null);
 		} catch (IOException e) {
-			main.getStatusService().getAkt().setStatus(-1);
+			main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 			main.getMainFrame().getStatusText().setText(main.getConf().getlProp()
 					.getProperty("error.language"));
 		}
@@ -112,7 +113,7 @@ public class IOProperties {
 			prop.load(new FileInputStream(main.getConf().getServerPath()
 					+ "webapps/RANDI2/RANDI2.properties"));
 		} catch (IOException e) {
-			main.getStatusService().getAkt().setStatus(-1);
+			main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 		}
 		prop.setProperty("website2", main.getConf().getWebsite());
 		if(main.getCenter().isSelfRegistration())
@@ -123,7 +124,7 @@ public class IOProperties {
 			prop.store(new FileOutputStream(main.getConf().getServerPath()
 					+ "webapps/RANDI2/RANDI2.properties"), null);
 		} catch (IOException e) {
-			main.getStatusService().getAkt().setStatus(-1);
+			main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 			main.getMainFrame().getStatusText().setText(main.getConf().getlProp()
 					.getProperty("error.language"));
 		}
@@ -139,7 +140,7 @@ public class IOProperties {
 		try {
 			prop.load(new FileInputStream(pfad.getFile()));
 		} catch (IOException e) {
-			main.getStatusService().getAkt().setStatus(-1);
+			main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 			main.getMainFrame().getStatusText().setText(main.getConf().getlProp()
 					.getProperty("error.loadFile"));
 		}

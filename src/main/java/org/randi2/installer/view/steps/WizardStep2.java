@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+
+import org.randi2.installer.model.enumerations.StatusEnum;
 import org.randi2.installer.view.MainPanel;
 import org.randi2.installer.controller.Main;
 
@@ -15,8 +17,9 @@ public class WizardStep2 extends MainPanel {
 
 	private static final long serialVersionUID = 8467361081329740076L;
 	private JTextField adminT;
+	private JTextField serverT;
+	private JTextField nameT;
 	private JPasswordField passwordT1;
-	private JPasswordField passwordT2;
 	private JButton insertB;
 
 	public WizardStep2(final Main main) {
@@ -69,48 +72,62 @@ public class WizardStep2 extends MainPanel {
 
 		this.add(datenL);
 
+		JLabel serverL = new JLabel(main.getConf().getlProp()
+				.getProperty("label.serverDB"));
+		serverL.setSize(600, 20);
+		serverL.setLocation(10, 130);
+
+		this.add(serverL);
+
+		
+		JLabel nameL = new JLabel(main.getConf().getlProp()
+				.getProperty("label.nameDB"));
+		nameL.setSize(200, 20);
+		nameL.setLocation(10, 170);
+
+		this.add(nameL);
+		
 		JLabel adminL = new JLabel(main.getConf().getlProp()
 				.getProperty("label.username"));
 		adminL.setSize(200, 20);
-		adminL.setLocation(10, 130);
+		adminL.setLocation(10, 210);
 
 		this.add(adminL);
 
 		JLabel passwordL1 = new JLabel(main.getConf().getlProp()
-				.getProperty("label.passwordCon"));
+				.getProperty("label.password"));
 		passwordL1.setSize(200, 20);
-		passwordL1.setLocation(10, 170);
+		passwordL1.setLocation(10, 250);
 
 		this.add(passwordL1);
 
-		JLabel passwordL2 = new JLabel(main.getConf().getlProp()
-				.getProperty("label.repeatCon"));
-		passwordL2.setSize(200, 20);
-		passwordL2.setLocation(10, 210);
+		serverT = new JTextField("127.0.0.1");
+		serverT.setSize(200, 20);
+		serverT.setLocation(200, 130);
+		serverT.setEnabled(false);
+		this.add(serverT);
 
-		this.add(passwordL2);
+		nameT = new JTextField("randi2DB");
+		nameT.setSize(200, 20);
+		nameT.setLocation(200, 170);
+		nameT.setEnabled(false);
+		this.add(nameT);
 
-		adminT = new JTextField();
+		adminT = new JTextField("randi2");
 		adminT.setSize(200, 20);
-		adminT.setLocation(200, 130);
+		adminT.setLocation(200, 210);
 		adminT.setEnabled(false);
 		this.add(adminT);
-
-		passwordT1 = new JPasswordField();
+		
+		passwordT1 = new JPasswordField("www");
 		passwordT1.setSize(200, 20);
-		passwordT1.setLocation(200, 170);
+		passwordT1.setLocation(200, 250);
 		passwordT1.setEnabled(false);
 		this.add(passwordT1);
 
-		passwordT2 = new JPasswordField();
-		passwordT2.setSize(200, 20);
-		passwordT2.setLocation(200, 210);
-		passwordT2.setEnabled(false);
-		this.add(passwordT2);
-
 		insertB = new JButton(main.getConf().getlProp()
 				.getProperty("button.save"));
-		insertB.setLocation(315, 250);
+		insertB.setLocation(315, 290);
 		insertB.setSize(80, 20);
 		insertB.setEnabled(false);
 		this.add(insertB);
@@ -118,7 +135,7 @@ public class WizardStep2 extends MainPanel {
 		JLabel mandatoryL = new JLabel(main.getConf().getlProp()
 				.getProperty("label.mandatory"));
 		mandatoryL.setSize(150, 20);
-		mandatoryL.setLocation(180, 250);
+		mandatoryL.setLocation(180, 290);
 
 		this.add(mandatoryL);
 		
@@ -128,10 +145,12 @@ public class WizardStep2 extends MainPanel {
 				main.getDbconf().setPostgre(false);
 				main.getDbconf().setDatabase(true);
 				adminT.setEnabled(true);
+				nameT.setEnabled(true);
+				serverT.setEnabled(true);
 				passwordT1.setEnabled(true);
-				passwordT2.setEnabled(true);
 				insertB.setEnabled(true);
-				main.getStatusService().getAkt().setStatus(0);
+				
+				main.getStatusService().getAkt().setStatus(StatusEnum.UNMACHINED);
 			}
 		});
 
@@ -142,9 +161,11 @@ public class WizardStep2 extends MainPanel {
 				main.getDbconf().setDatabase(true);
 				adminT.setEnabled(true);
 				passwordT1.setEnabled(true);
-				passwordT2.setEnabled(true);
+				nameT.setEnabled(true);
+				serverT.setEnabled(true);
 				insertB.setEnabled(true);
-				main.getStatusService().getAkt().setStatus(0);
+
+				main.getStatusService().getAkt().setStatus(StatusEnum.UNMACHINED);
 			}
 		});
 
@@ -154,35 +175,44 @@ public class WizardStep2 extends MainPanel {
 				adminT.setEnabled(false);
 				main.getDbconf().setDatabase(false);
 				passwordT1.setEnabled(false);
-				passwordT2.setEnabled(false);
+				nameT.setEnabled(false);
+				serverT.setEnabled(false);
 				main.getDbconf().setPostgre(false);
 				main.getDbconf().setUsernameCon("root");
 				main.getDbconf().setPasswordCon("", "");
 				insertB.setEnabled(false);
-				main.getStatusService().getAkt().setStatus(1);
+
+				main.getStatusService().getAkt().setStatus(StatusEnum.SUCCESS);
 			}
 		});
 
 		insertB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				main.getStatusService().getAkt().setStatus(1);
+				main.getStatusService().getAkt().setStatus(StatusEnum.SUCCESS);
 
 				String p1 = "";
-				String p2 = "";
+
 
 				for (int i = 0; i < passwordT1.getPassword().length; i++)
 					p1 = p1 + passwordT1.getPassword()[i];
 
-				for (int k = 0; k < passwordT2.getPassword().length; k++)
-					p2 = p2 + passwordT2.getPassword()[k];
-
 				if (main.getDbconf().isDatabase()) {
-					if (!main.getDbconf().setPasswordCon(p1, p2))
-						main.getStatusService().getAkt().setStatus(-1);
+					if (!main.getDbconf().setPasswordCon(p1, p1))
+						main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 
 					if (!main.getDbconf().setUsernameCon(adminT.getText()))
 					{
-						main.getStatusService().getAkt().setStatus(-1);
+						main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
+						main.getMainFrame().getStatusText().setText(main.getConf().getlProp().getProperty("error.insert"));
+					}
+					if (!main.getDbconf().setName(nameT.getText()))
+					{
+						main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
+						main.getMainFrame().getStatusText().setText(main.getConf().getlProp().getProperty("error.insert"));
+					}
+					if (!main.getDbconf().setServer(serverT.getText()))
+					{
+						main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 						main.getMainFrame().getStatusText().setText(main.getConf().getlProp().getProperty("error.insert"));
 					}
 				}

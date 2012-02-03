@@ -5,6 +5,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import org.randi2.installer.controller.StatusService;
+import org.randi2.installer.model.enumerations.StatusEnum;
 
 /**
  * 
@@ -54,20 +55,21 @@ public class Statusbar extends JPanel {
 	public void initBar() {
 		JLabel[] l = new JLabel[statusService.getStatusList().size()];
 		for (int i = 0; i < statusService.getStatusList().size() - 1; i++) {
+		
 			if (statusService.getStatusList().get(i).isActive()) {
-				if (statusService.getStatusList().get(i).getStatus() == 1)
+				if (statusService.getStatusList().get(i).getStatus().equals(StatusEnum.SUCCESS))
 					l[i] = new JLabel(iconGreenG);
-				if (statusService.getStatusList().get(i).getStatus() == -1)
+				if (statusService.getStatusList().get(i).getStatus().equals(StatusEnum.FAIL))
 					l[i] = new JLabel(iconRedG);
-				if (statusService.getStatusList().get(i).getStatus() == 0)
+				if (statusService.getStatusList().get(i).getStatus().equals(StatusEnum.UNMACHINED))
 					l[i] = new JLabel(iconYellowG);
 				l[i].setSize(40, 40);
 			} else {
-				if (statusService.getStatusList().get(i).getStatus() == 1)
+				if (statusService.getStatusList().get(i).getStatus().equals(StatusEnum.SUCCESS))
 					l[i] = new JLabel(iconGreen);
-				if (statusService.getStatusList().get(i).getStatus() == -1)
+				if (statusService.getStatusList().get(i).getStatus().equals(StatusEnum.FAIL))
 					l[i] = new JLabel(iconRed);
-				if (statusService.getStatusList().get(i).getStatus() == 0)
+				if (statusService.getStatusList().get(i).getStatus().equals(StatusEnum.UNMACHINED))
 					l[i] = new JLabel(iconYellow);
 				l[i].setSize(40, 40);
 			}

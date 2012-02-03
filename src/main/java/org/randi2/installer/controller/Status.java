@@ -1,5 +1,7 @@
 package org.randi2.installer.controller;
 
+import org.randi2.installer.model.enumerations.StatusEnum;
+
 public class Status {
 
 	/**
@@ -7,9 +9,8 @@ public class Status {
 	 * der Installation hat einen Status
 	 */
 
-	private int status;
+	private StatusEnum status;
 	private boolean active;
-	private boolean visible;
 	private Main main;
 
 	public Status(Main main) {
@@ -17,32 +18,17 @@ public class Status {
 	}
 
 	/**
-	 * @return Gibt an, ob ein Status in der Statusbar angezeigt wird
-	 */
-	public boolean isVisible() {
-		return visible;
-	}
-
-	/**
-	 * @param Setzt
-	 *            , ob ein Status in der Statusbar angezeigt wird
-	 */
-	public void setVisible(boolean visible) {
-		this.visible = visible;
-	}
-
-	/**
 	 * 
 	 * @param status
 	 *            Setzte den Status
 	 */
-	public void setStatus(int status) {
+	public void setStatus(StatusEnum status) {
 		if (status != this.status) {
 			this.status = status;
 			main.getStatusbar().removeAll();
 			main.getStatusbar().initBar();
 			main.getMainFrame().remove(main.getMainFrame().getStatusText());
-			if (status == 1)
+			if (status.equals(StatusEnum.SUCCESS))
 				main.getMainFrame()
 						.getStatusText()
 						.setText(
@@ -52,7 +38,7 @@ public class Status {
 		}
 	}
 
-	public int getStatus() {
+	public StatusEnum getStatus() {
 		return this.status;
 	}
 

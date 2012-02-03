@@ -14,6 +14,7 @@ import java.sql.Statement;
 
 import org.randi2.installer.controller.Main;
 import org.randi2.installer.controller.configuration.DBConfiguration;
+import org.randi2.installer.model.enumerations.StatusEnum;
 
 /**
  * 
@@ -46,23 +47,24 @@ public class DBService {
 					.setText(
 							(main.getConf().getlProp()
 									.getProperty("error.driverLoad")));
-			main.getStatusService().getAkt().setStatus(-1);
+			main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 		}
+	
 		try {
 			if (main.getDbconf().isMySQL())
-				url = "jdbc:mysql://" + main.getDbconf().getServer() + ":3306/randi2DB";
+				url = "jdbc:mysql://" + main.getDbconf().getServer() + ":3306/"+main.getDbconf().getName();
 			else
-				url = "jdbc:postgresql://" + main.getDbconf().getServer()+ ":5432/postgres";
-			con = DriverManager.getConnection(url, main.getDbconf().getUsernameCon(),
-					main.getDbconf().getPasswordCon());
+				url = "jdbc:postgresql://" + main.getDbconf().getServer()+ ":5432/"+main.getDbconf().getName();
+			con = DriverManager.getConnection(url, main.getDbconf().getUsernameCon(),main.getDbconf().getPasswordCon());
 		} catch (SQLException e) {
 			main.getMainFrame()
 					.getStatusText()
 					.setText(
 							(main.getConf().getlProp()
 									.getProperty("error.DBConnection")));
-			main.getStatusService().getAkt().setStatus(-1);
-
+			main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
+			System.out.println(e.getMessage());
+	
 		}
 		return con;
 	}
@@ -88,7 +90,7 @@ public class DBService {
 	 * 
 	 *  Fuerht das Init Skript fuer MySQL aus.
 	 */
-	public boolean executeMySQLDBScript(String aSQLScriptFilePath)
+	public boolean executeSQLDBScript(String aSQLScriptFilePath)
 			throws IOException, SQLException {
 		
 			boolean isScriptExecuted = false;
@@ -114,12 +116,13 @@ public class DBService {
 							}
 						}
 					} catch (SQLException error) {
-						main.getStatusService().getAkt().setStatus(-1);
+						main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 						main.getMainFrame()
 								.getStatusText()
 								.setText(
 										(main.getConf().getlProp()
 												.getProperty("error.SQL")));
+						System.out.println(error);
 					}
 				}
 				in.close();
@@ -130,7 +133,8 @@ public class DBService {
 						.setText(
 								(main.getConf().getlProp()
 										.getProperty("error.SQL")));
-				main.getStatusService().getAkt().setStatus(-1);
+				main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
+				
 			}
 			return isScriptExecuted;
 		} 
@@ -151,7 +155,7 @@ public class DBService {
 			else
 				Class.forName("org.postgresql.Driver");
 		} catch (ClassNotFoundException e) {
-			main.getStatusService().getAkt().setStatus(-1);
+			main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 			main.getMainFrame()
 					.getStatusText()
 					.setText(
@@ -160,9 +164,9 @@ public class DBService {
 		};
 		try {
 			if (main.getDbconf().isMySQL())
-				url = "jdbc:mysql://" + main.getDbconf().getServer() + "/";
+				url = "jdbc:mysql://" + main.getDbconf().getServer() + ":3306/";
 			else
-				url = "jdbc:postgresql://" + main.getDbconf().getServer() + ":5432/postgres";
+				url = "jdbc:postgresql://" + main.getDbconf().getServer() + ":5432/";
 		
 	con = DriverManager.getConnection(url, main.getDbconf().getUsernameCon(),main.getDbconf().getPasswordCon());
 
@@ -172,8 +176,7 @@ public class DBService {
 					.setText(
 							(main.getConf().getlProp()
 									.getProperty("error.DBConnection")));
-			main.getStatusService().getAkt().setStatus(-1);
-
+			main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 		}
 		return con;
 		
@@ -186,40 +189,22 @@ public class DBService {
 	public void createDatabase(DBConfiguration dbconf) {
 		
 		// Datenbank randi2DB erstellen MySql
-		if (main.getDbconf().isMySQL())
-			{
+		
 			try {
 				Statement st = (Statement) getFirstConnection()
 						.createStatement();
-		st.executeUpdate("CREATE DATABASE randi2DB IF NOT EXISTS");
+		st.executeUpdate("CREATE DATABASE IF NOT EXISTS "+main.getDbconf().getName());
 			} catch (SQLException e) {
-				main.getStatusService().getAkt().setStatus(-1);
+				main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 				main.getMainFrame()
 						.getStatusText()
 						.setText(
 								(main.getConf().getlProp()
 										.getProperty("error.createDB")));
-			}
-		}
-		else
-		{
-			try {
-				Statement st = (Statement) getFirstConnection()
-						.createStatement();
-		st.executeUpdate("CREATE DATABASE randi2DB");
-			} catch (SQLException e) {
-				main.getStatusService().getAkt().setStatus(-1);
-				main.getMainFrame()
-						.getStatusText()
-						.setText(
-								(main.getConf().getlProp()
-										.getProperty("error.createDB")));
-			}
-		
-		
+			}	
 		}
 	
-	}
+	
 
 	/**
 	 * Erstellt einen DB Benutzer mit dem von Anwender angegebenen Daten
@@ -262,7 +247,7 @@ public class DBService {
 							+ dbconf.getUsername() + "'@'%'");
 				}
 			} catch (SQLException e) {
-				main.getStatusService().getAkt().setStatus(-1);
+				main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 				main.getMainFrame()
 						.getStatusText()
 						.setText(

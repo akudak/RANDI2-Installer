@@ -4,6 +4,7 @@ import java.awt.Color;
 import javax.swing.JPanel;
 import org.randi2.installer.controller.Main;
 import org.randi2.installer.controller.Status;
+import org.randi2.installer.model.enumerations.StatusEnum;
 
 /**
  * 
@@ -15,8 +16,6 @@ public class MainPanel extends JPanel {
 	private static final long serialVersionUID = -2859437001178109758L;
 	private Status status;
 	public Main main;
-
-	private static final int OPEN = 0;
 
 	public MainPanel(Main main) {
 		super();
@@ -32,7 +31,7 @@ public class MainPanel extends JPanel {
 		this.setLocation(100, 200);
 		this.setBackground(Color.WHITE);
 		status = new Status(main);
-		status.setStatus(OPEN);
+		status.setStatus(StatusEnum.UNMACHINED);
 	}
 
 	/**

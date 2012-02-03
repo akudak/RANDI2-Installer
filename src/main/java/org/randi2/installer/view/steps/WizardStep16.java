@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import org.randi2.installer.view.MainPanel;
 import org.randi2.installer.io.Chooser;
+import org.randi2.installer.model.enumerations.StatusEnum;
 import org.randi2.installer.controller.Main;
 
 public class WizardStep16 extends MainPanel {
@@ -64,12 +65,12 @@ public class WizardStep16 extends MainPanel {
 
 		logoPathB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				main.getStatusService().getAkt().setStatus(1);
+				main.getStatusService().getAkt().setStatus(StatusEnum.SUCCESS);
 				Chooser fileOpen = new Chooser(main);
 				if (main.getConf().setLogoPath(fileOpen.getFile("")))
 					downloadPathT.setText(main.getConf().getLogoPath());
 				else {
-					main.getStatusService().getAkt().setStatus(-1);
+					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 					downloadPathT.setText("");
 					main.getMainFrame().getStatusText().setText(
 							(main.getConf().getlProp()
@@ -96,11 +97,11 @@ public class WizardStep16 extends MainPanel {
 		insertB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				main.getStatusService().getAkt().setStatus(1);
+				main.getStatusService().getAkt().setStatus(StatusEnum.SUCCESS);
 
 				if (!main.getConf().setWebsite(contactWebsiteT.getText()))
-					main.getStatusService().getAkt().setStatus(-1);
-				if (main.getStatusService().getAkt().getStatus() != -1) {
+					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
+				if (!main.getStatusService().getAkt().getStatus().equals(StatusEnum.FAIL)) {
 					main.copyLogo();
 					main.editWebsite();
 				} else

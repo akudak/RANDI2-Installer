@@ -8,6 +8,7 @@ import javax.swing.JTextField;
 
 import org.randi2.installer.view.MainPanel;
 import org.randi2.installer.io.Chooser;
+import org.randi2.installer.model.enumerations.StatusEnum;
 import org.randi2.installer.controller.Main;
 
 public class WizardStep1 extends MainPanel {
@@ -71,17 +72,17 @@ public class WizardStep1 extends MainPanel {
 
 		downloadPfadB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				main.getStatusService().getAkt().setStatus(1);
+				main.getStatusService().getAkt().setStatus(StatusEnum.SUCCESS);
 				Chooser fileOpen = new Chooser(main);
 
 				if (main.getConf().setServerPath(
 						fileOpen.getDirectorie(main.getConf(), "")))
 					downloadPathT.setText(main.getConf().getServerPath());
 				else
-					main.getStatusService().getAkt().setStatus(-1);
+					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 
-				if (main.getStatusService().getAkt().getStatus() != -1)
-					main.getStatusService().getAkt().setStatus(1);
+				if (!main.getStatusService().getAkt().getStatus().equals(StatusEnum.FAIL))
+					main.getStatusService().getAkt().setStatus(StatusEnum.SUCCESS);
 				else
 					main.getMainFrame().getStatusText().setText(
 							(main.getConf().getlProp()
