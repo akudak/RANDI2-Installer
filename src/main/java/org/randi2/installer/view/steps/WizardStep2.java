@@ -79,14 +79,13 @@ public class WizardStep2 extends MainPanel {
 
 		this.add(serverL);
 
-		
 		JLabel nameL = new JLabel(main.getConf().getlProp()
 				.getProperty("label.nameDB"));
 		nameL.setSize(200, 20);
 		nameL.setLocation(10, 170);
 
 		this.add(nameL);
-		
+
 		JLabel adminL = new JLabel(main.getConf().getlProp()
 				.getProperty("label.username"));
 		adminL.setSize(200, 20);
@@ -118,7 +117,7 @@ public class WizardStep2 extends MainPanel {
 		adminT.setLocation(200, 210);
 		adminT.setEnabled(false);
 		this.add(adminT);
-		
+
 		passwordT1 = new JPasswordField("www");
 		passwordT1.setSize(200, 20);
 		passwordT1.setLocation(200, 250);
@@ -138,7 +137,7 @@ public class WizardStep2 extends MainPanel {
 		mandatoryL.setLocation(180, 290);
 
 		this.add(mandatoryL);
-		
+
 		cButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				main.getDbconf().setMySQL(true);
@@ -149,8 +148,9 @@ public class WizardStep2 extends MainPanel {
 				serverT.setEnabled(true);
 				passwordT1.setEnabled(true);
 				insertB.setEnabled(true);
-				
-				main.getStatusService().getAkt().setStatus(StatusEnum.UNMACHINED);
+
+				main.getStatusService().getAkt()
+						.setStatus(StatusEnum.UNMACHINED);
 			}
 		});
 
@@ -165,7 +165,8 @@ public class WizardStep2 extends MainPanel {
 				serverT.setEnabled(true);
 				insertB.setEnabled(true);
 
-				main.getStatusService().getAkt().setStatus(StatusEnum.UNMACHINED);
+				main.getStatusService().getAkt()
+						.setStatus(StatusEnum.UNMACHINED);
 			}
 		});
 
@@ -192,28 +193,40 @@ public class WizardStep2 extends MainPanel {
 
 				String p1 = "";
 
-
 				for (int i = 0; i < passwordT1.getPassword().length; i++)
 					p1 = p1 + passwordT1.getPassword()[i];
 
 				if (main.getDbconf().isDatabase()) {
 					if (!main.getDbconf().setPasswordCon(p1, p1))
-						main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
+						main.getStatusService().getAkt()
+								.setStatus(StatusEnum.FAIL);
 
-					if (!main.getDbconf().setUsernameCon(adminT.getText()))
-					{
-						main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
-						main.getMainFrame().getStatusText().setText(main.getConf().getlProp().getProperty("error.insert"));
+					if (!main.getDbconf().setUsernameCon(adminT.getText())) {
+						main.getStatusService().getAkt()
+								.setStatus(StatusEnum.FAIL);
+						main.getMainFrame()
+								.getStatusText()
+								.setText(
+										main.getConf().getlProp()
+												.getProperty("error.insert"));
 					}
-					if (!main.getDbconf().setName(nameT.getText()))
-					{
-						main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
-						main.getMainFrame().getStatusText().setText(main.getConf().getlProp().getProperty("error.insert"));
+					if (!main.getDbconf().setName(nameT.getText())) {
+						main.getStatusService().getAkt()
+								.setStatus(StatusEnum.FAIL);
+						main.getMainFrame()
+								.getStatusText()
+								.setText(
+										main.getConf().getlProp()
+												.getProperty("error.insert"));
 					}
-					if (!main.getDbconf().setServer(serverT.getText()))
-					{
-						main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
-						main.getMainFrame().getStatusText().setText(main.getConf().getlProp().getProperty("error.insert"));
+					if (!main.getDbconf().setServer(serverT.getText())) {
+						main.getStatusService().getAkt()
+								.setStatus(StatusEnum.FAIL);
+						main.getMainFrame()
+								.getStatusText()
+								.setText(
+										main.getConf().getlProp()
+												.getProperty("error.insert"));
 					}
 				}
 

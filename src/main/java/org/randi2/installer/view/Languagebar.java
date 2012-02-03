@@ -25,7 +25,8 @@ public class Languagebar extends JPanel {
 		initGUI();
 	}
 
-	/** Erstelle Objekte
+	/**
+	 * Erstelle Objekte
 	 * 
 	 */
 	private void initGUI() {
@@ -52,16 +53,14 @@ public class Languagebar extends JPanel {
 		this.setVisible(true);
 		bGer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				main.getConf().loadLanguageProperties(Locale.GERMANY,
-						main);
+				main.getConf().loadLanguageProperties(Locale.GERMANY, main);
 				main.repaint();
 			}
 		});
 
 		bUS.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				main.getConf().loadLanguageProperties(Locale.US,
-						main);
+				main.getConf().loadLanguageProperties(Locale.US, main);
 				main.repaint();
 			}
 		});

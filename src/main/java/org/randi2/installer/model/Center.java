@@ -1,6 +1,5 @@
 package org.randi2.installer.model;
 
-
 import org.springframework.security.providers.encoding.ShaPasswordEncoder;
 
 /**
@@ -27,7 +26,8 @@ public class Center {
 	}
 
 	/**
-	 * @param Setzet Land
+	 * @param Setzet
+	 *            Land
 	 */
 	public boolean setCountry(String country) {
 		if (country != null && !country.isEmpty()) {
@@ -45,7 +45,8 @@ public class Center {
 	}
 
 	/**
-	 * @param Setzet Stadt
+	 * @param Setzet
+	 *            Stadt
 	 */
 	public boolean setCity(String city) {
 		if (city != null && !city.isEmpty()) {
@@ -63,7 +64,8 @@ public class Center {
 	}
 
 	/**
-	 * @param Setzte Postleitzahl
+	 * @param Setzte
+	 *            Postleitzahl
 	 */
 	public boolean setPostcode(String postcode) {
 		if (postcode != null && !postcode.isEmpty()) {
@@ -81,7 +83,8 @@ public class Center {
 	}
 
 	/**
-	 * @param Setzte Strasse
+	 * @param Setzte
+	 *            Strasse
 	 */
 	public boolean setStreet(String street) {
 		if (street != null && !street.isEmpty()) {
@@ -99,7 +102,8 @@ public class Center {
 	}
 
 	/**
-	 * @param Setzte Ansprechpartner
+	 * @param Setzte
+	 *            Ansprechpartner
 	 */
 	public void setContactPerson(Person contactPerson) {
 		this.contactPerson = contactPerson;
@@ -113,7 +117,8 @@ public class Center {
 	}
 
 	/**
-	 * @param Setze Name
+	 * @param Setze
+	 *            Name
 	 * 
 	 */
 	public boolean setName(String name) {
@@ -123,7 +128,6 @@ public class Center {
 		} else
 			return false;
 	}
-
 
 	/**
 	 * Setzt das codierte Passwort
@@ -153,8 +157,8 @@ public class Center {
 	public boolean econde(String password1, String password2) {
 		if (password1.equals(password2)) {
 			ShaPasswordEncoder passwordEncoder = new ShaPasswordEncoder(256);
-			setPassword(passwordEncoder.encodePassword(password1,"DSJGEWI8SDG46ASGJAER436234ERDFZHS9346"
-					));
+			setPassword(passwordEncoder.encodePassword(password1,
+					"DSJGEWI8SDG46ASGJAER436234ERDFZHS9346"));
 			return true;
 		} else
 			return false;
@@ -169,15 +173,17 @@ public class Center {
 	}
 
 	/**
-	 * @param Setzte ID
+	 * @param Setzte
+	 *            ID
 	 */
 	public void setId(long id) {
 		this.id = id;
 	}
+
 	/**
 	 * 
-	 * @return
-	 *  Legt fest, ob sich neue Benutzer selbst in einem Zentrum anmelden duerfen
+	 * @return Legt fest, ob sich neue Benutzer selbst in einem Zentrum anmelden
+	 *         duerfen
 	 */
 	public boolean isSelfRegistration() {
 		return selfRegistration;
@@ -185,7 +191,8 @@ public class Center {
 
 	/**
 	 * 
-	 * @param Setzte selfRegistration
+	 * @param Setzte
+	 *            selfRegistration
 	 */
 	public void setSelfRegistration(boolean selfRegistration) {
 		this.selfRegistration = selfRegistration;

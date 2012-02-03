@@ -16,8 +16,7 @@ public class DBConfiguration {
 	private String initDBPath;
 	private boolean database;
 	private String name;
-	
-	
+
 	/**
 	 * @return Gibt an, ob MySQL verwendet wird
 	 */
@@ -26,7 +25,8 @@ public class DBConfiguration {
 	}
 
 	/**
-	 * @param Setzte die Verwendung von MySQL
+	 * @param Setzte
+	 *            die Verwendung von MySQL
 	 */
 	public void setMySQL(boolean mySQl) {
 		this.mySQl = mySQl;
@@ -40,7 +40,8 @@ public class DBConfiguration {
 	}
 
 	/**
-	 * @param Setzte Verwendung von PostgreSQL
+	 * @param Setzte
+	 *            Verwendung von PostgreSQL
 	 */
 	public void setPostgre(boolean postgre) {
 		this.postgre = postgre;
@@ -54,7 +55,8 @@ public class DBConfiguration {
 	}
 
 	/**
-	 * @param Setzte Datenbank Server IP
+	 * @param Setzte
+	 *            Datenbank Server IP
 	 */
 	public boolean setServer(String server) {
 		if (server != null && !server.isEmpty()) {
@@ -72,7 +74,8 @@ public class DBConfiguration {
 	}
 
 	/**
-	 * @param Setzet Datenbankbenutzer
+	 * @param Setzet
+	 *            Datenbankbenutzer
 	 */
 	public boolean setUsername(String username) {
 		if (username != null && !username.isEmpty()) {
@@ -90,7 +93,8 @@ public class DBConfiguration {
 	}
 
 	/**
-	 * @param Setzte DB Passwort
+	 * @param Setzte
+	 *            DB Passwort
 	 */
 	public boolean setPassword(String password1, String password2) {
 		if (password1.equals(password2)) {
@@ -102,6 +106,7 @@ public class DBConfiguration {
 
 	/**
 	 * Passwort fuer die Datenbank Verbidnung
+	 * 
 	 * @return
 	 */
 	public String getPasswordCon() {
@@ -118,6 +123,7 @@ public class DBConfiguration {
 
 	/**
 	 * Benutzername fuer die Datenbank Verbidnung
+	 * 
 	 * @return
 	 */
 	public boolean setUsernameCon(String usernameCon) {
@@ -127,12 +133,11 @@ public class DBConfiguration {
 		} else
 			return false;
 	}
-	
+
 	public String getUsernameCon() {
 		return usernameCon;
 	}
-	
-	
+
 	/**
 	 * @return Pfad zur sql Datei
 	 */
@@ -141,7 +146,8 @@ public class DBConfiguration {
 	}
 
 	/**
-	 * @param Setzte Pfad zur SQL Datei
+	 * @param Setzte
+	 *            Pfad zur SQL Datei
 	 */
 	public boolean setInitDBPath(String initDBPath) {
 		if (initDBPath != null && !initDBPath.equalsIgnoreCase("fail")
@@ -162,7 +168,8 @@ public class DBConfiguration {
 
 	/**
 	 * 
-	 * @param Setzt, ob bereits eine Datenbank verwendet wird
+	 * @param Setzt
+	 *            , ob bereits eine Datenbank verwendet wird
 	 */
 	public void setDatabase(boolean database) {
 		this.database = database;

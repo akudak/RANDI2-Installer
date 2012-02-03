@@ -29,7 +29,7 @@ public class WizardStep15 extends MainPanel {
 	}
 
 	public void initGUI() {
-	
+
 		JLabel titleL = new JLabel(main.getConf().getlProp()
 				.getProperty("label.phone"));
 		titleL.setLocation(10, 20);
@@ -51,51 +51,41 @@ public class WizardStep15 extends MainPanel {
 
 		this.add(surnameL);
 
-		
-
 		JLabel contactPersonL = new JLabel(main.getConf().getlProp()
 				.getProperty("label.pwAuthentification"));
 		contactPersonL.setLocation(10, 130);
 		contactPersonL.setSize(600, 20);
 
 		this.add(contactPersonL);
-		
+
 		JRadioButton aButton = new JRadioButton(main.getConf().getlProp()
 				.getProperty("check.yes"));
 		JRadioButton bButton = new JRadioButton(main.getConf().getlProp()
 				.getProperty("check.no"));
-		
 
 		ButtonGroup myButtonGroup2 = new ButtonGroup();
 		myButtonGroup2.add(aButton);
 		myButtonGroup2.add(bButton);
-	
 
 		aButton.setLocation(100, 160);
 		bButton.setLocation(210, 160);
-	
 
 		aButton.setSize(100, 20);
 		bButton.setSize(100, 20);
-	
 
 		aButton.setVisible(true);
 		bButton.setVisible(true);
-		
+
 		this.add(aButton);
 		this.add(bButton);
-	
 
 		this.setVisible(true);
 
-
-		
 		JLabel passwordL1 = new JLabel(main.getConf().getlProp()
 				.getProperty("label.password"));
 		passwordL1.setLocation(10, 200);
 		passwordL1.setSize(180, 20);
-		
-	
+
 		this.add(passwordL1);
 
 		JLabel passwordL2 = new JLabel(main.getConf().getlProp()
@@ -137,9 +127,9 @@ public class WizardStep15 extends MainPanel {
 
 		aButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			passwordT1.setEnabled(true);
-			passwordT2.setEnabled(true);
-			main.getCenter().setSelfRegistration(true);
+				passwordT1.setEnabled(true);
+				passwordT2.setEnabled(true);
+				main.getCenter().setSelfRegistration(true);
 			}
 		});
 
@@ -150,15 +140,14 @@ public class WizardStep15 extends MainPanel {
 				main.getCenter().setSelfRegistration(true);
 			}
 		});
-		
-		
+
 		JButton insertB = new JButton(main.getConf().getlProp()
 				.getProperty("button.save"));
 		insertB.setLocation(340, 280);
 		insertB.setSize(80, 20);
 
 		this.add(insertB);
-		
+
 		JLabel mandatoryL = new JLabel(main.getConf().getlProp()
 				.getProperty("label.mandatory"));
 		mandatoryL.setSize(150, 20);
@@ -192,12 +181,15 @@ public class WizardStep15 extends MainPanel {
 						.setPhone(phoneT.getText()))
 					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 
-				if (!main.getStatusService().getAkt().getStatus().equals(StatusEnum.FAIL))
+				if (!main.getStatusService().getAkt().getStatus()
+						.equals(StatusEnum.FAIL))
 					main.configCenterInfo();
 				else
-					main.getMainFrame().getStatusText().setText(
-							(main.getConf().getlProp()
-									.getProperty("error.insert")));
+					main.getMainFrame()
+							.getStatusText()
+							.setText(
+									(main.getConf().getlProp()
+											.getProperty("error.insert")));
 
 			}
 		});

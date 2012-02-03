@@ -48,14 +48,13 @@ public class WizardStep18 extends MainPanel {
 
 		this.add(insertB);
 
-		
 		JLabel mandatoryL = new JLabel(main.getConf().getlProp()
 				.getProperty("label.mandatory"));
 		mandatoryL.setSize(150, 20);
 		mandatoryL.setLocation(395, 200);
 
 		this.add(mandatoryL);
-		
+
 		insertB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -67,10 +66,13 @@ public class WizardStep18 extends MainPanel {
 				if (!main.getConf().setDisclaimerUS(disclaimerUST.getText()))
 					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 
-				if (main.getStatusService().getAkt().getStatus().equals(StatusEnum.FAIL))
-					main.getMainFrame().getStatusText().setText(
-							(main.getConf().getlProp()
-									.getProperty("error.insert")));
+				if (main.getStatusService().getAkt().getStatus()
+						.equals(StatusEnum.FAIL))
+					main.getMainFrame()
+							.getStatusText()
+							.setText(
+									(main.getConf().getlProp()
+											.getProperty("error.insert")));
 			}
 		});
 	}

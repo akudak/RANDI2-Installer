@@ -10,6 +10,11 @@ import org.junit.Test;
 
 public class AdministratorTest {
 
+	/**
+	 * 
+	 * Es muss eine MySQL Datengesartet sein, damit die Tests funktionieren.
+	 */
+
 	private static Administrator ADMIN;
 	private final static String USERNAME = "administrator@example.com";
 	private final static String USERNAME2 = "USERNAME2";

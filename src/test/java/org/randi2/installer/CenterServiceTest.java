@@ -19,14 +19,23 @@ import org.randi2.installer.controller.configuration.DBConfiguration;
 
 public class CenterServiceTest {
 
+	/**
+	 * 
+	 * Es muss eine MySQL Datengesartet sein, damit die Tests funktionieren.
+	 */
+
+	// Werte muessen der DB angepass werden
+	private static final String DBUSER = "root";
+	private static final String DBSERVER = "127.0.0.1";
+	private static final String DBPASSWORT = "";
+	private static final String DBNAME = "randi2DB";
+
 	private static Center CENTER;
 	private static CenterService CENTERSERVICE;
 	private static ContactPerson CONTACTPERSON;
 	private static DBService DBSERVICE;
 	private static DBConfiguration DBCONF;
 	private static Main MAIN;
-	private static final String ROOT = "root";
-	private static final String SERVER = "127.0.0.1";
 	private static final String TITLE = "Dr,";
 	private static final long ID1 = 1;
 	private static final long ID2 = 2;
@@ -42,19 +51,19 @@ public class CenterServiceTest {
 	private static final String COUNTRY = "Germany";
 	private static final String NAME = "Zentrum";
 	private static final String POSTCODE = "33100";
-	private static final String STREET = "Mittelberg";
+	private static final String STREET = "Kamp";
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws IOException, SQLException {
 		MAIN = new Main();
 		DBCONF = new DBConfiguration();
-		DBCONF.setServer(SERVER);
+		DBCONF.setServer(DBSERVER);
 		DBCONF.setMySQL(true);
 		DBCONF.setUsername(NAME);
 		DBCONF.setPassword(PASSWORD, PASSWORD);
-		DBCONF.setUsernameCon(ROOT);
-		DBCONF.setPasswordCon("", "");
-		DBCONF.setName("randi2DB");
+		DBCONF.setUsernameCon(DBUSER);
+		DBCONF.setPasswordCon(DBPASSWORT, DBPASSWORT);
+		DBCONF.setName(DBNAME);
 		MAIN.setDbconf(DBCONF);
 		DBSERVICE = new DBService(MAIN);
 		DBSERVICE.createDatabase(DBCONF);
@@ -84,7 +93,6 @@ public class CenterServiceTest {
 		CENTER.setStreet(STREET);
 		CENTER.setId(ID1);
 		CENTER.setContactPerson(CONTACTPERSON);
-
 	}
 
 	@Test

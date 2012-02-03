@@ -69,13 +69,16 @@ public class WizardStep5 extends MainPanel {
 				Chooser fileOpen = new Chooser(main);
 				if (!main.getConf().setRandi2Path(fileOpen.getFile("war"))) {
 					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
-					main.getMainFrame().getStatusText().setText(
+					main.getMainFrame()
+							.getStatusText()
+							.setText(
 									(main.getConf().getlProp()
 											.getProperty("error.war")));
 				}
 
 				downloadPathT.setText(main.getConf().getRandi2Path());
-				if (!main.getStatusService().getAkt().getStatus().equals(StatusEnum.FAIL))
+				if (!main.getStatusService().getAkt().getStatus()
+						.equals(StatusEnum.FAIL))
 					main.copyRandi2();
 
 			}

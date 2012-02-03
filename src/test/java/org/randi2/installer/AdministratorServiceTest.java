@@ -17,17 +17,19 @@ import org.randi2.installer.controller.configuration.DBConfiguration;
 
 public class AdministratorServiceTest {
 
+	// Werte muessen der DB angepass werden
+	private static final String DBUSER = "root";
+	private static final String DBSERVER = "127.0.0.1";
+	private static final String DBPASSWORT = "";
+	private static final String DBNAME = "randi2DB";
+
 	private static DBService DBSERVICE;
 	private static DBConfiguration DBCONF;
 	private static Main MAIN;
 	private static Administrator ADMIN;
-	private static final String NAME = "admin";
 	private static final String ROOT = "root";
-	private static final String PASSWORD = "www";
-	private static final String SERVER = "127.0.0.1";
 	private static AdministratorService ADMINSERVICE = new AdministratorService(
 			MAIN);
-
 	private static final String TITLE = "Dr,";
 	private static final String PRELOCALE = "de";
 	private static final String USERNAME = "lolaUser";
@@ -45,13 +47,13 @@ public class AdministratorServiceTest {
 	public static void setUpBeforeClass() throws IOException, SQLException {
 		MAIN = new Main();
 		DBCONF = new DBConfiguration();
-		DBCONF.setServer(SERVER);
+		DBCONF.setServer(DBSERVER);
 		DBCONF.setMySQL(true);
-		DBCONF.setUsername(NAME);
-		DBCONF.setPassword(PASSWORD, PASSWORD);
+		DBCONF.setUsername(DBUSER);
+		DBCONF.setPassword(DBPASSWORT, DBPASSWORT);
 		DBCONF.setUsernameCon(ROOT);
 		DBCONF.setPasswordCon("", "");
-		DBCONF.setName("randi2DB");
+		DBCONF.setName(DBNAME);
 		MAIN.setDbconf(DBCONF);
 		ADMINSERVICE = new AdministratorService(MAIN);
 		DBSERVICE = new DBService(MAIN);

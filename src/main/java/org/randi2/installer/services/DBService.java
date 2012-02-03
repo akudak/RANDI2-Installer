@@ -10,8 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
-
 import org.randi2.installer.controller.Main;
 import org.randi2.installer.controller.configuration.DBConfiguration;
 import org.randi2.installer.model.enumerations.StatusEnum;
@@ -31,8 +29,9 @@ public class DBService {
 		this.main = main;
 	}
 
-	/** 
+	/**
 	 * Gibt eine Connection zur Datenbank randi2DB zurueck
+	 * 
 	 * @return
 	 */
 	public Connection getConnection() {
@@ -49,13 +48,16 @@ public class DBService {
 									.getProperty("error.driverLoad")));
 			main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 		}
-	
+
 		try {
 			if (main.getDbconf().isMySQL())
-				url = "jdbc:mysql://" + main.getDbconf().getServer() + ":3306/"+main.getDbconf().getName();
+				url = "jdbc:mysql://" + main.getDbconf().getServer() + ":3306/"
+						+ main.getDbconf().getName();
 			else
-				url = "jdbc:postgresql://" + main.getDbconf().getServer()+ ":5432/"+main.getDbconf().getName();
-			con = DriverManager.getConnection(url, main.getDbconf().getUsernameCon(),main.getDbconf().getPasswordCon());
+				url = "jdbc:postgresql://" + main.getDbconf().getServer()
+						+ ":5432/" + main.getDbconf().getName();
+			con = DriverManager.getConnection(url, main.getDbconf()
+					.getUsernameCon(), main.getDbconf().getPasswordCon());
 		} catch (SQLException e) {
 			main.getMainFrame()
 					.getStatusText()
@@ -64,7 +66,7 @@ public class DBService {
 									.getProperty("error.DBConnection")));
 			main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 			System.out.println(e.getMessage());
-	
+
 		}
 		return con;
 	}
@@ -88,67 +90,64 @@ public class DBService {
 	 * @throws IOException
 	 * @throws SQLException
 	 * 
-	 *  Fuerht das Init Skript fuer MySQL aus.
+	 *             Fuerht das Init Skript fuer MySQL aus.
 	 */
 	public boolean executeSQLDBScript(String aSQLScriptFilePath)
 			throws IOException, SQLException {
-		
-			boolean isScriptExecuted = false;
-			Statement stmt = (Statement) getConnection().createStatement();
-			try {
-				BufferedReader in = new BufferedReader(new FileReader(
-						aSQLScriptFilePath));
-				String str;
-				String sql = "";
-				int lng = 0;
-				while ((str = in.readLine()) != null) {
-					try {
-						// loescht leere Zeilen und Kommentare. Sucht nach ; und
-						// fuegt Zeilen zusammen
-						if (!str.isEmpty() && !str.substring(0, 2).equals("--")) {
-							lng = str.length();
-							if (!str.substring(lng - 1, lng).equals(";"))
-								sql = sql + str;
-							else {
-								sql = sql + str;
-								stmt.executeUpdate(sql);
-								sql = "";
-							}
+
+		boolean isScriptExecuted = false;
+		Statement stmt = (Statement) getConnection().createStatement();
+		try {
+			BufferedReader in = new BufferedReader(new FileReader(
+					aSQLScriptFilePath));
+			String str;
+			String sql = "";
+			int lng = 0;
+			while ((str = in.readLine()) != null) {
+				try {
+					// loescht leere Zeilen und Kommentare. Sucht nach ; und
+					// fuegt Zeilen zusammen
+					if (!str.isEmpty() && !str.substring(0, 2).equals("--")) {
+						lng = str.length();
+						if (!str.substring(lng - 1, lng).equals(";"))
+							sql = sql + str;
+						else {
+							sql = sql + str;
+							stmt.executeUpdate(sql);
+							sql = "";
 						}
-					} catch (SQLException error) {
-						main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
-						main.getMainFrame()
-								.getStatusText()
-								.setText(
-										(main.getConf().getlProp()
-												.getProperty("error.SQL")));
-						System.out.println(error);
 					}
+				} catch (SQLException error) {
+					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
+					main.getMainFrame()
+							.getStatusText()
+							.setText(
+									(main.getConf().getlProp()
+											.getProperty("error.SQL")));
+					System.out.println(error);
 				}
-				in.close();
-				isScriptExecuted = true;
-			} catch (Exception e) {
-				main.getMainFrame()
-						.getStatusText()
-						.setText(
-								(main.getConf().getlProp()
-										.getProperty("error.SQL")));
-				main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
-				
 			}
-			return isScriptExecuted;
-		} 
+			in.close();
+			isScriptExecuted = true;
+		} catch (Exception e) {
+			main.getMainFrame()
+					.getStatusText()
+					.setText(
+							(main.getConf().getlProp().getProperty("error.SQL")));
+			main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 
-	
+		}
+		return isScriptExecuted;
+	}
 
-	
 	/**
 	 * Erstellt eine erste Connection ohne die DB randi2DB
+	 * 
 	 * @return
 	 */
 	public Connection getFirstConnection() {
 		String url;
-		//Erste Verbindung aufbauen
+		// Erste Verbindung aufbauen
 		try {
 			if (main.getDbconf().isMySQL())
 				Class.forName("com.mysql.jdbc.Driver");
@@ -161,14 +160,17 @@ public class DBService {
 					.setText(
 							(main.getConf().getlProp()
 									.getProperty("error.DBConnection")));
-		};
+		}
+		;
 		try {
 			if (main.getDbconf().isMySQL())
 				url = "jdbc:mysql://" + main.getDbconf().getServer() + ":3306/";
 			else
-				url = "jdbc:postgresql://" + main.getDbconf().getServer() + ":5432/";
-		
-	con = DriverManager.getConnection(url, main.getDbconf().getUsernameCon(),main.getDbconf().getPasswordCon());
+				url = "jdbc:postgresql://" + main.getDbconf().getServer()
+						+ ":5432/";
+
+			con = DriverManager.getConnection(url, main.getDbconf()
+					.getUsernameCon(), main.getDbconf().getPasswordCon());
 
 		} catch (SQLException e) {
 			main.getMainFrame()
@@ -179,32 +181,31 @@ public class DBService {
 			main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 		}
 		return con;
-		
+
 	}
 
 	/**
 	 * Erstellt die Datenbank randi2DB, wenn sie noch nicht vorhanden ist
+	 * 
 	 * @param dbconf
 	 */
 	public void createDatabase(DBConfiguration dbconf) {
-		
+
 		// Datenbank randi2DB erstellen MySql
-		
-			try {
-				Statement st = (Statement) getFirstConnection()
-						.createStatement();
-		st.executeUpdate("CREATE DATABASE IF NOT EXISTS "+main.getDbconf().getName());
-			} catch (SQLException e) {
-				main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
-				main.getMainFrame()
-						.getStatusText()
-						.setText(
-								(main.getConf().getlProp()
-										.getProperty("error.createDB")));
-			}	
+
+		try {
+			Statement st = (Statement) getFirstConnection().createStatement();
+			st.executeUpdate("CREATE DATABASE IF NOT EXISTS "
+					+ main.getDbconf().getName());
+		} catch (SQLException e) {
+			main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
+			main.getMainFrame()
+					.getStatusText()
+					.setText(
+							(main.getConf().getlProp()
+									.getProperty("error.createDB")));
 		}
-	
-	
+	}
 
 	/**
 	 * Erstellt einen DB Benutzer mit dem von Anwender angegebenen Daten

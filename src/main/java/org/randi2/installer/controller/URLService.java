@@ -49,12 +49,18 @@ public class URLService {
 				Desktop.getDesktop().browse(url.toURI());
 			} catch (IOException e) {
 				main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
-	main.getMainFrame().getStatusText().setText(main.getConf().getlProp()
-			.getProperty("error.url"));
+				main.getMainFrame()
+						.getStatusText()
+						.setText(
+								main.getConf().getlProp()
+										.getProperty("error.url"));
 			} catch (URISyntaxException e) {
 				main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
-				main.getMainFrame().getStatusText().setText(main.getConf().getlProp()
-						.getProperty("error.url"));
+				main.getMainFrame()
+						.getStatusText()
+						.setText(
+								main.getConf().getlProp()
+										.getProperty("error.url"));
 			}
 		}
 

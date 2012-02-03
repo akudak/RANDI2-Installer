@@ -40,7 +40,7 @@ public class WizardStep4 extends MainPanel {
 		serverDBL.setSize(200, 20);
 
 		this.add(serverDBL);
-		
+
 		JLabel nameDBL = new JLabel(main.getConf().getlProp()
 				.getProperty("label.nameDB"));
 		nameDBL.setLocation(10, 80);
@@ -74,7 +74,7 @@ public class WizardStep4 extends MainPanel {
 		serverDBT.setSize(200, 20);
 
 		this.add(serverDBT);
-		
+
 		nameDBT = new JTextField("randi2DB");
 		nameDBT.setLocation(220, 80);
 		nameDBT.setSize(200, 20);
@@ -112,7 +112,7 @@ public class WizardStep4 extends MainPanel {
 		mandatoryL.setLocation(200, 240);
 
 		this.add(mandatoryL);
-		
+
 		insertB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				main.getStatusService().getAkt().setStatus(StatusEnum.SUCCESS);
@@ -137,10 +137,13 @@ public class WizardStep4 extends MainPanel {
 				if (!main.getDbconf().setPassword(p1, p2))
 					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 
-				if (main.getStatusService().getAkt().getStatus().equals(StatusEnum.FAIL))
-					main.getMainFrame().getStatusText().setText(
-							(main.getConf().getlProp()
-									.getProperty("error.insert")));
+				if (main.getStatusService().getAkt().getStatus()
+						.equals(StatusEnum.FAIL))
+					main.getMainFrame()
+							.getStatusText()
+							.setText(
+									(main.getConf().getlProp()
+											.getProperty("error.insert")));
 				else
 					main.createDatabase();
 			}

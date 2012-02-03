@@ -4,7 +4,6 @@ import java.util.Locale;
 import java.util.Properties;
 import org.randi2.installer.controller.Main;
 
-
 public class Configuration {
 
 	private String info_server;
@@ -38,7 +37,8 @@ public class Configuration {
 	}
 
 	/**
-	 * @param Setzt Text zum Info Server
+	 * @param Setzt
+	 *            Text zum Info Server
 	 */
 	public boolean setInfo_server(String info_server) {
 		if (info_server != null && !info_server.isEmpty()) {
@@ -49,7 +49,8 @@ public class Configuration {
 	}
 
 	/**
-	 * @param Setzt Text zum Info Hoster
+	 * @param Setzt
+	 *            Text zum Info Hoster
 	 */
 	public boolean setInfo_hoster(String info_hoster) {
 		if (info_hoster != null && !info_hoster.isEmpty()) {
@@ -67,7 +68,8 @@ public class Configuration {
 	}
 
 	/**
-	 * @param Setzte Webseite
+	 * @param Setzte
+	 *            Webseite
 	 */
 	public boolean setWebsite(String website) {
 		if (website != null && !website.isEmpty()) {
@@ -85,7 +87,8 @@ public class Configuration {
 	}
 
 	/**
-	 * @param  Setzte den Pfad zur Tomcat Installation
+	 * @param Setzte
+	 *            den Pfad zur Tomcat Installation
 	 */
 	public boolean setServerPath(String serverPath) {
 		if (serverPath != null && !serverPath.equalsIgnoreCase("fail")
@@ -103,23 +106,23 @@ public class Configuration {
 	public Properties getlProp() {
 		return this.lProp;
 	}
-	
+
 	/**
 	 * 
 	 * @param language
 	 * @param statusService
 	 * 
-	 * Lade Sprach Properties-Datei
+	 *            Lade Sprach Properties-Datei
 	 */
 
 	public void loadLanguageProperties(Locale language, Main main) {
 		if (Locale.GERMANY.equals(language)) {
-		lProp=	main.getProp().loadProperties(ClassLoader
-					.getSystemResource("labels_de_DE.properties"));
+			lProp = main.getProp().loadProperties(
+					ClassLoader.getSystemResource("labels_de_DE.properties"));
 			this.language = language;
 		} else {
-		lProp=	main.getProp().loadProperties(ClassLoader
-					.getSystemResource("labels_us_US.properties"));
+			lProp = main.getProp().loadProperties(
+					ClassLoader.getSystemResource("labels_us_US.properties"));
 			this.language = language;
 		}
 	}
@@ -132,14 +135,16 @@ public class Configuration {
 	}
 
 	/**
-	 * @param Setzte Sprache
+	 * @param Setzte
+	 *            Sprache
 	 */
 	public void setLanguage(Locale language) {
 		this.language = language;
 	}
 
 	/**
-	 * @param Setze Properties der Sprachdatei
+	 * @param Setze
+	 *            Properties der Sprachdatei
 	 */
 	public void setlProp(Properties lProp) {
 		this.lProp = lProp;
@@ -153,9 +158,10 @@ public class Configuration {
 	}
 
 	/**
-	 * @param Setzte Pafad zur RANDI2.war Datei
+	 * @param Setzte
+	 *            Pafad zur RANDI2.war Datei
 	 */
-	
+
 	public boolean setRandi2Path(String randi2Path) {
 		if (randi2Path != null && !randi2Path.equalsIgnoreCase("fail")
 				&& !randi2Path.isEmpty() && randi2Path.endsWith("war")) {
@@ -173,7 +179,8 @@ public class Configuration {
 	}
 
 	/**
-	 * @param Setzte Pfad zur JDBC.jar Datei
+	 * @param Setzte
+	 *            Pfad zur JDBC.jar Datei
 	 */
 	public boolean setJDBCPath(String jdbcPath) {
 		if (jdbcPath != null && !jdbcPath.equalsIgnoreCase("fail")
@@ -192,7 +199,8 @@ public class Configuration {
 	}
 
 	/**
-	 * @param Setez Pfad zur JAF.jar Datei
+	 * @param Setez
+	 *            Pfad zur JAF.jar Datei
 	 */
 	public boolean setJAFPath(String jafPath) {
 		if (jafPath != null && !jafPath.equalsIgnoreCase("fail")
@@ -211,7 +219,8 @@ public class Configuration {
 	}
 
 	/**
-	 * @param Setzte Absender E-Mail Adresse
+	 * @param Setzte
+	 *            Absender E-Mail Adresse
 	 */
 	public boolean setMail_from(String mail_from) {
 		if (mail_from != null && !mail_from.isEmpty()) {
@@ -229,7 +238,8 @@ public class Configuration {
 	}
 
 	/**
-	 * @param Setzte deutschen Text zur Installation
+	 * @param Setzte
+	 *            deutschen Text zur Installation
 	 */
 	public boolean setHostingInstGER(String hostingInstGER) {
 		if (hostingInstGER != null && !hostingInstGER.isEmpty()) {
@@ -247,7 +257,8 @@ public class Configuration {
 	}
 
 	/**
-	 * @param Setzte englischen Text zur Installation
+	 * @param Setzte
+	 *            englischen Text zur Installation
 	 */
 	public boolean setHostingInstUS(String hostingInstUS) {
 		if (hostingInstUS != null && !hostingInstUS.isEmpty()) {
@@ -265,7 +276,8 @@ public class Configuration {
 	}
 
 	/**
-	 * @param Setzte deutschen Disclaimer
+	 * @param Setzte
+	 *            deutschen Disclaimer
 	 */
 	public boolean setDisclaimerGER(String disclaimerGER) {
 		if (disclaimerGER != null && !disclaimerGER.isEmpty()) {
@@ -283,7 +295,8 @@ public class Configuration {
 	}
 
 	/**
-	 * @param Setzte englischen Disclaimer
+	 * @param Setzte
+	 *            englischen Disclaimer
 	 */
 	public boolean setDisclaimerUS(String disclaimerUS) {
 		if (disclaimerUS != null && !disclaimerUS.isEmpty()) {
@@ -301,7 +314,8 @@ public class Configuration {
 	}
 
 	/**
-	 * @param Setzte Logo Pfad
+	 * @param Setzte
+	 *            Logo Pfad
 	 */
 	public boolean setLogoPath(String logoPath) {
 		if (logoPath != null && !logoPath.equalsIgnoreCase("fail")

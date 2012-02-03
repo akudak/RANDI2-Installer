@@ -19,7 +19,8 @@ public class MailConfiguration {
 	}
 
 	/**
-	 * @param Setzte Server IP
+	 * @param Setzte
+	 *            Server IP
 	 */
 	public boolean setServer(String server) {
 		if (server != null && !server.isEmpty()) {
@@ -37,7 +38,8 @@ public class MailConfiguration {
 	}
 
 	/**
-	 * @param Setzte Benutzername
+	 * @param Setzte
+	 *            Benutzername
 	 */
 	public boolean setUsername(String username) {
 		if (username != null && !username.isEmpty()) {
@@ -55,7 +57,8 @@ public class MailConfiguration {
 	}
 
 	/**
-	 * @param Setzte Password
+	 * @param Setzte
+	 *            Password
 	 */
 	public boolean setPassword(String password1, String password2) {
 		if (password1 != null && !password1.isEmpty()
@@ -74,7 +77,8 @@ public class MailConfiguration {
 	}
 
 	/**
-	 * @param Pfad zur JMA Datei
+	 * @param Pfad
+	 *            zur JMA Datei
 	 */
 	public boolean setJarPath(String jarPath) {
 		if (jarPath != null && !jarPath.equalsIgnoreCase("fail")

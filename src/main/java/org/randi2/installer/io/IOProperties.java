@@ -20,8 +20,9 @@ public class IOProperties {
 		this.main = main;
 	}
 
-	/** 
-	 * aendert Tomcat/webapps/RANDI2/WEB-INF/classes/META-INF/configuration.properties
+	/**
+	 * aendert
+	 * Tomcat/webapps/RANDI2/WEB-INF/classes/META-INF/configuration.properties
 	 */
 	public void infoData() {
 		Properties prop = new Properties();
@@ -43,13 +44,18 @@ public class IOProperties {
 					null);
 		} catch (IOException e) {
 			main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
-			main.getMainFrame().getStatusText().setText(main.getConf().getlProp()
-					.getProperty("error.configuration"));
+			main.getMainFrame()
+					.getStatusText()
+					.setText(
+							main.getConf().getlProp()
+									.getProperty("error.configuration"));
 		}
 	}
 
-	/** 
-	 * aendert Tomcat/webapps/RANDI2/WEB-INF/classes/de/randi2/jsf/i18n/labels_de_DE.properties
+	/**
+	 * aendert
+	 * Tomcat/webapps/RANDI2/WEB-INF/classes/de/randi2/jsf/i18n/labels_de_DE
+	 * .properties
 	 */
 	public void labelsGER() {
 		Properties prop = new Properties();
@@ -60,9 +66,10 @@ public class IOProperties {
 		} catch (IOException e) {
 			main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 		}
-		prop.setProperty("pages.registration.terms", main.getConf().getDisclaimerGER());
-		prop.setProperty("pages.aboutPopup.hostingInst",
-				main.getConf().getHostingInstGER());
+		prop.setProperty("pages.registration.terms", main.getConf()
+				.getDisclaimerGER());
+		prop.setProperty("pages.aboutPopup.hostingInst", main.getConf()
+				.getHostingInstGER());
 		try {
 			prop.store(
 					new FileOutputStream(
@@ -71,14 +78,19 @@ public class IOProperties {
 					null);
 		} catch (IOException e) {
 			main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
-			main.getMainFrame().getStatusText().setText(main.getConf().getlProp()
-					.getProperty("error.language"));
+			main.getMainFrame()
+					.getStatusText()
+					.setText(
+							main.getConf().getlProp()
+									.getProperty("error.language"));
 		}
 	}
-	
-/**
- * aendert Tomcat/webapps/RANDI2/WEB-INF/classes/de/randi2/jsf/i18n/labels_en_US.properties
- */
+
+	/**
+	 * aendert
+	 * Tomcat/webapps/RANDI2/WEB-INF/classes/de/randi2/jsf/i18n/labels_en_US
+	 * .properties
+	 */
 	public void labelsUS() {
 		Properties prop = new Properties();
 		try {
@@ -88,9 +100,10 @@ public class IOProperties {
 		} catch (IOException e) {
 			main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 		}
-		prop.setProperty("pages.registration.terms", main.getConf().getDisclaimerUS());
-		prop.setProperty("pages.aboutPopup.hostingInst",
-				main.getConf().getHostingInstUS());
+		prop.setProperty("pages.registration.terms", main.getConf()
+				.getDisclaimerUS());
+		prop.setProperty("pages.aboutPopup.hostingInst", main.getConf()
+				.getHostingInstUS());
 		try {
 			prop.store(
 					new FileOutputStream(
@@ -99,8 +112,11 @@ public class IOProperties {
 					null);
 		} catch (IOException e) {
 			main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
-			main.getMainFrame().getStatusText().setText(main.getConf().getlProp()
-					.getProperty("error.language"));
+			main.getMainFrame()
+					.getStatusText()
+					.setText(
+							main.getConf().getlProp()
+									.getProperty("error.language"));
 		}
 	}
 
@@ -116,8 +132,8 @@ public class IOProperties {
 			main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 		}
 		prop.setProperty("website2", main.getConf().getWebsite());
-		if(main.getCenter().isSelfRegistration())
-		prop.setProperty("selfRegistration", "true");
+		if (main.getCenter().isSelfRegistration())
+			prop.setProperty("selfRegistration", "true");
 		else
 			prop.setProperty("selfRegistration", "false");
 		try {
@@ -125,13 +141,17 @@ public class IOProperties {
 					+ "webapps/RANDI2/RANDI2.properties"), null);
 		} catch (IOException e) {
 			main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
-			main.getMainFrame().getStatusText().setText(main.getConf().getlProp()
-					.getProperty("error.language"));
+			main.getMainFrame()
+					.getStatusText()
+					.setText(
+							main.getConf().getlProp()
+									.getProperty("error.language"));
 		}
 	}
 
 	/**
 	 * Laedet eine beliebige Properties-Datei und gibt sie zurueck
+	 * 
 	 * @param pfad
 	 * @return
 	 */
@@ -141,8 +161,11 @@ public class IOProperties {
 			prop.load(new FileInputStream(pfad.getFile()));
 		} catch (IOException e) {
 			main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
-			main.getMainFrame().getStatusText().setText(main.getConf().getlProp()
-					.getProperty("error.loadFile"));
+			main.getMainFrame()
+					.getStatusText()
+					.setText(
+							main.getConf().getlProp()
+									.getProperty("error.loadFile"));
 		}
 		return prop;
 	}

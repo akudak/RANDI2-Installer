@@ -17,6 +17,7 @@ import org.randi2.installer.services.DBService;
  * 
  * @author andreas Die MySQL Datenbank muss laufen.
  */
+
 public class DBServiceTest {
 
 	private static DBService DBSERVICE;

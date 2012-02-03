@@ -42,7 +42,8 @@ public class MainPanel extends JPanel {
 	}
 
 	/**
-	 * @param Setzt den aktuellen Status
+	 * @param Setzt
+	 *            den aktuellen Status
 	 */
 	public void setStatus(Status status) {
 		this.status = status;

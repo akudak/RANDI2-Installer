@@ -28,7 +28,8 @@ public class Person {
 	}
 
 	/**
-	 * @param Setzte Vorname
+	 * @param Setzte
+	 *            Vorname
 	 */
 	public boolean setFirstname(String firstname) {
 		if (firstname != null && !firstname.isEmpty()) {
@@ -46,7 +47,8 @@ public class Person {
 	}
 
 	/**
-	 * @param Setzte Nachname
+	 * @param Setzte
+	 *            Nachname
 	 */
 	public boolean setSurname(String surname) {
 		if (surname != null && !surname.isEmpty()) {
@@ -64,7 +66,8 @@ public class Person {
 	}
 
 	/**
-	 * @param Setzte Title
+	 * @param Setzte
+	 *            Title
 	 */
 	public void setAcademicTitle(String academicTitle) {
 		this.academicTitle = academicTitle;
@@ -78,11 +81,13 @@ public class Person {
 	}
 
 	/**
-	 * @param Setzte E-Mail Adresse
+	 * @param Setzte
+	 *            E-Mail Adresse
 	 */
 	public boolean setMail(String mail) {
 		EMailRANDI2Validator emailRANDI2Validator = new EMailRANDI2Validator();
-		if (mail != null && !mail.isEmpty() && emailRANDI2Validator.isValid(mail)) {
+		if (mail != null && !mail.isEmpty()
+				&& emailRANDI2Validator.isValid(mail)) {
 			this.mail = mail;
 			return true;
 		}
@@ -98,12 +103,14 @@ public class Person {
 	}
 
 	/**
-	 * @param Setzte Telefonnummer
+	 * @param Setzte
+	 *            Telefonnummer
 	 */
 	public boolean setPhone(String phone) {
 		{
 			TelephoneNumberValidator telephoneNumberValidator = new TelephoneNumberValidator();
-			if (phone != null && !phone.isEmpty() && telephoneNumberValidator.isValid(phone)) {
+			if (phone != null && !phone.isEmpty()
+					&& telephoneNumberValidator.isValid(phone)) {
 				this.phone = phone;
 				return true;
 			} else
@@ -119,12 +126,14 @@ public class Person {
 	}
 
 	/**
-	 * @param Setzte Mobilfunknummer
+	 * @param Setzte
+	 *            Mobilfunknummer
 	 */
 	public boolean setMobile(String mobile) {
 		{
 			TelephoneNumberValidator telephoneNumberValidator = new TelephoneNumberValidator();
-			if (mobile != null && !mobile.isEmpty() && telephoneNumberValidator.isValid(mobile)) {
+			if (mobile != null && !mobile.isEmpty()
+					&& telephoneNumberValidator.isValid(mobile)) {
 				this.mobile = mobile;
 				return true;
 			} else
@@ -141,12 +150,14 @@ public class Person {
 	}
 
 	/**
-	 * @param Setzte Faxnummer
+	 * @param Setzte
+	 *            Faxnummer
 	 */
 	public boolean setFax(String fax) {
 		{
 			TelephoneNumberValidator telephoneNumberValidator = new TelephoneNumberValidator();
-			if (fax != null && !fax.isEmpty() && telephoneNumberValidator.isValid(fax)) {
+			if (fax != null && !fax.isEmpty()
+					&& telephoneNumberValidator.isValid(fax)) {
 				this.fax = fax;
 				return true;
 			} else
@@ -154,7 +165,6 @@ public class Person {
 		}
 
 	}
-
 
 	/**
 	 * @return Geschlecht
@@ -164,10 +174,10 @@ public class Person {
 	}
 
 	/**
-	 * @param Setzte Geschlecht
+	 * @param Setzte
+	 *            Geschlecht
 	 */
-	public void setSex(Gender sex) 
-	{
+	public void setSex(Gender sex) {
 		this.sex = sex;
 	}
 
@@ -182,7 +192,7 @@ public class Person {
 	/**
 	 * 
 	 * @param id
-	 * Setzte ID
+	 *            Setzte ID
 	 */
 	public void setId(long id) {
 		this.id = id;

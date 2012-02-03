@@ -118,7 +118,7 @@ public class WizardStep12 extends MainPanel {
 		insertB.setSize(80, 20);
 
 		this.add(insertB);
-		
+
 		JLabel mandatoryL = new JLabel(main.getConf().getlProp()
 				.getProperty("label.mandatory"));
 		mandatoryL.setSize(150, 20);
@@ -152,12 +152,15 @@ public class WizardStep12 extends MainPanel {
 				if (!main.getAdmin().setPhone(adminPhoneT.getText()))
 					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 
-				if (!main.getStatusService().getAkt().getStatus().equals(StatusEnum.FAIL))
+				if (!main.getStatusService().getAkt().getStatus()
+						.equals(StatusEnum.FAIL))
 					main.editAdmin();
 				else
-					main.getMainFrame().getStatusText().setText(
-							(main.getConf().getlProp()
-									.getProperty("error.insert")));
+					main.getMainFrame()
+							.getStatusText()
+							.setText(
+									(main.getConf().getlProp()
+											.getProperty("error.insert")));
 			}
 		});
 	}

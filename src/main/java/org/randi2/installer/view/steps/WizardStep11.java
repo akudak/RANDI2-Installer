@@ -145,7 +145,8 @@ public class WizardStep11 extends MainPanel {
 		insertB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (genderB)
-					main.getStatusService().getAkt().setStatus(StatusEnum.SUCCESS);
+					main.getStatusService().getAkt()
+							.setStatus(StatusEnum.SUCCESS);
 				main.getAdmin().setAcademicTitle(adminTitleT.getText());
 
 				if (!main.getAdmin().setFirstname(adminFirstnameT.getText()))
@@ -162,7 +163,8 @@ public class WizardStep11 extends MainPanel {
 				else
 					main.getAdmin().setPrefLocale("us");
 
-				if (main.getStatusService().getAkt().getStatus().equals(StatusEnum.FAIL))
+				if (main.getStatusService().getAkt().getStatus()
+						.equals(StatusEnum.FAIL))
 					main.getMainFrame()
 							.getStatusText()
 							.setText(

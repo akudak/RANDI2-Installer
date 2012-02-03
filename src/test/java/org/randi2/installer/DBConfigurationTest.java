@@ -64,8 +64,6 @@ public class DBConfigurationTest {
 		// Setzet leeren String
 		assertTrue(DBCONF.setPassword(EMPTY, EMPTY));
 
-		
-		
 		// Positiv Test
 		assertTrue(DBCONF.setPasswordCon(PASSWORD1, PASSWORD2));
 

@@ -27,7 +27,8 @@ public class StatusService {
 	}
 
 	/**
-	 * @param Setzte Statusliste
+	 * @param Setzte
+	 *            Statusliste
 	 */
 	public void setStatusList(ArrayList<Status> statusList) {
 		this.statusList = statusList;
@@ -43,22 +44,21 @@ public class StatusService {
 		}
 		return act;
 	}
-	
+
 	/**
 	 * 
 	 * @param act
 	 * @return liefe den nachsten Status
 	 */
-	public Status getNext(Status act)
-	{
+	public Status getNext(Status act) {
 		Status pointer = null;
 		Status next = null;
 		iterator = statusList.iterator();
 		while (iterator.hasNext()) {
 			pointer = (Status) iterator.next();
-			if (pointer==act) {
-				if(iterator.hasNext())
-				next = iterator.next();
+			if (pointer == act) {
+				if (iterator.hasNext())
+					next = iterator.next();
 			}
 		}
 		return next;

@@ -38,12 +38,9 @@ public class Statusbar extends JPanel {
 				ClassLoader.getSystemResource("gruen_30x30.png"));
 		iconYellow = new ImageIcon(
 				ClassLoader.getSystemResource("gelb_30x30.png"));
-		iconRed = new ImageIcon(
-				ClassLoader.getSystemResource("rot_30x30.png"));
-		iconGreenG = new ImageIcon(
-				ClassLoader.getSystemResource("gruen.png"));
-		iconYellowG = new ImageIcon(
-				ClassLoader.getSystemResource("gelb.png"));
+		iconRed = new ImageIcon(ClassLoader.getSystemResource("rot_30x30.png"));
+		iconGreenG = new ImageIcon(ClassLoader.getSystemResource("gruen.png"));
+		iconYellowG = new ImageIcon(ClassLoader.getSystemResource("gelb.png"));
 		iconRedG = new ImageIcon(ClassLoader.getSystemResource("rot.png"));
 
 		initBar();
@@ -55,21 +52,27 @@ public class Statusbar extends JPanel {
 	public void initBar() {
 		JLabel[] l = new JLabel[statusService.getStatusList().size()];
 		for (int i = 0; i < statusService.getStatusList().size() - 1; i++) {
-		
+
 			if (statusService.getStatusList().get(i).isActive()) {
-				if (statusService.getStatusList().get(i).getStatus().equals(StatusEnum.SUCCESS))
+				if (statusService.getStatusList().get(i).getStatus()
+						.equals(StatusEnum.SUCCESS))
 					l[i] = new JLabel(iconGreenG);
-				if (statusService.getStatusList().get(i).getStatus().equals(StatusEnum.FAIL))
+				if (statusService.getStatusList().get(i).getStatus()
+						.equals(StatusEnum.FAIL))
 					l[i] = new JLabel(iconRedG);
-				if (statusService.getStatusList().get(i).getStatus().equals(StatusEnum.UNMACHINED))
+				if (statusService.getStatusList().get(i).getStatus()
+						.equals(StatusEnum.UNMACHINED))
 					l[i] = new JLabel(iconYellowG);
 				l[i].setSize(40, 40);
 			} else {
-				if (statusService.getStatusList().get(i).getStatus().equals(StatusEnum.SUCCESS))
+				if (statusService.getStatusList().get(i).getStatus()
+						.equals(StatusEnum.SUCCESS))
 					l[i] = new JLabel(iconGreen);
-				if (statusService.getStatusList().get(i).getStatus().equals(StatusEnum.FAIL))
+				if (statusService.getStatusList().get(i).getStatus()
+						.equals(StatusEnum.FAIL))
 					l[i] = new JLabel(iconRed);
-				if (statusService.getStatusList().get(i).getStatus().equals(StatusEnum.UNMACHINED))
+				if (statusService.getStatusList().get(i).getStatus()
+						.equals(StatusEnum.UNMACHINED))
 					l[i] = new JLabel(iconYellow);
 				l[i].setSize(40, 40);
 			}

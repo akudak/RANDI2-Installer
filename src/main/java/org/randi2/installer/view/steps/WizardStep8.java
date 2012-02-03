@@ -15,6 +15,7 @@ public class WizardStep8 extends MainPanel {
 
 	private static final long serialVersionUID = -2168605279876124181L;
 	private JTextField downloadPathT;
+
 	public WizardStep8(final Main main) {
 		super(main);
 		initGUI();
@@ -54,7 +55,7 @@ public class WizardStep8 extends MainPanel {
 		downloadPfadB.setSize(70, 20);
 
 		this.add(downloadPfadB);
-		
+
 		downloadPathT = new JTextField();
 		downloadPathT.setSize(350, 20);
 		downloadPathT.setLocation(100, 120);
@@ -68,7 +69,9 @@ public class WizardStep8 extends MainPanel {
 				Chooser fileOpen = new Chooser(main);
 				if (!main.getMailConf().setJarPath(fileOpen.getFile("jar"))) {
 					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
-					main.getMainFrame().getStatusText().setText(
+					main.getMainFrame()
+							.getStatusText()
+							.setText(
 									(main.getConf().getlProp()
 											.getProperty("error.jar")));
 				}

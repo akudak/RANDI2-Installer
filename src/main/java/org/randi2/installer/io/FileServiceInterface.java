@@ -2,12 +2,11 @@ package org.randi2.installer.io;
 
 public interface FileServiceInterface {
 
-
 	/**
 	 * Benennt eine Datei um
 	 */
 	public void rename(String Path, String name, String newName);
-	
+
 	/**
 	 * Korpiert eine Datei in ein neues Verzeichnis
 	 */

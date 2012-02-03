@@ -15,7 +15,7 @@ public class WizardStep7 extends MainPanel {
 
 	private static final long serialVersionUID = 4572893521134618163L;
 	private JTextField downloadPathT;
-	
+
 	public WizardStep7(final Main main) {
 		super(main);
 		initGUI();
@@ -65,20 +65,22 @@ public class WizardStep7 extends MainPanel {
 		downloadPathT.setEditable(false);
 
 		this.add(downloadPathT);
-		
+
 		downloadPfadB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				main.getStatusService().getAkt().setStatus(StatusEnum.SUCCESS);
 				Chooser fileOpen = new Chooser(main);
 				if (!main.getConf().setJDBCPath(fileOpen.getFile("jar"))) {
 					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
-						main.getMainFrame().getStatusText().setText(
+					main.getMainFrame()
+							.getStatusText()
+							.setText(
 									(main.getConf().getlProp()
 											.getProperty("error.jar")));
 				}
 				downloadPathT.setText(main.getConf().getJDBCPath());
 				main.copyJDBC();
-			
+
 			}
 		});
 	}

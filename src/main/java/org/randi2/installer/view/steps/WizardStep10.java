@@ -119,12 +119,15 @@ public class WizardStep10 extends MainPanel {
 				if (!main.getMailConf().setPassword(p1, p2))
 					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 
-				if (!main.getStatusService().getAkt().getStatus().equals(StatusEnum.FAIL))
+				if (!main.getStatusService().getAkt().getStatus()
+						.equals(StatusEnum.FAIL))
 					main.confContext();
 				else
-					main.getMainFrame().getStatusText().setText(
-							(main.getConf().getlProp()
-									.getProperty("error.insert")));
+					main.getMainFrame()
+							.getStatusText()
+							.setText(
+									(main.getConf().getlProp()
+											.getProperty("error.insert")));
 
 			}
 		});

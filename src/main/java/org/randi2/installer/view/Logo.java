@@ -18,7 +18,8 @@ public class Logo extends JPanel {
 		init();
 	}
 
-	/** Erzeugt Objekt
+	/**
+	 * Erzeugt Objekt
 	 * 
 	 */
 	public void init() {
@@ -27,8 +28,7 @@ public class Logo extends JPanel {
 		this.setBackground(Color.WHITE);
 
 		ImageIcon icon = new ImageIcon(
-				ClassLoader
-						.getSystemResource("randi2withSlogan_351x100.png"));
+				ClassLoader.getSystemResource("randi2withSlogan_351x100.png"));
 
 		JLabel label = new JLabel(icon);
 		label.setSize(351, 100);

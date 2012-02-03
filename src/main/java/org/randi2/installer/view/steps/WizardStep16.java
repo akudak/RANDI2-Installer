@@ -72,9 +72,11 @@ public class WizardStep16 extends MainPanel {
 				else {
 					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 					downloadPathT.setText("");
-					main.getMainFrame().getStatusText().setText(
-							(main.getConf().getlProp()
-									.getProperty("error.logo")));
+					main.getMainFrame()
+							.getStatusText()
+							.setText(
+									(main.getConf().getlProp()
+											.getProperty("error.logo")));
 				}
 
 			}
@@ -86,7 +88,7 @@ public class WizardStep16 extends MainPanel {
 		insertB.setSize(80, 20);
 
 		this.add(insertB);
-		
+
 		JLabel mandatoryL = new JLabel(main.getConf().getlProp()
 				.getProperty("label.mandatory"));
 		mandatoryL.setSize(150, 20);
@@ -101,13 +103,16 @@ public class WizardStep16 extends MainPanel {
 
 				if (!main.getConf().setWebsite(contactWebsiteT.getText()))
 					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
-				if (!main.getStatusService().getAkt().getStatus().equals(StatusEnum.FAIL)) {
+				if (!main.getStatusService().getAkt().getStatus()
+						.equals(StatusEnum.FAIL)) {
 					main.copyLogo();
 					main.editWebsite();
 				} else
-					main.getMainFrame().getStatusText().setText(
-							(main.getConf().getlProp()
-									.getProperty("error.insert")));
+					main.getMainFrame()
+							.getStatusText()
+							.setText(
+									(main.getConf().getlProp()
+											.getProperty("error.insert")));
 
 			}
 		});

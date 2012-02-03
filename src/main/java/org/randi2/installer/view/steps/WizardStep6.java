@@ -44,9 +44,8 @@ public class WizardStep6 extends MainPanel {
 
 		this.add(startTomcatWinB);
 
-	
-			initDBL = new JLabel(main.getConf().getlProp()
-					.getProperty("label.initDBMySQL"));
+		initDBL = new JLabel(main.getConf().getlProp()
+				.getProperty("label.initDBMySQL"));
 
 		initDBL.setLocation(10, 120);
 		initDBL.setSize(600, 20);
@@ -88,7 +87,9 @@ public class WizardStep6 extends MainPanel {
 				if (!main.getDbconf().setInitDBPath(fileOpen.getFile("sql"))) {
 					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 					System.out.println("fehler");
-					main.getMainFrame().getStatusText().setText(
+					main.getMainFrame()
+							.getStatusText()
+							.setText(
 									(main.getConf().getlProp()
 											.getProperty("error.loadSQL")));
 				}

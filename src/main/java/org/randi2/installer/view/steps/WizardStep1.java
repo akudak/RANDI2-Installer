@@ -21,7 +21,6 @@ public class WizardStep1 extends MainPanel {
 		initGUI();
 	}
 
-
 	public void initGUI() {
 		JLabel downloadTomcat = new JLabel(main.getConf().getlProp()
 				.getProperty("label.downloadTomcat"));
@@ -43,7 +42,7 @@ public class WizardStep1 extends MainPanel {
 		downloadPfadL.setSize(400, 20);
 
 		this.add(downloadPfadL);
-		
+
 		JLabel downloadTomcatL = new JLabel(main.getConf().getlProp()
 				.getProperty("label.downloadTomcatPath"));
 		downloadTomcatL.setLocation(10, 120);
@@ -81,12 +80,16 @@ public class WizardStep1 extends MainPanel {
 				else
 					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 
-				if (!main.getStatusService().getAkt().getStatus().equals(StatusEnum.FAIL))
-					main.getStatusService().getAkt().setStatus(StatusEnum.SUCCESS);
+				if (!main.getStatusService().getAkt().getStatus()
+						.equals(StatusEnum.FAIL))
+					main.getStatusService().getAkt()
+							.setStatus(StatusEnum.SUCCESS);
 				else
-					main.getMainFrame().getStatusText().setText(
-							(main.getConf().getlProp()
-									.getProperty("error.tomcat")));
+					main.getMainFrame()
+							.getStatusText()
+							.setText(
+									(main.getConf().getlProp()
+											.getProperty("error.tomcat")));
 			}
 		});
 	}
