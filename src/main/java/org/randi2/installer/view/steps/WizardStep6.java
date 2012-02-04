@@ -15,6 +15,7 @@ public class WizardStep6 extends MainPanel {
 	private static final long serialVersionUID = -4292214336317860926L;
 	private JLabel initDBL;
 	private JTextField downloadPathT;
+	private boolean start;
 
 	public WizardStep6(final Main main) {
 		super(main);
@@ -65,36 +66,47 @@ public class WizardStep6 extends MainPanel {
 		initDBPfadB.setSize(70, 20);
 
 		this.add(initDBPfadB);
-
+		start = false;
 		startTomcatMacB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				main.getStatusService().getAkt().setStatus(StatusEnum.SUCCESS);
+				start = true;
 				main.startTomcatMac();
 			}
 		});
 
 		startTomcatWinB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				main.getStatusService().getAkt().setStatus(StatusEnum.SUCCESS);
+				start = true;
 				main.startTomcatWin();
 			}
 		});
 
 		initDBPfadB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				main.getStatusService().getAkt().setStatus(StatusEnum.SUCCESS);
-				Chooser fileOpen = new Chooser(main);
-				if (!main.getDbconf().setInitDBPath(fileOpen.getFile("sql"))) {
-					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
-					System.out.println("fehler");
+				if (start) {
+					main.getStatusService().getAkt()
+							.setStatus(StatusEnum.SUCCESS);
+					Chooser fileOpen = new Chooser(main);
+					if (!main.getDbconf()
+							.setInitDBPath(fileOpen.getFile("sql"))) {
+						main.getStatusService().getAkt()
+								.setStatus(StatusEnum.FAIL);
+						System.out.println("fehler");
+						main.getMainFrame()
+								.getStatusText()
+								.setText(
+										(main.getConf().getlProp()
+												.getProperty("error.loadSQL")));
+					}
+					downloadPathT.setText(main.getDbconf().getInitDBPath());
+					main.initDatabase();
+				} else
 					main.getMainFrame()
 							.getStatusText()
 							.setText(
 									(main.getConf().getlProp()
-											.getProperty("error.loadSQL")));
-				}
-				downloadPathT.setText(main.getDbconf().getInitDBPath());
-				main.initDatabase();
+											.getProperty("error.startTomcatFirst")));
+
 			}
 		});
 	}

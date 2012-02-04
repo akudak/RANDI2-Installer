@@ -59,7 +59,7 @@ public class CenterServiceTest {
 		DBCONF = new DBConfiguration();
 		DBCONF.setServer(DBSERVER);
 		DBCONF.setMySQL(true);
-		DBCONF.setUsername(NAME);
+		DBCONF.setUsername(DBUSER);
 		DBCONF.setPassword(PASSWORD, PASSWORD);
 		DBCONF.setUsernameCon(DBUSER);
 		DBCONF.setPasswordCon(DBPASSWORT, DBPASSWORT);

@@ -137,7 +137,7 @@ public class WizardStep15 extends MainPanel {
 			public void actionPerformed(ActionEvent e) {
 				passwordT1.setEnabled(false);
 				passwordT2.setEnabled(false);
-				main.getCenter().setSelfRegistration(true);
+				main.getCenter().setSelfRegistration(false);
 			}
 		});
 

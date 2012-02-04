@@ -19,7 +19,6 @@ public class WizardStep11 extends MainPanel {
 	private JTextField adminTitleT;
 	private JTextField adminFirstnameT;
 	private JTextField adminSurnameT;
-	private JTextField adminUsernameT;
 	private boolean genderB = false;
 
 	public WizardStep11(final Main main) {
@@ -49,6 +48,13 @@ public class WizardStep11 extends MainPanel {
 
 		this.add(firstnameL);
 
+		JLabel genderL = new JLabel(main.getConf().getlProp()
+				.getProperty("label.gender"));
+		genderL.setLocation(10, 200);
+		genderL.setSize(200, 20);
+
+		this.add(genderL);
+
 		JLabel surnameL = new JLabel(main.getConf().getlProp()
 				.getProperty("label.surname"));
 		surnameL.setLocation(10, 160);
@@ -56,43 +62,23 @@ public class WizardStep11 extends MainPanel {
 
 		this.add(surnameL);
 
-		JLabel usernameL = new JLabel(main.getConf().getlProp()
-				.getProperty("label.username"));
-		usernameL.setLocation(10, 200);
-		usernameL.setSize(200, 20);
-
-		this.add(usernameL);
-
-		JLabel genderL = new JLabel(main.getConf().getlProp()
-				.getProperty("label.gender"));
-		genderL.setLocation(10, 240);
-		genderL.setSize(200, 20);
-
-		this.add(genderL);
-
-		adminTitleT = new JTextField("Dr");
+		adminTitleT = new JTextField();
 		adminTitleT.setLocation(220, 80);
 		adminTitleT.setSize(200, 20);
 
 		this.add(adminTitleT);
 
-		adminFirstnameT = new JTextField("andreas");
+		adminFirstnameT = new JTextField();
 		adminFirstnameT.setLocation(220, 120);
 		adminFirstnameT.setSize(200, 20);
 
 		this.add(adminFirstnameT);
 
-		adminSurnameT = new JTextField("kudak");
+		adminSurnameT = new JTextField();
 		adminSurnameT.setLocation(220, 160);
 		adminSurnameT.setSize(200, 20);
 
 		this.add(adminSurnameT);
-
-		adminUsernameT = new JTextField("losorllos");
-		adminUsernameT.setLocation(220, 200);
-		adminUsernameT.setSize(200, 20);
-
-		this.add(adminUsernameT);
 
 		JRadioButton aButton = new JRadioButton(main.getConf().getlProp()
 				.getProperty("check.female"));
@@ -103,8 +89,8 @@ public class WizardStep11 extends MainPanel {
 		myButtonGroup.add(aButton);
 		myButtonGroup.add(bButton);
 
-		aButton.setLocation(220, 240);
-		bButton.setLocation(340, 240);
+		aButton.setLocation(220, 200);
+		bButton.setLocation(340, 200);
 
 		aButton.setSize(100, 20);
 		bButton.setSize(100, 20);
@@ -117,14 +103,14 @@ public class WizardStep11 extends MainPanel {
 
 		JButton insertB = new JButton(main.getConf().getlProp()
 				.getProperty("button.save"));
-		insertB.setLocation(340, 280);
+		insertB.setLocation(340, 240);
 		insertB.setSize(80, 20);
 
 		this.add(insertB);
 		JLabel mandatoryL = new JLabel(main.getConf().getlProp()
 				.getProperty("label.mandatory"));
 		mandatoryL.setSize(150, 20);
-		mandatoryL.setLocation(205, 280);
+		mandatoryL.setLocation(205, 240);
 
 		this.add(mandatoryL);
 
@@ -153,9 +139,6 @@ public class WizardStep11 extends MainPanel {
 					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 
 				if (!main.getAdmin().setSurname(adminSurnameT.getText()))
-					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
-
-				if (!main.getAdmin().setUsername(adminUsernameT.getText()))
 					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 
 				if (main.getConf().getLanguage().equals("GER"))

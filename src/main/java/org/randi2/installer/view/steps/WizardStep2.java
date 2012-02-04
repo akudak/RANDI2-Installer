@@ -112,13 +112,13 @@ public class WizardStep2 extends MainPanel {
 		nameT.setEnabled(false);
 		this.add(nameT);
 
-		adminT = new JTextField("randi2");
+		adminT = new JTextField();
 		adminT.setSize(200, 20);
 		adminT.setLocation(200, 210);
 		adminT.setEnabled(false);
 		this.add(adminT);
 
-		passwordT1 = new JPasswordField("www");
+		passwordT1 = new JPasswordField();
 		passwordT1.setSize(200, 20);
 		passwordT1.setLocation(200, 250);
 		passwordT1.setEnabled(false);
@@ -148,7 +148,6 @@ public class WizardStep2 extends MainPanel {
 				serverT.setEnabled(true);
 				passwordT1.setEnabled(true);
 				insertB.setEnabled(true);
-
 				main.getStatusService().getAkt()
 						.setStatus(StatusEnum.UNMACHINED);
 			}
@@ -210,6 +209,21 @@ public class WizardStep2 extends MainPanel {
 										main.getConf().getlProp()
 												.getProperty("error.insert"));
 					}
+
+					if (!main.getDbconf().setPassword(p1, p1))
+						main.getStatusService().getAkt()
+								.setStatus(StatusEnum.FAIL);
+
+					if (!main.getDbconf().setUsername(adminT.getText())) {
+						main.getStatusService().getAkt()
+								.setStatus(StatusEnum.FAIL);
+						main.getMainFrame()
+								.getStatusText()
+								.setText(
+										main.getConf().getlProp()
+												.getProperty("error.insert"));
+					}
+
 					if (!main.getDbconf().setName(nameT.getText())) {
 						main.getStatusService().getAkt()
 								.setStatus(StatusEnum.FAIL);
@@ -228,6 +242,7 @@ public class WizardStep2 extends MainPanel {
 										main.getConf().getlProp()
 												.getProperty("error.insert"));
 					}
+					main.getDbService().createUser(main.getDbconf());
 				}
 
 			}

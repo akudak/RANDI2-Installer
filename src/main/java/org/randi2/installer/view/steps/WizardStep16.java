@@ -16,6 +16,7 @@ public class WizardStep16 extends MainPanel {
 	private JTextField contactWebsiteT;
 	private JButton logoPathB;
 	private JTextField downloadPathT;
+	private boolean logo;
 
 	public WizardStep16(final Main main) {
 		super(main);
@@ -62,14 +63,14 @@ public class WizardStep16 extends MainPanel {
 		contactWebsiteT.setSize(200, 20);
 
 		this.add(contactWebsiteT);
-
+		logo = false;
 		logoPathB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				main.getStatusService().getAkt().setStatus(StatusEnum.SUCCESS);
 				Chooser fileOpen = new Chooser(main);
-				if (main.getConf().setLogoPath(fileOpen.getFile("")))
+				if (main.getConf().setLogoPath(fileOpen.getFile(""))) {
 					downloadPathT.setText(main.getConf().getLogoPath());
-				else {
+					logo = true;
+				} else {
 					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 					downloadPathT.setText("");
 					main.getMainFrame()
@@ -98,23 +99,31 @@ public class WizardStep16 extends MainPanel {
 
 		insertB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (logo) {
+					main.getStatusService().getAkt()
+							.setStatus(StatusEnum.SUCCESS);
 
-				main.getStatusService().getAkt().setStatus(StatusEnum.SUCCESS);
-
-				if (!main.getConf().setWebsite(contactWebsiteT.getText()))
-					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
-				if (!main.getStatusService().getAkt().getStatus()
-						.equals(StatusEnum.FAIL)) {
-					main.copyLogo();
-					main.editWebsite();
+					if (!main.getConf().setWebsite(contactWebsiteT.getText()))
+						main.getStatusService().getAkt()
+								.setStatus(StatusEnum.FAIL);
+					if (!main.getStatusService().getAkt().getStatus()
+							.equals(StatusEnum.FAIL)) {
+						main.copyLogo();
+						main.editWebsite();
+					} else
+						main.getMainFrame()
+								.getStatusText()
+								.setText(
+										(main.getConf().getlProp()
+												.getProperty("error.insert")));
 				} else
 					main.getMainFrame()
 							.getStatusText()
 							.setText(
 									(main.getConf().getlProp()
-											.getProperty("error.insert")));
-
+											.getProperty("error.logoFirst")));
 			}
+
 		});
 
 	}

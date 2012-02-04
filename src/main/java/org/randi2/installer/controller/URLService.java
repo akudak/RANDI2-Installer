@@ -41,6 +41,8 @@ public class URLService {
 				url = new URL(link.getProperty("url.randi2"));
 			else if (urlText.equalsIgnoreCase("jaf"))
 				url = new URL(link.getProperty("url.jaf"));
+			else if (urlText.endsWith("randi2START"))
+				url = new URL(link.getProperty("url.randi2START"));
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}

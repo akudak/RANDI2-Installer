@@ -299,6 +299,8 @@ public class Main {
 	public void startTomcatMac() {
 		try {
 			Runtime.getRuntime().exec(
+					new String[] { conf.getServerPath() + "bin/shutdown.sh" });
+			Runtime.getRuntime().exec(
 					new String[] { conf.getServerPath() + "bin/startup.sh" });
 		} catch (IOException e) {
 			getStatusService().getAkt().setStatus(StatusEnum.FAIL);
@@ -314,6 +316,8 @@ public class Main {
 
 	public void startTomcatWin() {
 		try {
+			Runtime.getRuntime().exec(
+					new String[] { conf.getServerPath() + "bin/shutdown.bat" });
 			Runtime.getRuntime().exec(
 					new String[] { conf.getServerPath() + "bin/startup.bat" });
 		} catch (IOException e) {
@@ -462,7 +466,7 @@ public class Main {
 	 */
 	public void setStatusNext() {
 		/*
-		 * if (statusService.getAkt().getStatus()!= 1)
+		 * if (!statusService.getAkt().getStatus().equals(StatusEnum.SUCCESS))
 		 * mainFrame.getStatusText().setText(
 		 * getConf().getlProp().getProperty("error.passStatus")); else {
 		 */

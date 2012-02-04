@@ -76,37 +76,37 @@ public class WizardStep12 extends MainPanel {
 
 		this.add(passwordL2);
 
-		adminEMailT = new JTextField("test@test.de");
+		adminEMailT = new JTextField();
 		adminEMailT.setLocation(220, 40);
 		adminEMailT.setSize(200, 20);
 
 		this.add(adminEMailT);
 
-		adminFaxT = new JTextField("4234234234234");
+		adminFaxT = new JTextField();
 		adminFaxT.setLocation(220, 80);
 		adminFaxT.setSize(200, 20);
 
 		this.add(adminFaxT);
 
-		adminMobileT = new JTextField("3214234234");
+		adminMobileT = new JTextField();
 		adminMobileT.setLocation(220, 120);
 		adminMobileT.setSize(200, 20);
 
 		this.add(adminMobileT);
 
-		adminPhoneT = new JTextField("23121312312");
+		adminPhoneT = new JTextField();
 		adminPhoneT.setLocation(220, 160);
 		adminPhoneT.setSize(200, 20);
 
 		this.add(adminPhoneT);
 
-		adminPasswordT1 = new JPasswordField("1$password");
+		adminPasswordT1 = new JPasswordField();
 		adminPasswordT1.setLocation(220, 200);
 		adminPasswordT1.setSize(200, 20);
 
 		this.add(adminPasswordT1);
 
-		adminPasswordT2 = new JPasswordField("1$password");
+		adminPasswordT2 = new JPasswordField();
 		adminPasswordT2.setLocation(220, 240);
 		adminPasswordT2.setSize(200, 20);
 
@@ -141,6 +141,9 @@ public class WizardStep12 extends MainPanel {
 					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 
 				if (!main.getAdmin().setMail(adminEMailT.getText()))
+					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
+
+				if (!main.getAdmin().setUsername(adminEMailT.getText()))
 					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 
 				if (!main.getAdmin().setFax(adminFaxT.getText()))
