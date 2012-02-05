@@ -98,8 +98,8 @@ public class CenterService {
 				pStatement.close();
 			} else {
 				/**
-				 * Wenn kein Eintrag vorhanden, Fehler ausgabe. -> Richtige
-				 * InitSkript nutzenn.
+				 * Wenn kein Eintrag vorhanden, Fehler Ausgabe. -> Richtige
+				 * InitSkript nutzen.
 				 */
 				main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 				main.getMainFrame()

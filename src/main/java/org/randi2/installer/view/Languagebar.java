@@ -13,6 +13,9 @@ import org.randi2.installer.controller.Main;
 /**
  * 
  * @author andreas Erzeugt eine Languagebar.
+ * 
+ *         Bie Bilder fuer die Flaggen stammen von Nordic Factory -
+ *         www.nordicfactory.com und dürfen frei verwendet werden.
  */
 public class Languagebar extends JPanel {
 

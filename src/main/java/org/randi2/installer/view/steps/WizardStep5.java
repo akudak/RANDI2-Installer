@@ -80,7 +80,6 @@ public class WizardStep5 extends MainPanel {
 				if (!main.getStatusService().getAkt().getStatus()
 						.equals(StatusEnum.FAIL))
 					main.copyRandi2();
-
 			}
 		});
 	}

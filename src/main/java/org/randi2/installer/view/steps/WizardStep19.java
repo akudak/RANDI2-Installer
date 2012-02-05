@@ -57,7 +57,6 @@ public class WizardStep19 extends MainPanel {
 
 		insertB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 				main.getStatusService().getAkt().setStatus(StatusEnum.SUCCESS);
 				if (!main.getConf()
 						.setHostingInstGER(hostingInstGERT.getText()))

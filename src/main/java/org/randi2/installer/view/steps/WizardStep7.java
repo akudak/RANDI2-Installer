@@ -80,7 +80,6 @@ public class WizardStep7 extends MainPanel {
 				}
 				downloadPathT.setText(main.getConf().getJDBCPath());
 				main.copyJDBC();
-
 			}
 		});
 	}

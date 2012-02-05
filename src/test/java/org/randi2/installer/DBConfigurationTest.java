@@ -96,5 +96,4 @@ public class DBConfigurationTest {
 		// Setzte fail (File Chooser setzt fail, wenn kein Pfad ausgewahlt wird
 		assertFalse(DBCONF.setInitDBPath(FAIL));
 	}
-
 }

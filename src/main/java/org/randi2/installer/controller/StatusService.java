@@ -7,8 +7,8 @@ import java.util.Iterator;
  * 
  * @author andreas
  * 
- *         Verwaltet eine Liste mit den jeweiligem Status eines
- *         Installationsschritts
+ *         Verwaltet eine Liste mit dem jeweiligen Status eines
+ *         Installationsschrittes
  */
 public class StatusService {
 

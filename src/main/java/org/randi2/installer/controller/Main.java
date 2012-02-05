@@ -118,6 +118,10 @@ public class Main {
 		mainFrame.repaint();
 	}
 
+	/**
+	 * Ruft die Methode auf, die die Daten in der Datenbank zum Zenter
+	 * aktuallisiert.
+	 */
 	public void configCenterInfo() {
 		centerService.update(center);
 	}
@@ -294,7 +298,7 @@ public class Main {
 	}
 
 	/**
-	 * Startet den Tomcat Server unter UNIX
+	 * Beendet und startet den Tomcat Server unter UNIX
 	 */
 	public void startTomcatMac() {
 		try {
@@ -311,7 +315,7 @@ public class Main {
 	}
 
 	/**
-	 * Startet den Tomcat Server unter Windows
+	 * Beendet und startet den Tomcat Server unter Windows
 	 */
 
 	public void startTomcatWin() {
@@ -465,92 +469,93 @@ public class Main {
 	 *            den aktuellen Status weiter
 	 */
 	public void setStatusNext() {
-		/*
-		 * if (!statusService.getAkt().getStatus().equals(StatusEnum.SUCCESS))
-		 * mainFrame.getStatusText().setText(
-		 * getConf().getlProp().getProperty("error.passStatus")); else {
-		 */
-		mainFrame.getStatusText().setText(
-				getConf().getlProp().getProperty("error.actStatus"));
-		iterator = statusService.getStatusList().iterator();
-		boolean end = false;
-		Status akt;
-		Status next;
 
-		if (actStatus == 1 && this.dbconf.isDatabase()) {
-			this.getStatusService()
-					.getNext(
-							this.getStatusService().getNext(
-									this.getStatusService().getNext(
-											this.getStatusService().getAkt())))
-					.setActive(true);
-			this.getStatusService().getAkt().setActive(false);
-		} else
-			while (iterator.hasNext() && !end) {
-				akt = (Status) iterator.next();
-				if (akt.isActive()) {
-					akt.setActive(false);
-					next = (Status) iterator.next();
-					next.setActive(true);
-					end = true;
+		if (!statusService.getAkt().getStatus().equals(StatusEnum.SUCCESS))
+			mainFrame.getStatusText().setText(
+					getConf().getlProp().getProperty("error.passStatus"));
+		else {
+
+			mainFrame.getStatusText().setText(
+					getConf().getlProp().getProperty("error.actStatus"));
+			iterator = statusService.getStatusList().iterator();
+			boolean end = false;
+			Status akt;
+			Status next;
+
+			if (actStatus == 1 && this.dbconf.isDatabase()) {
+				this.getStatusService()
+						.getNext(
+								this.getStatusService().getNext(
+										this.getStatusService().getNext(
+												this.getStatusService()
+														.getAkt())))
+						.setActive(true);
+				this.getStatusService().getAkt().setActive(false);
+			} else
+				while (iterator.hasNext() && !end) {
+					akt = (Status) iterator.next();
+					if (akt.isActive()) {
+						akt.setActive(false);
+						next = (Status) iterator.next();
+						next.setActive(true);
+						end = true;
+					}
+
 				}
-
+			getStatusbar().removeAll();
+			getStatusbar().initBar();
+			if (actStatus == 1 && this.dbconf.isDatabase())
+				actStatus = 4;
+			else
+				actStatus++;
+			if (actStatus == 0) {
+				mainFrame.getbPrevious().setEnabled(false);
+				mainFrame.setMainPanel(ws1);
 			}
-		getStatusbar().removeAll();
-		getStatusbar().initBar();
-		if (actStatus == 1 && this.dbconf.isDatabase())
-			actStatus = 4;
-		else
-			actStatus++;
-		if (actStatus == 0) {
-			mainFrame.getbPrevious().setEnabled(false);
-			mainFrame.setMainPanel(ws1);
-		}
-		if (actStatus == 1) {
-			mainFrame.setMainPanel(ws2);
-			mainFrame.getbPrevious().setEnabled(true);
-		}
-		if (actStatus == 2)
-			mainFrame.setMainPanel(ws3);
-		if (actStatus == 3)
-			mainFrame.setMainPanel(ws4);
-		if (actStatus == 4)
-			mainFrame.setMainPanel(ws5);
-		if (actStatus == 5)
-			mainFrame.setMainPanel(ws6);
-		if (actStatus == 6)
-			mainFrame.setMainPanel(ws7);
-		if (actStatus == 7)
-			mainFrame.setMainPanel(ws8);
-		if (actStatus == 8)
-			mainFrame.setMainPanel(ws9);
-		if (actStatus == 9)
-			mainFrame.setMainPanel(ws10);
-		if (actStatus == 10)
-			mainFrame.setMainPanel(ws11);
-		if (actStatus == 11)
-			mainFrame.setMainPanel(ws12);
-		if (actStatus == 12)
-			mainFrame.setMainPanel(ws13);
-		if (actStatus == 13)
-			mainFrame.setMainPanel(ws14);
-		if (actStatus == 14)
-			mainFrame.setMainPanel(ws15);
-		if (actStatus == 15)
-			mainFrame.setMainPanel(ws16);
-		if (actStatus == 16)
-			mainFrame.setMainPanel(ws17);
-		if (actStatus == 17)
-			mainFrame.setMainPanel(ws18);
-		if (actStatus == 18)
-			mainFrame.setMainPanel(ws19);
-		if (actStatus == 19) {
-			mainFrame.setMainPanel(ws20);
-			mainFrame.getbNext().setEnabled(false);
+			if (actStatus == 1) {
+				mainFrame.setMainPanel(ws2);
+				mainFrame.getbPrevious().setEnabled(true);
+			}
+			if (actStatus == 2)
+				mainFrame.setMainPanel(ws3);
+			if (actStatus == 3)
+				mainFrame.setMainPanel(ws4);
+			if (actStatus == 4)
+				mainFrame.setMainPanel(ws5);
+			if (actStatus == 5)
+				mainFrame.setMainPanel(ws6);
+			if (actStatus == 6)
+				mainFrame.setMainPanel(ws7);
+			if (actStatus == 7)
+				mainFrame.setMainPanel(ws8);
+			if (actStatus == 8)
+				mainFrame.setMainPanel(ws9);
+			if (actStatus == 9)
+				mainFrame.setMainPanel(ws10);
+			if (actStatus == 10)
+				mainFrame.setMainPanel(ws11);
+			if (actStatus == 11)
+				mainFrame.setMainPanel(ws12);
+			if (actStatus == 12)
+				mainFrame.setMainPanel(ws13);
+			if (actStatus == 13)
+				mainFrame.setMainPanel(ws14);
+			if (actStatus == 14)
+				mainFrame.setMainPanel(ws15);
+			if (actStatus == 15)
+				mainFrame.setMainPanel(ws16);
+			if (actStatus == 16)
+				mainFrame.setMainPanel(ws17);
+			if (actStatus == 17)
+				mainFrame.setMainPanel(ws18);
+			if (actStatus == 18)
+				mainFrame.setMainPanel(ws19);
+			if (actStatus == 19) {
+				mainFrame.setMainPanel(ws20);
+				mainFrame.getbNext().setEnabled(false);
+			}
 		}
 	}
-
-	// }
 
 	/**
 	 * Setzt den aktuellen Status zurueck

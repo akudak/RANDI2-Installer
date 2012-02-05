@@ -43,7 +43,7 @@ public class Status {
 	}
 
 	/**
-	 * @return Gibt an, ob ein Status zur Zeit bearbeitet wird
+	 * @return Gibt an, ob ein Status zurzeit bearbeitet wird
 	 */
 	public boolean isActive() {
 		return active;
@@ -51,7 +51,7 @@ public class Status {
 
 	/**
 	 * @param Setzt
-	 *            , , ob ein Status zur Zeit bearbeitet wird
+	 *            , ob ein Status zurzeit bearbeitet wird
 	 */
 	public void setActive(boolean active) {
 		this.active = active;

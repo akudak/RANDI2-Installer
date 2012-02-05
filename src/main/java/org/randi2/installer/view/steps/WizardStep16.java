@@ -125,6 +125,5 @@ public class WizardStep16 extends MainPanel {
 			}
 
 		});
-
 	}
 }

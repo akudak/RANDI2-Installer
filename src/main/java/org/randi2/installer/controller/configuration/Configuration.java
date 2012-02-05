@@ -4,8 +4,12 @@ import java.util.Locale;
 import java.util.Properties;
 import org.randi2.installer.controller.Main;
 
+/**
+ * 
+ * @author andreas Speichert die Informationen zur Installation
+ * 
+ */
 public class Configuration {
-
 	private String info_server;
 	private String info_hoster;
 	private String website;

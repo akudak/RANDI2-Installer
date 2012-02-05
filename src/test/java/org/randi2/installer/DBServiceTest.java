@@ -5,6 +5,8 @@ import static org.junit.Assert.assertNotSame;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -52,7 +54,6 @@ public class DBServiceTest {
 
 	@Before
 	public void SetUpBefore() throws SQLException {
-
 		String user = "user";
 		do {
 			PreparedStatement ps = DBSERVICE.getFirstConnection()
@@ -74,20 +75,6 @@ public class DBServiceTest {
 		} while (!user.equals(""));
 	}
 
-	/**
-	 * 
-	 * 
-	 * executeMySQLDBScript Testen
-	 * 
-	 * Tabelle Test nachher wieder lšschen
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 */
 	@Test
 	public void createUser() throws SQLException {
 		// Alle User sind geloescht
@@ -131,5 +118,13 @@ public class DBServiceTest {
 		// Eintrag machen und schauen, ob es eingetragen wurde
 		assertEquals(1,
 				st.executeUpdate("Insert into randi2DB.Test (id) values (1)"));
+	}
+
+	@AfterClass
+	public static void afterClassTest() throws SQLException {
+		Statement st = (Statement) DBSERVICE.getFirstConnection()
+				.createStatement();
+		// Loescht Datenbank wieder
+		st.executeUpdate("Drop Database randi2DB");
 	}
 }

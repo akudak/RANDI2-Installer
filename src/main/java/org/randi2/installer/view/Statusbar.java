@@ -10,6 +10,10 @@ import org.randi2.installer.model.enumerations.StatusEnum;
 /**
  * 
  * @author andreas Erzeugt die Statusbar
+ * 
+ *         Die Bilder fuer die Statusbar stammen von
+ *         http://insurrectionx.deviantart.com/art/shiny-buttons-93501214 und
+ *         duerfen frei fuer private und gewerbliche Zwecke verwendet werden
  */
 public class Statusbar extends JPanel {
 

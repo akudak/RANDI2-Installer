@@ -65,8 +65,6 @@ public class DBService {
 							(main.getConf().getlProp()
 									.getProperty("error.DBConnection")));
 			main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
-			System.out.println(e.getMessage());
-
 		}
 		return con;
 	}
@@ -124,7 +122,6 @@ public class DBService {
 							.setText(
 									(main.getConf().getlProp()
 											.getProperty("error.SQL")));
-					System.out.println(error);
 				}
 			}
 			in.close();
@@ -135,7 +132,6 @@ public class DBService {
 					.setText(
 							(main.getConf().getlProp().getProperty("error.SQL")));
 			main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
-
 		}
 		return isScriptExecuted;
 	}
@@ -161,7 +157,6 @@ public class DBService {
 							(main.getConf().getlProp()
 									.getProperty("error.DBConnection")));
 		}
-		;
 		try {
 			if (main.getDbconf().isMySQL())
 				url = "jdbc:mysql://" + main.getDbconf().getServer() + ":3306/";
@@ -171,7 +166,6 @@ public class DBService {
 
 			con = DriverManager.getConnection(url, main.getDbconf()
 					.getUsernameCon(), main.getDbconf().getPasswordCon());
-
 		} catch (SQLException e) {
 			main.getMainFrame()
 					.getStatusText()
@@ -181,7 +175,6 @@ public class DBService {
 			main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
 		}
 		return con;
-
 	}
 
 	/**
@@ -225,8 +218,8 @@ public class DBService {
 					user = user + rs.getString(1);
 				}
 				rs.close();
-				// Wenne es noch kein gibt, lege einen an
-				// Wenn es einen gibt, gib ihm die rechte fuer die DB
+				// Wenne es noch kein Bneutzer gibt, lege einen an
+				// Wenn es ein Benutzer gibt, gib ihm die Rechte fuer die DB
 				if (user.isEmpty()) {
 					st.executeUpdate("CREATE USER '" + dbconf.getUsername()
 							+ "'@'%' IDENTIFIED BY  '" + dbconf.getPassword()

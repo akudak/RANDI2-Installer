@@ -273,5 +273,4 @@ public class ConfigurationTest {
 		// Setzte fail (File Chooser setzt fail, wenn kein Pfad ausgewahlt wird
 		assertFalse(CONF.setLogoPath(FAIL));
 	}
-
 }

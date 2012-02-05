@@ -33,6 +33,7 @@ public class ContextService {
 			String line;
 			String text = "";
 			String l;
+			// MySQL
 			if (main.getDbconf().isMySQL()) {
 				l = "<Resource auth=\"Container\" driverClassName=\"com.mysql.jdbc.Driver\" maxActive=\"100\" maxIdle=\"30\" maxWait=\"10000\" type=\"javax.sql.DataSource\" url=\"jdbc:mysql://localhost:3306/"
 						+ main.getDbconf().getName()
@@ -44,8 +45,9 @@ public class ContextService {
 						+ main.getMailConf().getUsername()
 						+ "\" mail.smtp.password=\""
 						+ main.getMailConf().getPassword() + "\" /></Context>";
-
-			} else {
+			}
+			// PostgreSQL
+			else {
 				l = "<Resource name=\"jdbc/randi2\" auth=\"Container\" type=\"org.postgresql.Driverv\" maxActive=\"100\" maxIdle=\"30\" maxWait=\"10000\" driverClassName=\"com.mysql.jdbc.Driver\"  username=\""
 						+ main.getDbconf().getUsername()
 						+ "\" password=\""

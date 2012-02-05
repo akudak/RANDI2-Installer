@@ -120,5 +120,4 @@ public class PersonTest {
 		// Ungueltige EMAIl
 		assertFalse(PERSON.setPhone(PHONE_FAIL));
 	}
-
 }

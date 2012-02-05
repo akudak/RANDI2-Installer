@@ -87,7 +87,6 @@ public class WizardStep17 extends MainPanel {
 
 		insertB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 				main.getStatusService().getAkt().setStatus(StatusEnum.SUCCESS);
 				if (!main.getConf().setMail_from(mailFromT.getText()))
 					main.getStatusService().getAkt().setStatus(StatusEnum.FAIL);
